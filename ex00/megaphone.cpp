@@ -1,19 +1,20 @@
 #include <iostream>
+#include <cctype>
 
-int	main(int argc, int argv)
+int	main(int argc, char **argv)
 {
 	int	i;
 	int	j;
 
 	if (argc < 2)
 		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	i = -1;
-	while (argc > 1 && argv[++i])
+	i = 0;
+	while (argv[++i])
 	{
 		j = -1;
-		while (argv[i] && argv[i][++j])
+		while (argv[i][++j])
 			std::cout << (char)std::toupper(argv[i][j]);
 	}
-	std::cout << std::endl;
+	std::cout << '\n';
 	return (0);
 }
