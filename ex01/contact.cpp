@@ -25,7 +25,15 @@ Contact::~Contact()
 
 bool	Contact::set_contact()
 {
+	int	i;
 
+	i = FirstName;
+	while (i <= DarkestSecret)
+	{
+		i++;
+	}
+	std::cout << "New contact added successfully." << std::endl;
+	return (true);
 }
 
 void	Contact::get_contact(int index) const
