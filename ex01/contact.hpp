@@ -1,0 +1,29 @@
+#ifndef  CONTACT.HPP
+# define CONTACT.HPP
+
+#include <iostream>
+#include <iomanip>
+#include <string>
+#include <cstdlib>
+
+class Contact
+{
+public:
+	Contact(void);
+	~Contact(void);
+	
+	bool	set_contact();
+	void	get_contact(int index)const;
+
+private:
+	static std::string _fields_list[5];
+	enum Field {
+		FirstName = 0,
+		LastName = 1,
+		NickName = 2,
+		PhoneNumber = 3,
+		DarkestSecret = 4
+	};
+	std::string			_informations[5]; // FIXME
+};
+#endif // ! CONTACT.HPP
