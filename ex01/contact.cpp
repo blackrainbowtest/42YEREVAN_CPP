@@ -30,6 +30,7 @@ bool	Contact::set_contact()
 	i = FirstName;
 	while (i <= DarkestSecret)
 	{
+		std::count << "Enter " << Contact::
 		i++;
 	}
 	std::cout << "New contact added successfully." << std::endl;
