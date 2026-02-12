@@ -1,4 +1,7 @@
-#include <Contact.hpp>
+#include "contact.hpp"
+#include <iostream>
+#include <iomanip>
+#include <cstdlib>
 
 std::string Contact::_fields_name[5] =
 {
@@ -21,7 +24,7 @@ bool	Contact::set_contact()
 {
 	for (int xi = FirstName; xi <= DarkestSecret; ++xi)
 	{
-		std::cout << "Please enter the " << Contact::_fields_name[xi] << ":\n>";
+		std::cout << "Please enter the " << Contact::_fields_list[xi] << ":\n>";
 		while (!(std::getline(std::cin, this->_informations[xi])) || this->_informations[xi].empty())
 		{
 			if (std::cin.eof())
@@ -32,7 +35,7 @@ bool	Contact::set_contact()
 			else if (this->_informations[xi].empty())
 			{
 				std::cout << "Note: Empty string not allowed" << std::endl;
-				std::cout << "Please enter the " << Contact::_fields_name[xi] << ":\n>";
+				std::cout << "Please enter the " << Contact::_fields_list[xi] << ":\n>";
 			}
 
 		}
