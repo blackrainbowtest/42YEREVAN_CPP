@@ -1,10 +1,5 @@
-#ifndef  CONTACT.HPP
-# define CONTACT.HPP
-
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include <cstdlib>
+#ifndef  CONTACT_HPP
+# define CONTACT_HPP
 
 class Contact
 {
@@ -26,4 +21,4 @@ private:
 	};
 	std::string			_informations[5]; // FIXME
 };
-#endif // ! CONTACT.HPP
+#endif // ! CONTACT_HPP
