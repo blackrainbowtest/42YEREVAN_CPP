@@ -1,20 +1,20 @@
 #ifndef  PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-# include <string>
+# include "Contact.hpp"
 
-class PhoneBook
+class	PhoneBook
 {
 	private:
 		Contact	_contacts[8];
 		int		_index;
-		bool	_isFull;
+		int		_count;
 	public:
 		PhoneBook(void);
 		~PhoneBook(void);
 
 		void	set_information(void);
 		void	get_information(void)const;
-		void	get_instruction(void);
+		void	get_instruction(void)const;
 };
 #endif // ! PHONEBOOK_HPP
