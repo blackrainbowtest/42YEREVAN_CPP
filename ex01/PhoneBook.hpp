@@ -13,8 +13,9 @@ class	PhoneBook
 		PhoneBook(void);
 		~PhoneBook(void);
 
-		void	addContact(void);
+		bool	addContact(void);
 		void	searchContact(void)const;
-		void	get_instruction(void)const;
+		void	getInstruction(void)const;
+		void	updateIndex(void);
 };
 #endif // ! PHONEBOOK_HPP
