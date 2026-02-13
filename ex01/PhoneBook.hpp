@@ -13,8 +13,8 @@ class	PhoneBook
 		PhoneBook(void);
 		~PhoneBook(void);
 
-		void	set_information(void);
-		void	get_information(void)const;
+		void	addContact(void);
+		void	searchContact(void)const;
 		void	get_instruction(void)const;
 };
 #endif // ! PHONEBOOK_HPP

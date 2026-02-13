@@ -5,7 +5,8 @@
 
 PhoneBook::PhoneBook()
 {
-	this->_index = 0;
+	_index = 0;
+	_count = 0;
 }
 
 PhoneBook::~PhoneBook()
@@ -14,18 +15,18 @@ PhoneBook::~PhoneBook()
 
 void	PhoneBook::get_instruction(void)const
 {
-	std::cout << "The program only accepts ADD, SEARCH and EXIT" << std::endl;
-	std::cout << "ADD: save new contact." << std::endl;
-	std::cout << "SEARCH: display a specific contact." << std::endl;
-	std::cout << "EXIT: quit program and lose contacts." << std::endl;
+	std::cout << "The program only accepts ADD, SEARCH and EXIT" << "\n";
+	std::cout << "ADD: save new contact." << "\n";
+	std::cout << "SEARCH: display a specific contact." << "\n";
+	std::cout << "EXIT: quit program and lose contacts." << "\n";
 }
 
-void	PhoneBook::set_information(void)
+void	PhoneBook::addContact(void)
 {
 
 }
 
-void	PhoneBook::get_information(void)const
+void	PhoneBook::searchContact(void)const
 {
 
 }

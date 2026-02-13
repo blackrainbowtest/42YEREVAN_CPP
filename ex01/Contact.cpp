@@ -30,7 +30,7 @@ bool	Contact::set_contact()
 			if (std::cin.eof())
 			{
 				std::cout << "Note: ^D detected. Exiting phonebook..." << std::endl;
-				std::exit(0);
+				return (false);
 			}
 			else if (this->_informations[xi].empty())
 			{
