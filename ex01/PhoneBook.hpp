@@ -14,7 +14,7 @@ class	PhoneBook
 		~PhoneBook(void);
 
 		bool	addContact(void);
-		void	searchContact(void)const;
+		bool	searchContact(void)const;
 		void	getInstruction(void)const;
 		void	updateIndex(void);
 };
