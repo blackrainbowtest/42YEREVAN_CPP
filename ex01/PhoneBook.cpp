@@ -24,7 +24,7 @@ void	PhoneBook::getInstruction(void)const
 void	PhoneBook::updateIndex(void)
 {
 	_index = (_index + 1) % 8;
-	if (_count < 7)
+	if (_count < 8)
 		_count++;
 }
 
@@ -59,17 +59,23 @@ bool	PhoneBook::searchContact(void)const
 		{
 			std::cout << "Note: Empty string not allowed" << "\n";
 			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
+			continue ;
 		}
-		inputIndex = std::atoi(input.c_str());
-		else if (input.length() > 1 || inputIndex < 0 || inputIndex > _count - 1)
+		else if (input.length() != 1 || !(isdigit(input[0])))
 		{
 			std::cout << "Note: Required numeric enter" << "\n";
 			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
+			continue ;
 		}
-		else
+		inputIndex = input[0] - '0';
+		if (inputIndex < 0 || inputIndex > _count - 1)
 		{
-			_contacts[inputIndex - 1].get_contact(inputIndex);
+			std::cout << "Note: Index out of range" << "\n";
+			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
+			continue;
 		}
+		_contacts[inputIndex - 1].get_contact(inputIndex);
+		break ;
 	}
 	return (true);
 }
