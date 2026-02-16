@@ -5,7 +5,7 @@ RM = rm -f
 # using -std=c++98
 CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
-NAME = megaphone
+NAME = phonebook
 
 all: $(NAME)
 

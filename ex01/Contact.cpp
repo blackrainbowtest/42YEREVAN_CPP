@@ -3,7 +3,7 @@
 #include <iomanip>
 #include <cstdlib>
 
-std::string Contact::_fields_name[5] =
+std::string Contact::_fields_list[5] =
 {
 	"First Name",
 	"Last Name",
@@ -29,18 +29,18 @@ bool	Contact::set_contact()
 		{
 			if (std::cin.eof())
 			{
-				std::cout << "Note: ^D detected. Exiting phonebook..." << std::endl;
+				std::cout << "Note: ^D detected. Exiting phonebook..." << '\n';
 				return (false);
 			}
 			else if (this->_informations[xi].empty())
 			{
-				std::cout << "Note: Empty string not allowed" << std::endl;
+				std::cout << "Note: Empty string not allowed" << '\n';
 				std::cout << "Please enter the " << Contact::_fields_list[xi] << ":\n>";
 			}
 
 		}
 	}
-	std::cout << "New contact added successfully." << std::endl;
+	std::cout << "New contact added successfully." << '\n';
 	return (true);
 }
 

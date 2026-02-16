@@ -2,6 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <cstdlib>
+#include <cctype>
 
 PhoneBook::PhoneBook()
 {
@@ -39,7 +40,6 @@ bool	PhoneBook::addContact(void)
 	}
 	else
 		return (false);
-	return (true);
 }
 
 bool	PhoneBook::searchContact(void)const
@@ -74,7 +74,7 @@ bool	PhoneBook::searchContact(void)const
 			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
 			continue;
 		}
-		_contacts[inputIndex - 1].get_contact(inputIndex);
+		_contacts[inputIndex].get_contact(inputIndex);
 		break ;
 	}
 	return (true);

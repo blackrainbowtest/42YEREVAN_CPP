@@ -11,17 +11,17 @@ int	main(void)
 	while (!isExit && std::getline(std::cin, input))
 	{
 		if (input.compare("ADD") == 0)
-			phoneBook.addContact();
+			PhoneBook.addContact();
 		else if (input.compare("SEARCH") == 0)
-			phoneBook.searchContact();
+			PhoneBook.searchContact();
 		else if (input.compare("EXIT") == 0)
 		{
 			std::cout << "Exiting programm." << std::endl;
 			isExit = true;
 		}
-		phoneBook.getInstruction();
+		PhoneBook.getInstruction();
 	}
 	if (!isExit)
-		std::cout << "You Pressed ^D. Exiting phonebook now." << std::endl;
+		std::cout << "You Pressed ^D. Exiting PhoneBook now." << std::endl;
 	return (0);
 }
