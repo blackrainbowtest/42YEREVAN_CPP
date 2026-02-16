@@ -20,6 +20,20 @@ Contact::~Contact()
 {
 }
 
+void	Contact::printContacts(int count)const
+{
+	std::cout << "|" << std::setw(10) << "N";
+	for (int xi = FirstName; xi < PhoneNumber; ++xi)
+	{
+		std::cout << "|" << std::setw(10) << Contact::_fields_list[xi];
+	}
+	std::cout << "|" << '\n';
+	for (int xi = 0; xi < count; ++xi)
+	{
+		get_contact(xi);
+	}
+}
+
 bool	Contact::set_contact()
 {
 	for (int xi = FirstName; xi <= DarkestSecret; ++xi)

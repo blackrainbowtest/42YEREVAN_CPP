@@ -79,3 +79,21 @@ bool	PhoneBook::searchContact(void)const
 	}
 	return (true);
 }
+
+bool	PhoneBook::showContacts(int count)const
+{
+	if (count == 0)
+	{
+		std::cout << "PhoneBook is empty" << '\n';
+		return (true);
+	}
+	else if (count > 0)
+		_contacts[0].printContacts(count);
+	else
+		return (false);
+}
+
+int		PhoneBook::getCount(void)const
+{
+	return (_count);
+}
