@@ -11,9 +11,11 @@ int	main(void)
 	while (!isExit && std::getline(std::cin, input))
 	{
 		if (input.compare("ADD") == 0)
-			phoneBook.addContact();
+			if (!phoneBook.addContact())
+				break ;
 		else if (input.compare("SEARCH") == 0)
-			phoneBook.searchContact();
+			if (!phoneBook.searchContact())
+				break ;
 		else if (input.compare("EXIT") == 0)
 		{
 			std::cout << "Exiting program." << '\n';

@@ -47,28 +47,30 @@ bool	PhoneBook::searchContact(void)const
 	int				inputIndex;
 	std::string		input;
 
+	if (_count == 0)
+	{
+		std::cout << "Phone book empty, enter some data first!" << "\n>";
+		return (true);
+	}
 	std::cout << "Enter contact index (0-7 allowed)" << "\n>";
 	while (!(std::getline(std::cin, input)) || input.empty())
 	{
 		if (std::cin.eof())
-		{
-			std::cout << "Note: ^D detected. Exiting phonebook..." << "\n";
 			return (false);
-		}
 		else if (input.empty())
 		{
 			std::cout << "Note: Empty string not allowed" << "\n";
 			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
 			continue ;
 		}
-		else if (input.length() != 1 || !(isdigit(input[0])))
+		else if (input.length() != 1 || !std::isdigit(input[0]))
 		{
 			std::cout << "Note: Required numeric enter" << "\n";
 			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
 			continue ;
 		}
 		inputIndex = input[0] - '0';
-		if (inputIndex < 0 || inputIndex > _count - 1)
+		if (inputIndex < 0 || inputIndex >= _count)
 		{
 			std::cout << "Note: Index out of range" << "\n";
 			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
