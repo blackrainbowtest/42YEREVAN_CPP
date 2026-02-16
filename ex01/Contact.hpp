@@ -11,7 +11,6 @@ public:
 	
 	bool	set_contact();
 	void	get_contact(int index)const;
-	void	Contact::printContacts(int count)const;
 
 private:
 	static std::string _fields_list[5];

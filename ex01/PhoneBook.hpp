@@ -17,7 +17,5 @@ class	PhoneBook
 		bool	searchContact(void)const;
 		void	getInstruction(void)const;
 		void	updateIndex(void);
-		bool	showContacts(int count)const;
-		int		getCount(void)const;
 };
 #endif // ! PHONEBOOK_HPP

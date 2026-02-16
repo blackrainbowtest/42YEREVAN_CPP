@@ -7,7 +7,6 @@ int	main(void)
 	bool		isExit = false;
 	std::string	input;
 
-	phoneBook.showContacts(phoneBook.getCount());
 	phoneBook.getInstruction();
 	while (!isExit && std::getline(std::cin, input))
 	{
@@ -20,7 +19,6 @@ int	main(void)
 			std::cout << "Exiting program." << '\n';
 			isExit = true;
 		}
-		phoneBook.showContacts(phoneBook.getCount());
 		phoneBook.getInstruction();
 	}
 	if (!isExit)
