@@ -53,15 +53,17 @@ bool	PhoneBook::searchContact(void)const
 		return (true);
 	}
 	std::cout << "Enter contact index (0-7 allowed)" << "\n>";
-	while (!(std::getline(std::cin, input)) || input.empty())
+	while (true)
 	{
-		if (std::cin.eof())
-			return (false);
-		else if (input.empty())
+		if (!std::getline(std::cin, input))
 		{
-			std::cout << "Note: Empty string not allowed" << "\n";
-			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
-			continue ;
+			if (std::cin.eof())
+				return false;
+		}
+		if (input.empty())
+		{
+			std::cout << "Empty string not allowed\n>";
+			continue;
 		}
 		else if (input.length() != 1 || !std::isdigit(input[0]))
 		{
