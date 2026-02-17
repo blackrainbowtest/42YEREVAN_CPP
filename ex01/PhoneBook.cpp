@@ -49,7 +49,7 @@ bool	PhoneBook::searchContact(void)const
 
 	if (_count == 0)
 	{
-		std::cout << "Phone book empty, enter some data first!" << "\n>";
+		std::cout << "Phone book empty, enter some data first!" << "\n";
 		return (true);
 	}
 	std::cout << "Enter contact index (0-7 allowed)" << "\n>";
