@@ -19,7 +19,7 @@ void	PhoneBook::getInstruction(void)const
 	std::cout << "The program only accepts ADD, SEARCH and EXIT" << "\n";
 	std::cout << "\tADD:\tsave new contact." << "\n";
 	std::cout << "\tSEARCH:\tdisplay a specific contact." << "\n";
-	std::cout << "\tEXIT:\tquit program and lose contacts." << "\n";
+	std::cout << "\tEXIT:\tquit program and lose contacts." << "\n>";
 }
 
 void	PhoneBook::updateIndex(void)
