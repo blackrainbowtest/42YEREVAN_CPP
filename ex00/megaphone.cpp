@@ -14,6 +14,8 @@ int	main(int argc, char **argv)
 		j = -1;
 		while (argv[i][++j])
 			std::cout << (char)std::toupper(argv[i][j]);
+		if (argv[i + 1])
+			std::cout << ' ';
 	}
 	std::cout << '\n';
 	return (0);
