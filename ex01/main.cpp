@@ -2,12 +2,22 @@
 #include "PhoneBook.hpp"
 #include <iostream>
 
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define MAGENTA "\033[35m"
+#define CYAN    "\033[36m"
+#define WHITE   "\033[37m"
+
 int	main(void)
 {
 	PhoneBook	phoneBook;
 	bool		isExit = false;
 	std::string	input;
 
+	std::cout << CYAN << "Wellcome!" << RESET << '\n';
 	phoneBook.getInstruction();
 	while (!isExit && std::getline(std::cin, input))
 	{
@@ -23,12 +33,13 @@ int	main(void)
 		}
 		else if (input.compare("EXIT") == 0)
 		{
-			std::cout << "Exiting program." << '\n';
+			std::cout << RED << "Exiting program." << RESET << '\n';
 			isExit = true;
 		}
-		phoneBook.getInstruction();
+		if (!isExit)
+			phoneBook.getInstruction();
 	}
 	if (!isExit)
-		std::cout << "You Pressed ^D. Exiting phoneBook now." << std::endl;
+		std::cout << RED << "You Pressed ^D. Exiting phoneBook now." << RESET << std::endl;
 	return (0);
 }

@@ -3,6 +3,11 @@
 #include <iomanip>
 #include <cstdlib>
 
+static const char* RESET   = "\033[0m";
+static const char* YELLOWBG  = "\033[43m";
+static const char* BLUE    = "\033[34m";
+static const char* NLTWR   = "\n\033[31m>\033[0m";
+
 std::string Contact::_fields_list[5] =
 {
 	"First Name",
@@ -24,23 +29,32 @@ bool	Contact::set_contact()
 {
 	for (int xi = FirstName; xi <= DarkestSecret; ++xi)
 	{
-		std::cout << "Please enter the " << Contact::_fields_list[xi] << ":\n>";
-		while (!(std::getline(std::cin, this->_informations[xi])) || this->_informations[xi].empty())
+		std::cout << "Please enter the " 
+				  << Contact::_fields_list[xi]
+				  << ':' << NLTWR;
+		while (true)
 		{
-			if (std::cin.eof())
+			if (!std::getline(std::cin, this->_informations[xi]))
 			{
-				std::cout << "Note: ^D detected. Exiting phonebook..." << '\n';
-				return (false);
+				if (std::cin.eof())
+				{
+					std::cout << "Note: ^D detected. Exiting phonebook..." 
+							  << '\n';
+					return false;
+				}
 			}
-			else if (this->_informations[xi].empty())
-			{
-				std::cout << "Note: Empty string not allowed" << '\n';
-				std::cout << "Please enter the " << Contact::_fields_list[xi] << ":\n>";
-			}
+			if (!this->_informations[xi].empty())
+				break;
 
+			std::cout << YELLOWBG << "Note:" << RESET << " Empty string not allowed" 
+					  << '\n';
+			std::cout << BLUE << "Please enter the " << RESET 
+					  << Contact::_fields_list[xi] 
+					  << ':' << NLTWR;
 		}
 	}
-	std::cout << "New contact added successfully." << '\n';
+	std::cout << "New contact added successfully."
+			  << '\n';
 	return (true);
 }
 
@@ -51,7 +65,7 @@ void	Contact::get_contact(int index) const
 	{
 		std::cout << "|";
 		if (this->_informations[xi].length() > 10)
-			std::cout << this->_informations[xi].substr(0, 9) << ".";
+			std::cout << std::setw(10) << this->_informations[xi].substr(0, 9) << ".";
 		else
 			std::cout << std::setw(10) << this->_informations[xi];
 	}

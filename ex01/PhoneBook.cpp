@@ -16,10 +16,7 @@ PhoneBook::~PhoneBook()
 
 void	PhoneBook::getInstruction(void)const
 {
-	std::cout << "The program only accepts ADD, SEARCH and EXIT" << "\n";
-	std::cout << "\tADD:\tsave new contact." << "\n";
-	std::cout << "\tSEARCH:\tdisplay a specific contact." << "\n";
-	std::cout << "\tEXIT:\tquit program and lose contacts." << "\n>";
+	std::cout << "The program only accepts ADD, SEARCH and EXIT" << "\n>";
 }
 
 void	PhoneBook::updateIndex(void)
@@ -58,7 +55,7 @@ bool	PhoneBook::searchContact(void)const
 		if (!std::getline(std::cin, input))
 		{
 			if (std::cin.eof())
-				return false;
+				return (false);
 		}
 		if (input.empty())
 		{
@@ -68,15 +65,13 @@ bool	PhoneBook::searchContact(void)const
 		else if (input.length() != 1 || !std::isdigit(input[0]))
 		{
 			std::cout << "Note: Required numeric enter" << "\n";
-			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
-			continue ;
+			return (true);
 		}
 		inputIndex = input[0] - '0';
 		if (inputIndex < 0 || inputIndex >= _count)
 		{
 			std::cout << "Note: Index out of range" << "\n";
-			std::cout << "Enter contact index (0-7 allowed)" << "\n>";
-			continue;
+			return (true);
 		}
 		_contacts[inputIndex].get_contact(inputIndex);
 		break ;
