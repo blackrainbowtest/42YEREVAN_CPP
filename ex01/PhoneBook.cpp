@@ -4,6 +4,11 @@
 #include <cstdlib>
 #include <cctype>
 
+static const char* RESET   = "\033[0m";
+// static const char* YELLOWBG  = "\033[43m";
+static const char* BLUE    = "\033[34m";
+static const char* NLTWR   = "\n\033[31m>\033[0m";
+
 PhoneBook::PhoneBook()
 {
 	_index = 0;
@@ -16,7 +21,10 @@ PhoneBook::~PhoneBook()
 
 void	PhoneBook::getInstruction(void)const
 {
-	std::cout << "The program only accepts ADD, SEARCH and EXIT" << "\n>";
+	std::cout 	<< "The program only accepts " 
+				<< BLUE << "ADD" << RESET << ", "
+				<< BLUE << "SEARCH" << RESET << " and "
+				<< BLUE << "EXIT" << NLTWR;
 }
 
 void	PhoneBook::updateIndex(void)
@@ -48,6 +56,11 @@ bool	PhoneBook::searchContact(void)const
 	{
 		std::cout << "Phone book empty, enter some data first!" << "\n";
 		return (true);
+	}
+
+	for (int xi = 0; xi < _count; ++xi)
+	{
+		_contacts[xi].get_contact_row(xi);
 	}
 	std::cout << "Enter contact index (0-7 allowed)" << "\n>";
 	while (true)

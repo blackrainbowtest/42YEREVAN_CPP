@@ -11,6 +11,7 @@ public:
 	
 	bool	set_contact();
 	void	get_contact_row(int index)const;
+	void	get_contact_info(void)const;
 
 private:
 	static std::string _fields_list[5];

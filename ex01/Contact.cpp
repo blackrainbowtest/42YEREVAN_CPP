@@ -71,3 +71,13 @@ void	Contact::get_contact_row(int index) const
 	}
 	std::cout << "|" << '\n';
 }
+
+void	Contact::get_contact_info(void) const
+{
+	for (int xi = FirstName; xi <= DarkestSecret; ++xi)
+	{
+		std::cout << FirstName + 1
+				  << ". " << BLUE  << Contact::_fields_list[xi]
+				  << ": " << RESET << this->_informations[xi] << NLTWR;
+	}
+}

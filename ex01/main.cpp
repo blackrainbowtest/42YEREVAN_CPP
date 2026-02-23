@@ -14,13 +14,15 @@
 int	main(void)
 {
 	PhoneBook	phoneBook;
-	bool		isExit = false;
 	std::string	input;
 
 	std::cout << CYAN << "Wellcome!" << RESET << '\n';
-	phoneBook.getInstruction();
-	while (!isExit && std::getline(std::cin, input))
+	while (true)
 	{
+		phoneBook.getInstruction();
+		if (!std::getline(std::cin, input))
+			break ;
+
 		if (input.compare("ADD") == 0)
 		{
 			if (!phoneBook.addContact())
@@ -34,12 +36,8 @@ int	main(void)
 		else if (input.compare("EXIT") == 0)
 		{
 			std::cout << RED << "Exiting program." << RESET << '\n';
-			isExit = true;
+			break ;
 		}
-		if (!isExit)
-			phoneBook.getInstruction();
 	}
-	if (!isExit)
-		std::cout << RED << "You Pressed ^D. Exiting phoneBook now." << RESET << std::endl;
 	return (0);
 }
