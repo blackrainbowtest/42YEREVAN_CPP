@@ -58,7 +58,7 @@ bool	Contact::set_contact()
 	return (true);
 }
 
-void	Contact::get_contact(int index) const
+void	Contact::get_contact_row(int index) const
 {
 	std::cout << "|" << std::setw(10) << index;
 	for (int xi = FirstName; xi <= NickName; ++xi)

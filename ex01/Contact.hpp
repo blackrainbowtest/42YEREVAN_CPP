@@ -10,7 +10,7 @@ public:
 	~Contact(void);
 	
 	bool	set_contact();
-	void	get_contact(int index)const;
+	void	get_contact_row(int index)const;
 
 private:
 	static std::string _fields_list[5];

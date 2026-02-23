@@ -73,7 +73,7 @@ bool	PhoneBook::searchContact(void)const
 			std::cout << "Note: Index out of range" << "\n";
 			return (true);
 		}
-		_contacts[inputIndex].get_contact(inputIndex);
+		_contacts[inputIndex].get_contact_row(inputIndex);
 		break ;
 	}
 	return (true);
