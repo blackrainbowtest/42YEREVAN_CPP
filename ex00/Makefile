@@ -1,16 +1,16 @@
 SRC = megaphone.cpp
 OBJ = $(SRC:.cpp=.o)
-CC = g++
+CXX = g++
 RM = rm -f
 # using -std=c++98
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
 NAME = megaphone
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	$(RM) $(OBJ)

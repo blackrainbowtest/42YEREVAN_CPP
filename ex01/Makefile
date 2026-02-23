@@ -1,16 +1,20 @@
-SRC = Contact.cpp PhoneBook.cpp main.cpp
-OBJ = $(SRC:.cpp=.o)
-CC = g++
-RM = rm -f
-# using -std=c++98
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+NAME      = phonebook
 
-NAME = phonebook
+CXX       = c++
+CXXFLAGS  = -Wall -Wextra -Werror -std=c++98 -pedantic
+
+SRC       = Contact.cpp PhoneBook.cpp main.cpp
+OBJ       = $(SRC:.cpp=.o)
+
+RM        = rm -f
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJ)
@@ -18,6 +22,6 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean $(NAME)
+re: fclean all
 
 .PHONY: all clean fclean re

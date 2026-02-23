@@ -62,7 +62,7 @@ bool	PhoneBook::searchContact(void)const
 			std::cout << "Empty string not allowed\n>";
 			continue;
 		}
-		else if (input.length() != 1 || !std::isdigit(input[0]))
+		else if (input.length() != 1 || !std::isdigit(static_cast<unsigned char>(input[0])))
 		{
 			std::cout << "Note: Required numeric enter" << "\n";
 			return (true);
