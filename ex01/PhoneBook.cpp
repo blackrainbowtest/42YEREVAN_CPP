@@ -19,12 +19,12 @@ PhoneBook::~PhoneBook()
 {
 }
 
-void	PhoneBook::getInstruction(void)const
+void	PhoneBook::getInstruction(std::ostream &out)const
 {
-	std::cout 	<< "The program only accepts " 
-				<< BLUE << "ADD" << RESET << ", "
-				<< BLUE << "SEARCH" << RESET << " and "
-				<< BLUE << "EXIT" << NLTWR;
+	out << "The program only accepts " 
+		<< BLUE << "ADD" << RESET << ", "
+		<< BLUE << "SEARCH" << RESET << " and "
+		<< BLUE << "EXIT" << NLTWR;
 }
 
 void	PhoneBook::updateIndex(void)
@@ -34,11 +34,11 @@ void	PhoneBook::updateIndex(void)
 		_count++;
 }
 
-bool	PhoneBook::addContact(void)
+bool	PhoneBook::addContact(std::istream &in, std::ostream &out)
 {
 	if (_count >= 8)
-		std::cout << "Warning: Oldest contact will be overwritten.\n";
-	if (this->_contacts[_index].set_contact())
+		out << "Warning: Oldest contact will be overwritten.\n";
+	if (this->_contacts[_index].set_contact(in, out))
 	{
 		updateIndex();
 		return (true);
@@ -47,46 +47,46 @@ bool	PhoneBook::addContact(void)
 		return (false);
 }
 
-bool	PhoneBook::searchContact(void)const
+bool	PhoneBook::searchContact(std::istream &in, std::ostream &out)const
 {
 	int				inputIndex;
 	std::string		input;
 
 	if (_count == 0)
 	{
-		std::cout << "Phone book empty, enter some data first!" << "\n";
+		out << "Phone book empty, enter some data first!" << "\n";
 		return (true);
 	}
 
 	for (int xi = 0; xi < _count; ++xi)
 	{
-		_contacts[xi].get_contact_row(xi);
+		_contacts[xi].get_contact_row(out, xi);
 	}
-	std::cout << "Enter contact index (0-7 allowed)" << "\n>";
+	out << "Enter contact index (0-7 allowed)" << "\n>";
 	while (true)
 	{
-		if (!std::getline(std::cin, input))
+		if (!std::getline(in, input))
 		{
-			if (std::cin.eof())
+			if (in.eof())
 				return (false);
 		}
 		if (input.empty())
 		{
-			std::cout << "Empty string not allowed\n>";
+			out << "Empty string not allowed\n>";
 			continue;
 		}
 		else if (input.length() != 1 || !std::isdigit(static_cast<unsigned char>(input[0])))
 		{
-			std::cout << "Note: Required numeric enter" << "\n";
+			out << "Note: Required numeric enter" << "\n";
 			return (true);
 		}
 		inputIndex = input[0] - '0';
 		if (inputIndex < 0 || inputIndex >= _count)
 		{
-			std::cout << "Note: Index out of range" << "\n";
+			out << "Note: Index out of range" << "\n";
 			return (true);
 		}
-		_contacts[inputIndex].get_contact_row(inputIndex);
+		_contacts[inputIndex].get_contact_row(out, inputIndex);
 		break ;
 	}
 	return (true);

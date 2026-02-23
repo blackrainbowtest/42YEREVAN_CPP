@@ -9,9 +9,9 @@ public:
 	Contact(void);
 	~Contact(void);
 	
-	bool	set_contact();
-	void	get_contact_row(int index)const;
-	void	get_contact_info(void)const;
+	bool	set_contact(std::istream &in, std::ostream &out);
+	void	get_contact_row(std::ostream &out, int index)const;
+	void	get_contact_info(std::ostream &out)const;
 
 private:
 	static std::string _fields_list[5];

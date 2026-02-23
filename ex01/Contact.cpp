@@ -25,20 +25,20 @@ Contact::~Contact()
 {
 }
 
-bool	Contact::set_contact()
+bool	Contact::set_contact(std::istream &in, std::ostream &out)
 {
 	for (int xi = FirstName; xi <= DarkestSecret; ++xi)
 	{
-		std::cout << "Please enter the " 
-				  << Contact::_fields_list[xi]
-				  << ':' << NLTWR;
+		out	<< "Please enter the " 
+			<< Contact::_fields_list[xi]
+			<< ':' << NLTWR;
 		while (true)
 		{
-			if (!std::getline(std::cin, this->_informations[xi]))
+			if (!std::getline(in, this->_informations[xi]))
 			{
-				if (std::cin.eof())
+				if (in.eof())
 				{
-					std::cout << "Note: ^D detected. Exiting phonebook..." 
+					out << "Note: ^D detected. Exiting phonebook..." 
 							  << '\n';
 					return false;
 				}
@@ -46,38 +46,38 @@ bool	Contact::set_contact()
 			if (!this->_informations[xi].empty())
 				break;
 
-			std::cout << YELLOWBG << "Note:" << RESET << " Empty string not allowed" 
-					  << '\n';
-			std::cout << BLUE << "Please enter the " << RESET 
-					  << Contact::_fields_list[xi] 
-					  << ':' << NLTWR;
+			out	<< YELLOWBG << "Note:" << RESET << " Empty string not allowed" 
+				<< '\n';
+			out	<< BLUE << "Please enter the " << RESET 
+				<< Contact::_fields_list[xi] 
+				<< ':' << NLTWR;
 		}
 	}
-	std::cout << "New contact added successfully."
+	out << "New contact added successfully."
 			  << '\n';
 	return (true);
 }
 
-void	Contact::get_contact_row(int index) const
+void	Contact::get_contact_row(std::ostream &out, int index) const
 {
-	std::cout << "|" << std::setw(10) << index;
+	out << "|" << std::setw(10) << index;
 	for (int xi = FirstName; xi <= NickName; ++xi)
 	{
-		std::cout << "|";
+		out << "|";
 		if (this->_informations[xi].length() > 10)
-			std::cout << std::setw(10) << this->_informations[xi].substr(0, 9) << ".";
+			out << std::setw(10) << this->_informations[xi].substr(0, 9) << ".";
 		else
-			std::cout << std::setw(10) << this->_informations[xi];
+			out << std::setw(10) << this->_informations[xi];
 	}
-	std::cout << "|" << '\n';
+	out << "|" << '\n';
 }
 
-void	Contact::get_contact_info(void) const
+void	Contact::get_contact_info(std::ostream &out) const
 {
 	for (int xi = FirstName; xi <= DarkestSecret; ++xi)
 	{
-		std::cout << FirstName + 1
-				  << ". " << BLUE  << Contact::_fields_list[xi]
-				  << ": " << RESET << this->_informations[xi] << NLTWR;
+		out	<< FirstName + 1
+			<< ". " << BLUE  << Contact::_fields_list[xi]
+			<< ": " << RESET << this->_informations[xi] << NLTWR;
 	}
 }

@@ -1,6 +1,6 @@
-#include "Contact.hpp"
 #include "PhoneBook.hpp"
 #include <iostream>
+#include <string>
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"
@@ -19,18 +19,18 @@ int	main(void)
 	std::cout << CYAN << "Wellcome!" << RESET << '\n';
 	while (true)
 	{
-		phoneBook.getInstruction();
+		phoneBook.getInstruction(std::cout);
 		if (!std::getline(std::cin, input))
 			break ;
 
 		if (input.compare("ADD") == 0)
 		{
-			if (!phoneBook.addContact())
+			if (!phoneBook.addContact(std::cin, std::cout))
 				break ;
 		}
 		else if (input.compare("SEARCH") == 0)
 		{
-			if (!phoneBook.searchContact())
+			if (!phoneBook.searchContact(std::cin, std::cout))
 				break ;
 		}
 		else if (input.compare("EXIT") == 0)
