@@ -38,46 +38,54 @@ bool	Contact::set_contact(std::istream &in, std::ostream &out)
 			{
 				if (in.eof())
 				{
-					out << "Note: ^D detected. Exiting phonebook..." 
-							  << '\n';
+					out	<< "Note: ^D detected. Exiting phonebook..." 
+						<< '\n';
 					return false;
 				}
 			}
 			if (!this->_informations[xi].empty())
 				break;
 
-			out	<< YELLOWBG << "Note:" << RESET << " Empty string not allowed" 
+			out	<< YELLOWBG << "Note:" 
+				<< RESET << " Empty string not allowed" 
 				<< '\n';
-			out	<< BLUE << "Please enter the " << RESET 
-				<< Contact::_fields_list[xi] 
-				<< ':' << NLTWR;
+			out	<< BLUE << "Please enter the "
+				<< RESET << Contact::_fields_list[xi] 
+				<< ':' 
+				<< NLTWR;
 		}
 	}
-	out << "New contact added successfully."
-			  << '\n';
+	out	<< "New contact added successfully."
+		<< '\n';
 	return (true);
 }
 
 void	Contact::get_contact_row(std::ostream &out, int index) const
 {
-	out << "|" << std::setw(10) << index;
+	out	<< "|"
+		<< std::setw(10)
+		<< index;
 	for (int xi = FirstName; xi <= NickName; ++xi)
 	{
-		out << "|";
+		out	<< "|";
 		if (this->_informations[xi].length() > 10)
-			out << std::setw(10) << this->_informations[xi].substr(0, 9) << ".";
+			out	<< std::setw(10)
+				<< this->_informations[xi].substr(0, 9)
+				<< ".";
 		else
-			out << std::setw(10) << this->_informations[xi];
+			out	<< std::setw(10)
+				<< this->_informations[xi];
 	}
-	out << "|" << '\n';
+	out << "|"
+		<< '\n';
 }
 
 void	Contact::get_contact_info(std::ostream &out) const
 {
 	for (int xi = FirstName; xi <= DarkestSecret; ++xi)
 	{
-		out	<< FirstName + 1
+		out	<< xi + 1
 			<< ". " << BLUE  << Contact::_fields_list[xi]
-			<< ": " << RESET << this->_informations[xi] << NLTWR;
+			<< ": " << RESET << this->_informations[xi] << '\n';
 	}
 }

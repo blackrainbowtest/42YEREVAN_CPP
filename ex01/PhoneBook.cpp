@@ -34,6 +34,31 @@ void	PhoneBook::updateIndex(void)
 		_count++;
 }
 
+void	PhoneBook::printHeader(std::ostream &out)const
+{
+	out	<< "|"
+		<< BLUE
+		<< std::setw(10)
+		<< "Index"
+		<< RESET;
+	out	<< "|"
+		<< BLUE
+		<< std::setw(10)
+		<< "First Name"
+		<< RESET;
+	out	<< "|"
+		<< BLUE
+		<< std::setw(10)
+		<< "Last Name"
+		<< RESET;
+	out	<< "|"
+		<< BLUE
+		<< std::setw(10)
+		<< "Nickname"
+		<< RESET;
+	out << "|\n";
+}
+
 bool	PhoneBook::addContact(std::istream &in, std::ostream &out)
 {
 	if (_count >= 8)
@@ -57,12 +82,12 @@ bool	PhoneBook::searchContact(std::istream &in, std::ostream &out)const
 		out << "Phone book empty, enter some data first!" << "\n";
 		return (true);
 	}
-
+	printHeader(out);
 	for (int xi = 0; xi < _count; ++xi)
 	{
 		_contacts[xi].get_contact_row(out, xi);
 	}
-	out << "Enter contact index (0-7 allowed)" << "\n>";
+	out << "Enter contact index (0-7 allowed)" << NLTWR;
 	while (true)
 	{
 		if (!std::getline(in, input))
@@ -86,7 +111,7 @@ bool	PhoneBook::searchContact(std::istream &in, std::ostream &out)const
 			out << "Note: Index out of range" << "\n";
 			return (true);
 		}
-		_contacts[inputIndex].get_contact_row(out, inputIndex);
+		_contacts[inputIndex].get_contact_info(out);
 		break ;
 	}
 	return (true);

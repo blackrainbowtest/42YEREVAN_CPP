@@ -10,6 +10,7 @@ class	PhoneBook
 		int		_index;
 		int		_count;
 		void	updateIndex(void);
+		void	printHeader(std::ostream &out)const;
 	public:
 		PhoneBook(void);
 		~PhoneBook(void);
