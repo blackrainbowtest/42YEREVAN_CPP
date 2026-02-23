@@ -62,19 +62,18 @@ bool	Contact::set_contact(std::istream &in, std::ostream &out)
 
 void	Contact::get_contact_row(std::ostream &out, int index) const
 {
+	std::string field;
 	out	<< "|"
 		<< std::setw(10)
 		<< index;
 	for (int xi = FirstName; xi <= NickName; ++xi)
 	{
-		out	<< "|";
-		if (this->_informations[xi].length() > 10)
-			out	<< std::setw(10)
-				<< this->_informations[xi].substr(0, 9)
-				<< ".";
-		else
-			out	<< std::setw(10)
-				<< this->_informations[xi];
+		field = this->_informations[xi];
+		if (field.length() > 10)
+    		field = field.substr(0, 9) + ".";
+		out	<< "|"
+			<< std::setw(10)
+			<< field;
 	}
 	out << "|"
 		<< '\n';
