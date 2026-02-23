@@ -7,15 +7,24 @@ int	main(int argc, char **argv)
 	int	j;
 
 	if (argc < 2)
-		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-	i = 0;
-	while (argv[++i])
 	{
-		j = -1;
-		while (argv[i][++j])
-			std::cout << (char)std::toupper(argv[i][j]);
-		if (argv[i + 1])
+		std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
+		return (0);
+	}
+	i = 1;
+	while (i < argc)
+	{
+		j = 0;
+		while (argv[i][j])
+		{
+			std::cout << static_cast<char>(
+				std::toupper(static_cast<unsigned char>(argv[i][j]))
+			);
+			++j;
+		}
+		if (i + 1 < argc)
 			std::cout << ' ';
+		++i;
 	}
 	std::cout << '\n';
 	return (0);
