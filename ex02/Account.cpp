@@ -1,5 +1,27 @@
 #include "Account.hpp"
 #include <iostream>
+/*
+Account(int) × 8
+
+displayAccountsInfos()
+
+displayStatus() × 8
+
+makeDeposit() × 8
+
+displayAccountsInfos()
+
+displayStatus() × 8
+
+makeWithdrawal() × 8
+
+displayAccountsInfos()
+
+displayStatus() × 8
+
+~Account() × 8
+*/
+
 
 int Account::_nbAccounts = 0;
 int Account::_totalAmount = 0;
@@ -39,5 +61,10 @@ void	Account::_displayTimestamp( void )
 	// cout time like this here [19920104_091532]
 	// yyyymmdd_hhmmss
 				<< "]";
+}
+
+int		Account::checkAmount( void ) const
+{
+	return (this->_amount);
 }
 // Account.cpp
