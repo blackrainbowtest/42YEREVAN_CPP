@@ -104,13 +104,10 @@ bool	Account::makeWithdrawal( int withdrawal )
 {
 	return false;
 }
-void	Account::displayStatus( void ) const
-{
-
-}
 
 void	Account::_displayTimestamp( void )
 {
+	// [19920104_091532] -> yyyymmdd_hhmmss (%Y%m%d_%H%M%S)
 	std::time_t now 			= time_t(NULL);
 	std::tm* tm 				= std::localtime(&now);
 
