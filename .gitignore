@@ -1,0 +1,25 @@
+# Object files
+*.o
+
+# Executables
+phonebook
+megaphone
+
+# Dependency files (если добавишь -MMD)
+*.d
+
+# macOS
+.DS_Store
+
+# Vim swap
+*.swp
+
+# VSCode
+.vscode/
+
+# CLion / JetBrains
+.idea/
+
+# Coverage / debug
+*.out
+a.out
