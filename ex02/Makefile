@@ -1,4 +1,4 @@
-SRC = Account.cpp tests.cpp main.cpp
+SRC = Account.cpp tests.cpp
 OBJ = $(SRC:.cpp=.o)
 CC = g++
 RM = rm -f
