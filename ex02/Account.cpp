@@ -98,11 +98,44 @@ void	Account::displayStatus(void) const
 
 void	Account::makeDeposit( int deposit )
 {
+	// [19920104_091532] index:0;p_amount:42;deposit:5;amount:47;nb_deposits:1
+	this->_nbDeposits++;	// update number of deposits
 
+	// Bank client balance display block ========================================
+	Account::_displayTimestamp();
+	std::cout	<< "index:"			<< Account::_accountIndex		<< ";"
+				<< "p_amount:"		<< this->_amount				<< ";"
+				<< "deposit:"		<< deposit						<< ";"
+				<< "amount:"		<< this->_amount + deposit		<< ";"
+				<< "nb_deposits"	<< this->_nbDeposits			<< std::endl;
+
+	// Bank client's balance interaction block ==================================
+	this->_amount += deposit;
+	Account::_totalAmount += deposit;
+	Account::_totalNbDeposits++;
 }
 bool	Account::makeWithdrawal( int withdrawal )
 {
-	return false;
+	// [19920104_091532] index:1;p_amount:819;withdrawal:34;amount:785;nb_withdrawals:1
+	// [19920104_091532] index:5;p_amount:23;withdrawal:refused
+	Account::_displayTimestamp();
+	std::cout	<< "index:"			<< Account::_accountIndex		<< ";"
+				<< "p_amount:"		<< this->_amount				<< ";"
+				<< "withdrawal:";
+	if (withdrawal > this->checkAmount())
+	{
+		std::cout	<< "refused"	<< std::endl;
+		return (false);
+	}
+	this->_nbWithdrawals++;
+	std::cout	<< ""				<< withdrawal					<< ";"
+				<< "amount"
+
+	// Bank client's balance interaction block ==================================
+	this->_amount -= withdrawal;
+	Account::_totalAmount -= withdrawal;
+	Account::_totalNbWithdrawals++;
+	return (true);
 }
 
 void	Account::_displayTimestamp( void )
