@@ -129,7 +129,8 @@ bool	Account::makeWithdrawal( int withdrawal )
 	}
 	this->_nbWithdrawals++;
 	std::cout	<< ""				<< withdrawal					<< ";"
-				<< "amount"
+				<< "amount"			<< this->_amount				<< ";"
+				<< "nb_withdrawals"	<< this->_nbWithdrawals			<< std::endl;
 
 	// Bank client's balance interaction block ==================================
 	this->_amount -= withdrawal;
