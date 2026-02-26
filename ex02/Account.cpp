@@ -107,7 +107,7 @@ void	Account::makeDeposit( int deposit )
 				<< "p_amount:"		<< this->_amount				<< ";"
 				<< "deposit:"		<< deposit						<< ";"
 				<< "amount:"		<< this->_amount + deposit		<< ";"
-				<< "nb_deposits"	<< this->_nbDeposits			<< std::endl;
+				<< "nb_deposits:"	<< this->_nbDeposits			<< std::endl;
 
 	// Bank client's balance interaction block ==================================
 	this->_amount += deposit;
@@ -129,8 +129,8 @@ bool	Account::makeWithdrawal( int withdrawal )
 	}
 	this->_nbWithdrawals++;
 	std::cout	<< ""				<< withdrawal					<< ";"
-				<< "amount"			<< this->_amount				<< ";"
-				<< "nb_withdrawals"	<< this->_nbWithdrawals			<< std::endl;
+				<< "amount:"			<< this->_amount				<< ";"
+				<< "nb_withdrawals:"	<< this->_nbWithdrawals			<< std::endl;
 
 	// Bank client's balance interaction block ==================================
 	this->_amount -= withdrawal;
@@ -141,10 +141,18 @@ bool	Account::makeWithdrawal( int withdrawal )
 
 void	Account::_displayTimestamp( void )
 {
-	// [19920104_091532] -> yyyymmdd_hhmmss (%Y%m%d_%H%M%S)
-	std::time_t now 			= time_t(NULL);
+	// [19920104_091532] -> yyyymmdd_hhmmss
+	std::time_t now 			= std::time(NULL);
 	std::tm* tm 				= std::localtime(&now);
 
-	std::cout	<< std::put_time(tm, "[%Y%m%d_%H%M%S] ");
+	std::cout	<< "["
+				<< (tm->tm_year + 1900)
+				<< std::setw(2) << std::setfill('0') << (tm->tm_mon + 1)
+				<< std::setw(2) << std::setfill('0') << tm->tm_mday
+				<< "_"
+				<< std::setw(2) << std::setfill('0') << tm->tm_hour
+				<< std::setw(2) << std::setfill('0') << tm->tm_min
+				<< std::setw(2) << std::setfill('0') << tm->tm_sec
+				<< "] ";
 }
 // Account.cpp
