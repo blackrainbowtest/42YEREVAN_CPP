@@ -5,7 +5,8 @@
 #include <cctype>
 
 static const char* RESET   = "\033[0m";
-// static const char* YELLOWBG  = "\033[43m";
+static const char* YELLOWBG  = "\033[43m";
+static const char* BLUEWBG  = "\033[44m";
 static const char* BLUE    = "\033[34m";
 static const char* NLTWR   = "\n\033[31m>\033[0m";
 
@@ -62,7 +63,8 @@ void	PhoneBook::printHeader(std::ostream &out)const
 bool	PhoneBook::addContact(std::istream &in, std::ostream &out)
 {
 	if (_count >= 8)
-		out << "Warning: Oldest contact will be overwritten.\n";
+		out << YELLOWBG << "Warning:" 
+			<< RESET << " Oldest contact will be overwritten.\n";
 	if (this->_contacts[_index].set_contact(in, out))
 	{
 		updateIndex();
@@ -97,18 +99,22 @@ bool	PhoneBook::searchContact(std::istream &in, std::ostream &out)const
 		}
 		if (input.empty())
 		{
-			out << "Empty string not allowed\n>";
+			out << BLUEWBG << "Note:" << RESET 
+				<< " Empty string not allowed"
+				<< NLTWR;;
 			continue;
 		}
 		else if (input.length() != 1 || !std::isdigit(static_cast<unsigned char>(input[0])))
 		{
-			out << "Note: Required numeric enter" << "\n";
+			out << BLUEWBG << "Note:" << RESET 
+				<< " Required numeric enter" << "\n";
 			return (true);
 		}
 		inputIndex = input[0] - '0';
 		if (inputIndex < 0 || inputIndex >= _count)
 		{
-			out << "Note: Index out of range" << "\n";
+			out << BLUEWBG << "Note:" << RESET 
+				<< " Index out of range" << "\n";
 			return (true);
 		}
 		_contacts[inputIndex].get_contact_info(out);

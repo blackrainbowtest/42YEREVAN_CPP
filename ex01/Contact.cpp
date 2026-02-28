@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 static const char* RESET   = "\033[0m";
-static const char* YELLOWBG  = "\033[43m";
+static const char* BLUEWBG  = "\033[44m";
 static const char* BLUE    = "\033[34m";
 static const char* NLTWR   = "\n\033[31m>\033[0m";
 
@@ -29,16 +29,18 @@ bool	Contact::set_contact(std::istream &in, std::ostream &out)
 {
 	for (int xi = FirstName; xi <= DarkestSecret; ++xi)
 	{
-		out	<< "Please enter the " 
-			<< Contact::_fields_list[xi]
-			<< ':' << NLTWR;
+		out		<< "Please enter the "
+				<< BLUE << Contact::_fields_list[xi] 
+				<< RESET << ':' 
+				<< NLTWR;
 		while (true)
 		{
 			if (!std::getline(in, this->_informations[xi]))
 			{
 				if (in.eof())
 				{
-					out	<< "Note: ^D detected. Exiting phonebook..." 
+					out	<< BLUEWBG << "Note:"
+						<< RESET << " ^D detected. Exiting phonebook..." 
 						<< '\n';
 					return false;
 				}
@@ -46,12 +48,12 @@ bool	Contact::set_contact(std::istream &in, std::ostream &out)
 			if (!this->_informations[xi].empty())
 				break;
 
-			out	<< YELLOWBG << "Note:" 
+			out	<< BLUEWBG << "Note:" 
 				<< RESET << " Empty string not allowed" 
 				<< '\n';
-			out	<< BLUE << "Please enter the "
-				<< RESET << Contact::_fields_list[xi] 
-				<< ':' 
+			out << "Please enter the "
+				<< BLUE << Contact::_fields_list[xi] 
+				<< RESET << ':' 
 				<< NLTWR;
 		}
 	}
