@@ -23,7 +23,8 @@ int	main(int argc, char **argv)
 			++j;
 		}
 		if (i + 1 < argc)
-			std::cout << ' ';
+			if (argv[i][j - 1] != ' ' && argv[i + 1][0] != ' ')
+				std::cout << ' ';
 		++i;
 	}
 	std::cout << '\n';
