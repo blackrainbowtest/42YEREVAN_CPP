@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 14:12:09 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/02 15:10:50 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/02 15:44:10 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@
 #define RESET     "\033[0m"
 
 // constructor
-HumanB::HumanB(const std::string &name): _name(name)
+HumanB::HumanB(const std::string &name): _name(name), _weapon(NULL), _is_armed(false)
 {
-	this->_is_armed = false;
 	std::cout << "\n" << BG_CYAN << BLACK << "Combat log: " << RESET
 			  << MAGENTA << this->_name << RESET
 			  << " enter into the dungeon. "
@@ -38,13 +37,13 @@ HumanB::~HumanB(void)
 // actions
 void	HumanB::attack() const
 {
-	if (this->_is_armed)
-    {
-        std::cout << GREEN << this->_name << " attacks"
-			<< RESET << " with his "
-			<< CYAN << this->_weapon << RESET
-			<< "." << std::endl;
-    }
+	if (this->_is_armed && this->_weapon)
+	{
+		std::cout << GREEN << this->_name << " attacks"
+				  << RESET << " with his "
+				  << CYAN << this->_weapon->getType() << RESET
+				  << "." << std::endl;
+	}
     else
     {
         std::cout << GREEN << this->_name << " attacks"
