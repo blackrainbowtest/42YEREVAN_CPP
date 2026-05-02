@@ -1,0 +1,36 @@
+NAME      = unnecessary_violence
+
+CXX       = c++
+CXXFLAGS  = -Wall -Wextra -Werror -std=c++98
+
+SRC_DIR		=	src/
+OBJ_DIR		=	obj/
+INC_DIR		=	include/
+
+SRC_FILES	=	HumanA.cpp HumanB.cpp main.cpp Weapon.cpp
+OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
+
+SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
+OBJ			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
+
+
+RM        = rm -f
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+
+$(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
+	mkdir -p $(OBJ_DIR)
+	$(CXX) $(CXXFLAGS) -I $(INC_DIR) -o $@ -c $<
+
+clean:
+	$(RM) $(OBJ)
+
+fclean: clean
+	$(RM) $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
