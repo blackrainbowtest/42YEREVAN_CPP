@@ -6,11 +6,15 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:53:53 by aramarak          #+#    #+#             */
-/*   Updated: 2026/04/30 17:36:02 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/02 17:15:25 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Zombie.hpp"
+	{
+		std::cout << BG_MAGENTA << "ERROR" << RESET << ": "
+				<< "s1 cannot be empty\n" << RESET;
+		return (EXIT_FAILURE);
+	}#include "Zombie.hpp"
 
 // Constructor
 Zombie::Zombie(std::string name): _name(name)
