@@ -6,21 +6,22 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:53:53 by aramarak          #+#    #+#             */
-/*   Updated: 2026/04/30 18:02:23 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/02 12:40:21 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
 // Constructor
-Zombie::Zombie(): _name()
+Zombie::Zombie()
 {
 }
 
 // Destructor
 Zombie::~Zombie()
 {
-	std::cout << "Horde member " << _name << " has passed away." << std::endl;
+	std::cout << "Horde member " << BG_GREEN << _name 
+				<< RESET << " has passed away." << std::endl;
 }
 
 // name setter
@@ -32,5 +33,7 @@ void	Zombie::set_name(std::string name)
 // zombie announce
 void	Zombie::announce(void) const
 {
-	std::cout << _name << ":  BraiiiiiiinnnzzzZ..." << std::endl;
+	std::cout	<< BG_GREEN << _name
+				<< RESET << YELLOW << ":  BraiiiiiiinnnzzzZ..." 
+				<< RESET << std::endl;
 }
