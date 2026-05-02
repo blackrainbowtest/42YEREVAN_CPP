@@ -5,12 +5,12 @@
 #                                                     +:+ +:+         +:+      #
 #    By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/05/02 15:27:00 by aramarak          #+#    #+#              #
-#    Updated: 2026/05/02 15:27:01 by aramarak         ###   ########.fr        #
+#    Created: 2026/05/02 15:26:51 by aramarak          #+#    #+#              #
+#    Updated: 2026/05/02 15:26:53 by aramarak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME      = unnecessary_violence
+NAME      = replace
 
 CXX       = c++
 CXXFLAGS  = -Wall -Wextra -Werror -std=c++98
@@ -19,7 +19,7 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-SRC_FILES	=	HumanA.cpp HumanB.cpp main.cpp Weapon.cpp
+SRC_FILES	=	main.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
