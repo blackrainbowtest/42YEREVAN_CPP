@@ -6,11 +6,11 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/02 15:26:51 by aramarak          #+#    #+#              #
-#    Updated: 2026/05/03 13:33:43 by root             ###   ########.fr        #
+#    Updated: 2026/05/03 13:41:26 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME      = harl
+NAME      = harlFilter
 
 CXX       = c++
 CXXFLAGS  = -Wall -Wextra -Werror -std=c++98
