@@ -6,7 +6,7 @@
 #    By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/02 15:27:00 by aramarak          #+#    #+#              #
-#    Updated: 2026/05/02 15:27:01 by aramarak         ###   ########.fr        #
+#    Updated: 2026/05/04 16:31:16 by aramarak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ OBJ			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 
 RM        = rm -f
+RMDIR     = rm -rf
 
 all: $(NAME)
 
@@ -42,6 +43,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RMDIR) $(OBJ_DIR)
 
 re: fclean all
 

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
+#    By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/02 15:26:51 by aramarak          #+#    #+#              #
-#    Updated: 2026/05/03 13:41:26 by root             ###   ########.fr        #
+#    Updated: 2026/05/04 16:29:39 by aramarak         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ OBJ			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 
 RM        = rm -f
+RMDIR     = rm -rf
 
 all: $(NAME)
 
@@ -42,6 +43,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RMDIR) $(OBJ_DIR)
 
 re: fclean all
 
