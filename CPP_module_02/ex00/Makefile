@@ -6,11 +6,11 @@
 #    By: root <root@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/05/02 15:26:51 by aramarak          #+#    #+#              #
-#    Updated: 2026/05/03 13:41:26 by root             ###   ########.fr        #
+#    Updated: 2026/05/05 21:24:17 by root             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME      = harlFilter
+NAME      = a.out
 
 CXX       = c++
 CXXFLAGS  = -Wall -Wextra -Werror -std=c++98
@@ -19,7 +19,7 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-SRC_FILES	=	main.cpp Harl.cpp
+SRC_FILES	=	main.cpp Fixed.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))

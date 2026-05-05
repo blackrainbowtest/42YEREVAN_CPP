@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 15:22:41 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/05 18:50:55 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/05 21:22:58 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 #define BG_CYAN "\033[46m"
 #define RESET "\033[0m"
 
-int	main(int argc, char **argv)
+int	main(void)
 {
 	Fixed a;
 	Fixed b( a );

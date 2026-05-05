@@ -25,11 +25,25 @@ Fixed::Fixed(const Fixed& copy)
 
 Fixed::~Fixed()
 {
-	std::cout << "Fixed Deconstructor called" << std::endl;
+	std::cout << "Destructor called" << std::endl;
 }
 
 // Overloaded operators
-
+Fixed& Fixed::operator=(const Fixed& copy)
+{
+	std::cout << "Copy assignment operator called" << std::endl;
+	if(this != &copy)
+		this->_value = copy.getRawBits();
+	return (*this);
+}
 // Getter
-
+int	Fixed::getRawBits(void) const
+{
+	std::cout << "getRawBits member function called" << std::endl;
+	return (this->_value);
+}
 // Setter
+void Fixed::setRawBits(int const raw)
+{
+	this->_value = raw;
+}

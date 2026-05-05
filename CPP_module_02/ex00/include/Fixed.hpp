@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Fixed.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 16:14:52 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/05 18:57:56 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/05 21:23:06 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ class Fixed
 
 	int		getRawBits(void)const;
 	void	setRawBits(int const raw);
-}
+};
 #endif // FIXED_HPP
