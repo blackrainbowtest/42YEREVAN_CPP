@@ -40,10 +40,10 @@ $(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
 
 clean:
 	$(RM) $(OBJ)
+	$(RMDIR) $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
-	$(RMDIR) $(OBJ_DIR)
 
 re: fclean all
 

@@ -27,6 +27,7 @@ OBJ			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
 
 
 RM        = rm -f
+RMDIR     = rm -rf
 
 all: $(NAME)
 
@@ -39,6 +40,7 @@ $(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
 
 clean:
 	$(RM) $(OBJ)
+	$(RMDIR) $(OBJ_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
