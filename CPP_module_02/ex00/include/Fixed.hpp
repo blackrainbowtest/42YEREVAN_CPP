@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/04 16:14:52 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/05 18:55:19 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/05 18:55:44 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@ class Fixed
 	Fixed(const Fixed& copy);
 	~Fixed();
 	
-	Fixed& operator=(const Fixed& src);
+	Fixed&	operator=(const Fixed& src);
 
-	int	getRawBits(void)const;
+	int		getRawBits(void)const;
 	void	setRawBits(int const raw);
 }
 #endif // FIXED_HPP
