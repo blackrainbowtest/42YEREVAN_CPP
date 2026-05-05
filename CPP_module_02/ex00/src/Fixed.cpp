@@ -10,4 +10,26 @@
 #define BG_CYAN "\033[46m"
 #define RESET "\033[0m"
 
+const int Fixed::_bits = 8;
 
+Fixed::Fixed(): _value(0)
+{
+	std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const Fixed& copy)
+{
+	std::cout << "Copy constructor called" << std::endl;
+	*this = copy;
+}
+
+Fixed::~Fixed()
+{
+	std::cout << "Fixed Deconstructor called" << std::endl;
+}
+
+// Overloaded operators
+
+// Getter
+
+// Setter
