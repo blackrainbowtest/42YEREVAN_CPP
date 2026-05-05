@@ -6,7 +6,7 @@
 /*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 15:22:41 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/05 22:12:13 by root             ###   ########.fr       */
+/*   Updated: 2026/05/05 23:15:38 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,12 @@ int	main(void)
 	Fixed a;
 	Fixed const b(Fixed(5.05f) * Fixed(2));
 
-	std::cout << a << "\t\tis a at start\n" << std::endl;
-	std::cout << ++a << "\tis a at ++a\n" << std::endl;
-	std::cout << a << "\tis a after ++a\n" << std::endl;
-	std::cout << a++ <<"\tis a at a++\n" << std::endl;
-	std::cout << a << "\tis a after a++\n" << std::endl;
-
-	std::cout << b << "\t\tvalue of b\n" << std::endl;
-
-	std::cout << Fixed::max(a, b) << "\t\tthe max of a and b\n" << std::endl;
-	std::cout << Fixed::min(a, b) << "\tthe min of a and b\n" << std::endl;
+	std::cout << a << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << Fixed::max( a, b ) << std::endl;
 	return (EXIT_SUCCESS);
 }

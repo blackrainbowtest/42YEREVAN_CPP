@@ -14,30 +14,25 @@ const int Fixed::_bits = 8;
 
 Fixed::Fixed(): _value(0)
 {
-	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed(const Fixed& copy)
 {
-	std::cout << "Copy constructor called" << std::endl;
 	*this = copy;
 }
 
 Fixed::Fixed(const int value)
 {
-	std::cout << "Int constructor called" << std::endl;
 	this->_value = value << this->_bits;
 }
 
 Fixed::Fixed(const float value)
 {
-	std::cout << "Float constructor called" << std::endl;
 	this->_value = roundf(value * (1 << this->_bits));
 }
 
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
 }
 
 float Fixed::toFloat(void) const
@@ -53,16 +48,118 @@ int Fixed::toInt(void) const
 // Overloaded operators
 Fixed& Fixed::operator=(const Fixed& src)
 {
-	std::cout << "Copy assignment operator called" << std::endl;
 	if(this != &src)
 		this->_value = src.getRawBits();
 	return (*this);
 }
+
+bool Fixed::operator>(const Fixed& src) const
+{
+	return (this->toFloat() > src.toFloat());
+}
+
+bool Fixed::operator<(const Fixed& src) const
+{
+	return (this->toFloat() < src.toFloat());
+}
+
+bool Fixed::operator>=(const Fixed& src) const
+{
+	return (this->toFloat() >= src.toFloat());
+}
+
+bool Fixed::operator<=(const Fixed& src) const
+{
+	return (this->toFloat() <= src.toFloat());
+}
+
+bool Fixed::operator==(const Fixed& src) const
+{
+	return (this->toFloat() == src.toFloat());
+}
+
+bool Fixed::operator!=(const Fixed& src) const
+{
+	return (this->toFloat() != src.toFloat());
+}
+
+// Arithmetic operators
+Fixed Fixed::operator+(const Fixed& src) const
+{
+	return (Fixed(this->toFloat() + src.toFloat()));
+}
+
+Fixed Fixed::operator-(const Fixed& src) const
+{
+	return (Fixed(this->toFloat() - src.toFloat()));
+}
+
+Fixed Fixed::operator*(const Fixed& src) const
+{
+	return (Fixed(this->toFloat() * src.toFloat()));
+}
+
+Fixed Fixed::operator/(const Fixed& src) const
+{
+	if (src.toFloat() == 0)
+		throw std::runtime_error("Division by zero");
+	return (Fixed(this->toFloat() / src.toFloat()));
+}
+
+// Increment/Decrement operators
+Fixed& Fixed::operator++() // prefix increment
+{
+	this->_value += 1;
+	return (*this);
+}
+
+Fixed Fixed::operator++(int) // postfix increment
+{
+	Fixed temp(*this);
+	this->_value += 1;
+	return (temp);
+}
+
+Fixed& Fixed::operator--() // prefix decrement
+{
+	this->_value -= 1;
+	return (*this);
+}
+
+Fixed Fixed::operator--(int) // postfix decrement
+{
+	Fixed temp(*this);
+	this->_value -= 1;
+	return (temp);
+}
+
+// Static member functions
+Fixed& Fixed::min(Fixed& a, Fixed& b)
+{
+	return (a < b ? a : b);
+}
+
+const Fixed& Fixed::min(const Fixed& a, const Fixed& b)
+{
+	return (a < b ? a : b);
+}
+
+Fixed& Fixed::max(Fixed& a, Fixed& b)
+{
+	return (a > b ? a : b);
+}
+
+const Fixed& Fixed::max(const Fixed& a, const Fixed& b)
+{
+	return (a > b ? a : b);
+}
+
 // Getter
 int	Fixed::getRawBits(void) const
 {
 	return (this->_value);
 }
+
 // Setter
 void Fixed::setRawBits(int const raw)
 {
