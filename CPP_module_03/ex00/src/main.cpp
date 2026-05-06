@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 15:22:41 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/06 19:57:14 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/07 01:01:38 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,33 @@
 
 int	main(void)
 {
-	ClapTrap cl;
-	std::cout << "test" << std::endl;
+	// testing 01
+	{
+		std::cout << CYAN << "Testing 01" << RESET << std::endl;
+		ClapTrap a("ClapTrap A");
+		a.attack("Target 1");
+		a.takeDamage(3);
+		a.beRepaired(2);
+		std::cout << std::endl;
+	}
+	// testing 02
+	{
+		std::cout << CYAN << "Testing 02" << RESET << std::endl;
+		ClapTrap b("ClapTrap B");
+		b.attack("Target 2");
+		b.takeDamage(5);
+		b.beRepaired(3);
+		std::cout << std::endl;
+	}
+	// testing 03
+	{
+		std::cout << CYAN << "Testing 03" << RESET << std::endl;
+		ClapTrap c("ClapTrap C");
+		c.attack("Target 3");
+		c.takeDamage(12);
+		c.beRepaired(5);
+		std::cout << std::endl;
+	}
 	
 	return (EXIT_SUCCESS);
 }

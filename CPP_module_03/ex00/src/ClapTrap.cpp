@@ -66,5 +66,64 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& src)
 
 void	ClapTrap::attack(const std::string& target)
 {
-	(void)target;
+	if (this->_base_stamina > 0 && this->_base_health > 0)
+	{
+		std::cout << CYAN << "ClapTrap" << " " << BG_YELLOW << BLACK 
+				  << "Attack" << RESET 
+				  << " " << "for " << YELLOW << _name << RESET
+				  << " " << "on " << YELLOW << target << RESET
+				  << std::endl;
+		this->_base_stamina--;
+	}
+	else
+	{
+		std::cout << CYAN << "ClapTrap" << " " << BG_RED << BLACK 
+				  << "Cannot attack" << RESET 
+				  << " " << "for " << YELLOW << _name << RESET
+				  << std::endl;
+	}
+}
+
+void	ClapTrap::takeDamage(unsigned int amount)
+{
+	if (this->_base_health > 0)
+	{
+		std::cout << CYAN << "ClapTrap" << " " << BG_MAGENTA << BLACK 
+				  << "Take damage" << RESET 
+				  << " " << "for " << YELLOW << _name << RESET
+				  << " " << "of " << YELLOW << amount << RESET
+				  << std::endl;
+		this->_base_health -= amount;
+	}
+	else
+	{
+		std::cout << CYAN << "ClapTrap" << " " << BG_RED << BLACK 
+				  << "Cannot take damage" << RESET 
+				  << " " << "for " << YELLOW << _name << RESET
+				  << std::endl;
+	}
+}
+
+void	ClapTrap::beRepaired(unsigned int amount)
+{
+	if (this->_base_stamina > 0 && this->_base_health > 0)
+	{
+		std::cout << CYAN << "ClapTrap" << " " << BG_CYAN << BLACK 
+				  << "Be repaired" << RESET 
+				  << " " << "for " << YELLOW << _name << RESET
+				  << " " << "of " << YELLOW << amount << RESET
+				  << std::endl;
+		if (this->_base_health + amount > 10)
+			this->_base_health = 10;
+		else
+			this->_base_health += amount;
+		this->_base_stamina--;
+	}
+	else
+	{
+		std::cout << CYAN << "ClapTrap" << " " << BG_RED << BLACK 
+				  << "Cannot be repaired" << RESET 
+				  << " " << "for " << YELLOW << _name << RESET
+				  << std::endl;
+	}
 }
