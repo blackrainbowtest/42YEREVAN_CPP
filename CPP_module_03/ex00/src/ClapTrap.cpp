@@ -22,14 +22,14 @@ ClapTrap::ClapTrap()
 	  _base_stamina(10),
 	  _base_health(10)
 {
-	std::cout << CYAN << "ClapTrap" << BG_MAGENTA << BLACK 
-			  << " Default constructor" << RESET << " called" << std::endl;
+	std::cout << CYAN << "ClapTrap" << " " << BG_MAGENTA << BLACK  
+			  << "Default constructor" << RESET << " called" << std::endl;
 }
 ClapTrap::ClapTrap(const ClapTrap& copy)
 {
 	*this = copy;
-	std::cout << CYAN << "ClapTrap" << BG_MAGENTA << BLACK 
-			  << " Copy constructor" << RESET << " called" << std::endl;
+	std::cout << CYAN << "ClapTrap" << " " << BG_MAGENTA << BLACK 
+			  << "Copy constructor" << RESET << " " << "called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string name)
@@ -38,25 +38,25 @@ ClapTrap::ClapTrap(std::string name)
 	  _base_stamina(10),
 	  _base_health(10)
 {
-	std::cout << CYAN << "ClapTrap" << BG_MAGENTA << BLACK 
-			  << " Name constructor" << RESET 
-			  << " for " << YELLOW << _name << RESET
-			  << " called" << std::endl;
+	std::cout << CYAN << "ClapTrap" << " " << BG_MAGENTA << BLACK 
+			  << "Name constructor" << RESET 
+			  << " " << "for " << YELLOW << _name << RESET
+			  << " " << "called" << std::endl;
 }
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << CYAN << "ClapTrap" << BG_RED << YELLOW 
-			  << " Destructor" << RESET 
-			  << " for " << YELLOW << _name << RESET
-			  << " called" << std::endl;
+	std::cout << CYAN << "ClapTrap" << " " << BG_RED << YELLOW 
+			  << "Destructor" << RESET 
+			  << " " << "for " << YELLOW << _name << RESET
+			  << " " << "called" << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& src)
 {
 	std::cout << "Assignation" 
-			  << CYAN << " operator" << RESET 
-			  << " called" << std::endl;
+			  << " " << CYAN << "operator" << RESET 
+			  << " " << "called" << std::endl;
 	this->_name = src._name;
 	this->_base_attack = src._base_attack;
 	this->_base_health = src._base_health;
@@ -66,5 +66,5 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& src)
 
 void	ClapTrap::attack(const std::string& target)
 {
-	
+	(void)target;
 }

@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 15:22:41 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/06 19:56:27 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/06 19:57:14 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 int	main(void)
 {
+	ClapTrap cl;
 	std::cout << "test" << std::endl;
 	
 	return (EXIT_SUCCESS);
