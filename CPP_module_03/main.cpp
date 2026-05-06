@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/02 15:22:41 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/05 23:15:38 by root             ###   ########.fr       */
+/*   Updated: 2026/05/06 19:31:39 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include "Fixed.hpp"
+#include "ClapTrap.hpp"
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
@@ -26,15 +26,6 @@
 
 int	main(void)
 {
-	Fixed a;
-	Fixed const b(Fixed(5.05f) * Fixed(2));
-
-	std::cout << a << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
+	std::cout << "test" << std::endl;
 	return (EXIT_SUCCESS);
 }
