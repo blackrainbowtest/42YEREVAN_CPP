@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:07 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/08 20:24:59 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/09 00:09:20 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 class Animal
 {
-	std::string	_type;
+	protected:
+		std::string	_type;
 
 	public:
 		Animal(void);

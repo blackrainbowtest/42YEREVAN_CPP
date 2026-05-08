@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:22 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/08 20:37:45 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/09 00:08:45 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,44 @@
 
 Cat::Cat(): Animal()
 {
-	
+	this->_type = "Cat";
+	std::cout << BG_CYAN << BLACK << "[constructor]"
+		<< RESET << ": Cat " << MAGENTA
+		<< "Default" << RESET << " Constructor called"
+		<< std::endl;
+}
+
+Cat::Cat(const Cat& copy): Animal(copy)
+{
+	*this = copy;
+	std::cout << BG_CYAN << BLACK << "[constructor]"
+		<< RESET << ": Cat " << MAGENTA
+		<< "Copy" << RESET << " Constructor called"
+		<< std::endl;
+}
+
+Cat::~Cat()
+{
+	std::cout << BG_MAGENTA << BLACK << "[destructor]"
+		<< RESET << ": Cat Destructor called"
+		<< std::endl;
+}
+
+Cat& Cat::operator=(const Cat& src)
+{
+	std::cout << BG_YELLOW << BLACK << "[assignation]"
+		<< RESET << ": Cat " << CYAN
+		<< "Assignation" << RESET << " Operator called"
+		<< std::endl;
+	if (this != &src)
+		this->_type = src._type;
+	return (*this);
+}
+
+void Cat::makeSound(void)const
+{
+	std::cout << BG_YELLOW << BLACK << "[makeSound]"
+		<< RESET << ": This " << this->getType() << MAGENTA
+		<< " meows" << RESET << " loudly."
+		<< std::endl;
 }

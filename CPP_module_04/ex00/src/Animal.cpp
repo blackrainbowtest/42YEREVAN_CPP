@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Animal.cpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*   By: root <root@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:19 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/08 20:33:35 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/08 23:57:22 by root             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ Animal::Animal(): _type("default")
 		<< std::endl;
 }
 
-Animal::Animal(const Animal& copy)
+Animal::Animal(const Animal& copy): _type(copy._type)
 {
 	*this = copy;
 	std::cout << BG_CYAN << BLACK << "[constructor]"
@@ -59,6 +59,9 @@ Animal& Animal::operator=(const Animal& src)
 		<< RESET << ": Animal " << CYAN
 		<< "Assignation" << RESET << " Operator called"
 		<< std::endl;
+	if (this != &src)
+		this->_type = src._type;
+	return (*this);
 }
 
 void Animal::makeSound(void)const
