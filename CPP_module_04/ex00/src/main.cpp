@@ -6,13 +6,12 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:54:04 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/08 20:07:27 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/08 20:22:00 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
-#include "ClapTrap.hpp"
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1

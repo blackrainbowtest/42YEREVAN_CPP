@@ -13,6 +13,8 @@
 #ifndef CAT_HPP
 # define CAT_HPP
 
+#include <iostream>
+#include <string>
 # include "Animal.hpp"
 
 class Cat: public Animal
@@ -23,7 +25,10 @@ class Cat: public Animal
 		Cat(const Cat &copy);
 	// Destructor
 		~Cat();
-	
+	// Operator Overloaded
+		Cat &operator=(const Cat& src);
+	// methods
+		void	makeSound(void)const;
 };
 
 #endif // !CAT_HPP
