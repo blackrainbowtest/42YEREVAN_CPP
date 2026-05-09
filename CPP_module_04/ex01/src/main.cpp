@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 #include "Animal.hpp"
 #include "Cat.hpp"
@@ -45,87 +46,101 @@ static void	printSection(const std::string& title)
 
 int	main(void)
 {
-	printSection("Animal");
-	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const Animal	*meta = new Animal();
-	std::cout << std::endl;
-	std::cout << "\033[34mTesting\033[0m" << std::endl;
+	{
+		printSection("Animal Creation and Polymorphism");
 
-	std::cout << "Animal _type: " << meta->getType() << std::endl;
-	meta->makeSound();
-	std::cout << std::endl;
+		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		const Animal *meta[10];
+		for (int i = 0; i < 10; i++)
+		{
+			if (i % 2)
+			{
+				meta[i] = new Cat();
+				if (meta[i] == NULL)
+				{
+					std::cerr << "Cat allocation failed" << std::endl;
+					std::cerr << "Exiting process now" << std::endl;
+					exit(1);
+				}
+			}
+			else
+			{
+				meta[i] = new Dog();
+				if (meta[i] == NULL)
+				{
+					std::cerr << "Dog allocation failed" << std::endl;
+					std::cerr << "Exiting process now" << std::endl;
+					exit(1);
+				}
+			}
+		}
+		std::cout << std::endl;
 
-	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-	delete meta;
-	std::cout << std::endl;
+		std::cout << CYAN << "Testing" << RESET << std::endl;
+		for (int i = 0; i < 10; i++)
+		{
+			std::cout << "Animal _type: " << meta[i]->getType() << std::endl;
+			meta[i]->makeSound();
+		}
+		std::cout << std::endl;
 
-	printSection("Cat via Animal pointer");
-	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const Animal	*catto = new Cat();
-	std::cout << std::endl;
+		std::cout << MAGENTA << "Deconstructing" << RESET << std::endl;
+		for (int i = 0; i < 10; i++)
+			delete(meta[i]);
 
-	std::cout << "\033[34mTesting\033[0m" << std::endl;
-	std::cout << "Cat _type: " << catto->getType() << std::endl;
-	catto->makeSound();
-	std::cout << std::endl;
 
-	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-	delete catto;
-	std::cout << std::endl;
 
-	printSection("Dog via Animal pointer");
-	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const Animal	*doggo = new Dog();
-	std::cout << std::endl;
-	std::cout << "\033[34mTesting\033[0m" << std::endl;
-	std::cout << "Dog _type: " << doggo->getType() <<std::endl;
-	doggo->makeSound();
-	std::cout << std::endl;
-	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-	delete doggo;
-	std::cout << std::endl;
 
-	printSection("WrongAnimal");
-	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const WrongAnimal	*wrong_meta = new WrongAnimal();
-	std::cout << std::endl;
+		// THIS PART IS FOR TESTING DEEP COPY ↓
 
-	std::cout << "\033[34mTesting\033[0m" << std::endl;
-	std::cout << "Animal _type: " << wrong_meta->getType() << std::endl;
-	wrong_meta->makeSound();
-	std::cout << std::endl;
+		std::cout << std::endl << std::endl;
+		std::cout << "#### showing that the copy constructor creates a deep copy ####" << std::endl;
+		std::cout << std::endl;
 
-	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-	delete wrong_meta;
-	std::cout << std::endl;
+		std::cout << "\033[34mConstructing\033[0m" << std::endl;
+		Dog *a = new Dog();
+		// Cat *a = new Cat();
+		if (a == NULL)
+		{
+			std::cerr << "Allocation failed" << std::endl;
+			std::cerr << "Exiting the process now." << std::endl;
+			exit(1);
+		}
 
-	printSection("WrongCat via WrongAnimal pointer");
-	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const WrongAnimal	*wrong_catto = new WrongCat();
-	std::cout << std::endl;
+		a->setIdea(0, "I have to eat");
+		a->setIdea(1, "I have to sleep");
+		a->setIdea(2, "I have to play");
+		a->setIdea(3, "I have to bark");
+		a->setIdea(4, "I have to wag my tail");
+		a->setIdea(101, "some out of range idea"); // should trigger error message
 
-	std::cout << "\033[34mTesting\033[0m" << std::endl;
-	std::cout << "WrongCat _type: " << wrong_catto->getType() <<std::endl;
-	wrong_catto->makeSound();
-	std::cout << std::endl;
+		Dog *b = new Dog(*a);
+		// Cat *b = new Cat(*a);
+		if (b == NULL)
+		{
+			std::cerr << "Allocation failed" << std::endl;
+			std::cerr << "Exiting the process now." << std::endl;
+			exit(1);
+		}
+		std::cout << std::endl;
 
-	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-	delete wrong_catto;
-	std::cout << std::endl;
+		std::cout << CYAN << "Testing a" << RESET << std::endl;
+		std::cout << "The " << a->getType() << " a has the following ideas: " << std::endl;
+		a->getIdeas();
+		std::cout << std::endl;
 
-	printSection("WrongCat direct pointer");
-	std::cout << "\033[34mConstructing\033[0m" << std::endl;
-	const WrongCat	*wrong_catta = new WrongCat();
-	std::cout << std::endl;
+		std::cout << CYAN << "Deconstructing a" << RESET << std::endl;
+		delete(a);
+		std::cout << std::endl;
 
-	std::cout << "\033[34mTesting\033[0m" << std::endl;
-	std::cout << "WrongCat _type: " << wrong_catta->getType() <<std::endl;
-	wrong_catta->makeSound();
-	std::cout << std::endl;
+		std::cout << CYAN << "Testing b" << RESET << std::endl;
+		std::cout << "The " << b->getType() << " b has the following ideas: " << std::endl;
+		b->getIdeas();
+		std::cout << std::endl;
 
-	std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-	delete wrong_catta;
-	std::cout << std::endl;
-	
-	return (EXIT_SUCCESS);
+		std::cout << CYAN << "Deconstructing b" << RESET << std::endl;
+		delete(b);
+
+		return (EXIT_SUCCESS);
+	}
 }

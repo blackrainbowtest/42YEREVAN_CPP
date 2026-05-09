@@ -34,6 +34,6 @@ class Brain
 		const std::string *getIdeaAddress(int index) const;
 	// setter
 		void setIdea(size_t index, const std::string& idea);
-}
+};
 
 #endif // !BRAIN_HPP

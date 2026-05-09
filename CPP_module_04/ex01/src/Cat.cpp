@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "Cat.hpp"
-
+#include "Brain.hpp"
 
 #define EXIT_SUCCESS 0
 #define EXIT_FAILURE 1
@@ -32,6 +32,14 @@
 Cat::Cat(): Animal()
 {
 	this->_type = "Cat";
+	this->_brain = new Brain();
+	if (this->_brain == NULL)
+	{
+		std::cerr << RED << "Error: " << RESET
+			<< "Failed to allocate memory for Cat's Brain."
+			<< std::endl;
+		exit(EXIT_FAILURE);
+	}
 	std::cout << BG_CYAN << BLACK << "[constructor]"
 		<< RESET << ": Cat " << MAGENTA
 		<< "Default" << RESET << " Constructor called"
@@ -40,7 +48,8 @@ Cat::Cat(): Animal()
 
 Cat::Cat(const Cat& copy): Animal(copy)
 {
-	*this = copy;
+	this->_brain = new Brain(*copy._brain);
+    this->_type = copy._type;
 	std::cout << BG_CYAN << BLACK << "[constructor]"
 		<< RESET << ": Cat " << MAGENTA
 		<< "Copy" << RESET << " Constructor called"
@@ -49,6 +58,8 @@ Cat::Cat(const Cat& copy): Animal(copy)
 
 Cat::~Cat()
 {
+	if (this->_brain)
+		delete this->_brain;
 	std::cout << BG_MAGENTA << BLACK << "[destructor]"
 		<< RESET << ": Cat Destructor called"
 		<< std::endl;
@@ -61,7 +72,21 @@ Cat& Cat::operator=(const Cat& src)
 		<< "Assignation" << RESET << " Operator called"
 		<< std::endl;
 	if (this != &src)
-		this->_type = src._type;
+	{
+		Animal::operator=(src);		
+		Brain* newBrain = new Brain(*src._brain);
+		if (newBrain == NULL)
+		{
+			std::cerr << RED << "Error: " << RESET
+				<< "Failed to allocate memory for Cat's Brain during assignment."
+				<< std::endl;
+			exit(EXIT_FAILURE);
+		}
+		if (this->_brain)
+			delete this->_brain;
+		this->_brain = newBrain;
+	}
+
 	return (*this);
 }
 
@@ -71,4 +96,23 @@ void Cat::makeSound(void)const
 		<< RESET << ": This " << this->getType() << MAGENTA
 		<< " meows" << RESET << " loudly."
 		<< std::endl;
+}
+
+void Cat::getIdeas(void) const
+{
+	std::cout << BG_YELLOW << BLACK << "[getIdeas]"
+		<< RESET << ": " << this->getType() << MAGENTA
+		<< " has the following ideas:" << RESET
+		<< std::endl;
+	for (size_t i = 0; i < 100; i++)
+	{
+		const std::string& idea = this->_brain->getIdea(i);
+		if (!idea.empty())
+			std::cout << "  [" << i << "] " << idea << std::endl;
+	}
+}
+
+void Cat::setIdea(size_t index, const std::string& idea)
+{
+	this->_brain->setIdea(index, idea);
 }

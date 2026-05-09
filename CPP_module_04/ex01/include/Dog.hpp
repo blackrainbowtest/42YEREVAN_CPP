@@ -16,9 +16,11 @@
 #include <iostream>
 #include <string>
 # include "Animal.hpp"
+# include "Brain.hpp"
 
 class Dog: public Animal
 {
+	Brain *_brain;
 	public:
 	// Constructor
 		Dog();
@@ -29,6 +31,10 @@ class Dog: public Animal
 		Dog &operator=(const Dog& src);
 	// methods
 		void	makeSound(void)const;
+	// getter
+		void getIdeas(void) const;
+	// setter
+		void setIdea(size_t index, const std::string& idea);
 };
 
 #endif // !DOG_HPP
