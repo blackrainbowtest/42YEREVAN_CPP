@@ -28,7 +28,7 @@ class WrongCat: public WrongAnimal
 	// Overloaded operator
 		WrongCat &operator=(const WrongCat& src);
 	// methods
-		void	makesound(void)const;
+		void	makeSound(void)const;
 };
 
 #endif // !WRONG_CAT_HPP

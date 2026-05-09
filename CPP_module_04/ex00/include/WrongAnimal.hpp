@@ -29,7 +29,7 @@ class WrongAnimal
 	// Overloaded operator
 		WrongAnimal &operator=(const WrongAnimal& src);
 	// methods
-		void	makesound(void)const;
+		void	makeSound(void)const;
 	// get
 		std::string getType(void)const;
 };

@@ -37,7 +37,7 @@ WrongAnimal::WrongAnimal(): _type("WrongAnimal")
 		<< std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal& copy): Animal(copy)
+WrongAnimal::WrongAnimal(const WrongAnimal& copy): _type(copy._type)
 {
 	*this = copy;
 	std::cout << BG_CYAN << BLACK << "[constructor]"

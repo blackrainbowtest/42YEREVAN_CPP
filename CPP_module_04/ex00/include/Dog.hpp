@@ -28,7 +28,7 @@ class Dog: public Animal
 	// Overloaded operator
 		Dog &operator=(const Dog& src);
 	// methods
-		void	makesound(void)const;
+		void	makeSound(void)const;
 };
 
 #endif // !DOG_HPP
