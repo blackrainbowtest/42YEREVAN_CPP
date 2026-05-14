@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/30 16:54:04 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/09 00:05:04 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:17:22 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,23 @@ int	main(void)
 		std::cout << CYAN << "Deconstructing b" << RESET << std::endl;
 		delete(b);
 
+
+	printSection("DeepCopyCheck");
+	{
+		Dog original;
+		original.setIdea(0, "I want meat");
+
+		Dog copy(original);
+
+		original.setIdea(0, "I changed my mind");
+
+		std::cout << "ORIGINAL:" << std::endl;
+		original.getIdeas();
+
+		std::cout << "COPY:" << std::endl;
+		copy.getIdeas();
+	}
+	
 		return (EXIT_SUCCESS);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:29 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/08 20:07:30 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:19:05 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ WrongCat::WrongCat(): WrongAnimal()
 
 WrongCat::WrongCat(const WrongCat& copy): WrongAnimal(copy)
 {
-	*this = copy;
 	std::cout << BG_CYAN << BLACK << "[constructor]"
 		<< RESET << ": WrongCat " << MAGENTA
 		<< "Copy" << RESET << " Constructor called"

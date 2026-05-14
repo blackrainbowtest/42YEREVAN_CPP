@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:22 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/09 00:08:45 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:06:00 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ Cat::Cat(): Animal()
 
 Cat::Cat(const Cat& copy): Animal(copy)
 {
-	*this = copy;
 	std::cout << BG_CYAN << BLACK << "[constructor]"
 		<< RESET << ": Cat " << MAGENTA
 		<< "Copy" << RESET << " Constructor called"

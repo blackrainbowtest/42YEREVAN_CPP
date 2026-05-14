@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:19 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/08 23:57:22 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:18:00 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ Brain::Brain()
 
 Brain::Brain(const Brain& copy)
 {
-	*this = copy;
+	for (size_t i = 0; i < 100; i++)
+		this->_ideas[i] = copy._ideas[i];
 	std::cout << BG_CYAN << BLACK << "[constructor]"
 		<< RESET << ": Brain " << MAGENTA
 		<< "Copy" << RESET << " Constructor called"

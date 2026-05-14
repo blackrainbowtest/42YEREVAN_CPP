@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:31 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/08 20:07:32 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:06:23 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ WrongAnimal::WrongAnimal(): _type("WrongAnimal")
 
 WrongAnimal::WrongAnimal(const WrongAnimal& copy): _type(copy._type)
 {
-	*this = copy;
 	std::cout << BG_CYAN << BLACK << "[constructor]"
 		<< RESET << ": WrongAnimal " << MAGENTA
 		<< "Copy" << RESET << " Constructor called"

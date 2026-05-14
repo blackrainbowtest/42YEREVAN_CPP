@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:19 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/08 23:57:22 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:05:38 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ Animal::Animal(): _type("default")
 
 Animal::Animal(const Animal& copy): _type(copy._type)
 {
-	*this = copy;
 	std::cout << BG_CYAN << BLACK << "[constructor]"
 		<< RESET << ": Animal " << MAGENTA
 		<< "Copy" << RESET << " Constructor called"

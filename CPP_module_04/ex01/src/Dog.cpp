@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/08 20:07:24 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/09 10:18:56 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/05/14 18:16:30 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ Dog::Dog(const Dog& copy): Animal(copy)
 {
 
 	this->_brain = new Brain(*copy._brain);
-    this->_type = copy._type;
 	std::cout << BG_CYAN << BLACK << "[constructor]"
 		<< RESET << ": Dog " << MAGENTA
 		<< "Copy" << RESET << " Constructor called"
