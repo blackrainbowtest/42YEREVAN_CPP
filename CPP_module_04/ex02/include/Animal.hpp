@@ -1,0 +1,43 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/05/08 20:07:07 by aramarak          #+#    #+#             */
+/*   Updated: 2026/05/14 18:26:01 by aramarak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef ANIMAL_HPP
+# define ANIMAL_HPP
+
+#include <iostream>
+#include <string>
+#include <cstdlib>
+
+class Animal
+{
+	protected:
+		std::string	_type;
+
+	public:
+		Animal(void);
+		Animal(const Animal &copy);
+
+	// Destructor
+		virtual ~Animal(void);
+	
+	// Operators
+		Animal &operator=(const Animal &copy);
+	
+	// Getters
+		std::string	getType(void) const;
+	
+	// methods
+		virtual void	makeSound(void) const = 0;
+};
+
+
+#endif // !ANIMAL_HPP
