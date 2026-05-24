@@ -19,13 +19,13 @@
 class Bureaucrat
 {
 	private:
-		std::string const	name;
-		size_t				grade;
+		std::string const	_name;
+		size_t				_grade;
 	public:
 		Bureaucrat();	// default constructor
-		Bureaucrat(std::string name);	// constructor with name only
-		Bureaucrat(size_t grade);	// constructor with grade only
-		Bureaucrat(std::string name, size_t grade); // constructor with name and grade
+		Bureaucrat(std::string _name);	// constructor with name only
+		Bureaucrat(size_t _grade);	// constructor with grade only
+		Bureaucrat(std::string _name, size_t _grade); // constructor with name and grade
 		Bureaucrat(Bureaucrat const & src); // copy constructor
 		~Bureaucrat(); // destructor
 
@@ -35,6 +35,9 @@ class Bureaucrat
 		// Getters
 		std::string getName() const;
 		size_t getGrade() const;
+
+		// Setters
+		void setGrade(size_t _grade);
 
 		// Methods
 		void incrementGrade();

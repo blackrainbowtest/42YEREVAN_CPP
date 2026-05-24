@@ -19,12 +19,11 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-SRC_FILES	=	main.cpp
+SRC_FILES	=	main.cpp Bureaucrat.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
 OBJ			=	$(addprefix $(OBJ_DIR), $(OBJ_FILES))
-
 
 RM        = rm -f
 RMDIR     = rm -rf
