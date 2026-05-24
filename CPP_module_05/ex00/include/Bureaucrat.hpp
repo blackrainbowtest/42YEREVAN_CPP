@@ -18,8 +18,42 @@
 
 class Bureaucrat
 {
-	
-}
+	private:
+		std::string const	name;
+		size_t				grade;
+	public:
+		Bureaucrat();	// default constructor
+		Bureaucrat(std::string name);	// constructor with name only
+		Bureaucrat(size_t grade);	// constructor with grade only
+		Bureaucrat(std::string name, size_t grade); // constructor with name and grade
+		Bureaucrat(Bureaucrat const & src); // copy constructor
+		~Bureaucrat(); // destructor
+
+		// overload assignment operator
+		Bureaucrat & operator=(Bureaucrat const & src);
+
+		// Getters
+		std::string getName() const;
+		size_t getGrade() const;
+
+		// Methods
+		void incrementGrade();
+		void decrementGrade();
+
+		// Exceptions
+		class GradeTooHighException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+
+		class GradeTooLowException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+
+};
 
 std::ostream& operator<<(std::ostream& o, Bureaucrat* a);
 
