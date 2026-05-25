@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/30 16:54:04 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/16 10:50:51 by aramarak         ###   ########.fr       */
+/*   Created: 2026/05/24 15:25:11 by aramarak          #+#    #+#             */
+/*   Updated: 2026/05/25 09:28:41 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,136 @@ static void	printSection(const std::string& title)
 
 int	main(void)
 {
-	printSection("Test");
-	
-	
+	printSection("VALID CONSTRUCTION");
+
+	try
+	{
+		Bureaucrat bob("Bob", 42);
+		std::cout << GREEN << bob << RESET << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("GRADE TOO HIGH ON CONSTRUCTION");
+
+	try
+	{
+		Bureaucrat boss("Boss", 0);
+		std::cout << boss << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("GRADE TOO LOW ON CONSTRUCTION");
+
+	try
+	{
+		Bureaucrat intern("Intern", 151);
+		std::cout << intern << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("INCREMENT TEST");
+
+	try
+	{
+		Bureaucrat chief("Chief", 2);
+
+		std::cout << chief << std::endl;
+		chief.incrementGrade();
+		std::cout << chief << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("INCREMENT OVERFLOW");
+
+	try
+	{
+		Bureaucrat king("King", 1);
+
+		std::cout << king << std::endl;
+		king.incrementGrade();
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("DECREMENT TEST");
+
+	try
+	{
+		Bureaucrat worker("Worker", 149);
+
+		std::cout << worker << std::endl;
+		worker.decrementGrade();
+		std::cout << worker << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("DECREMENT OVERFLOW");
+
+	try
+	{
+		Bureaucrat noob("Noob", 150);
+
+		std::cout << noob << std::endl;
+		noob.decrementGrade();
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("COPY CONSTRUCTOR");
+
+	try
+	{
+		Bureaucrat original("Original", 10);
+		Bureaucrat copy(original);
+
+		std::cout << original << std::endl;
+		std::cout << copy << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("ASSIGNMENT OPERATOR");
+
+	try
+	{
+		Bureaucrat a("Alice", 50);
+		Bureaucrat b("Bob", 120);
+
+		std::cout << YELLOW << "Before assignment:" << RESET << std::endl;
+		std::cout << a << std::endl;
+		std::cout << b << std::endl;
+
+		b = a;
+
+		std::cout << YELLOW << "After assignment:" << RESET << std::endl;
+		std::cout << a << std::endl;
+		std::cout << b << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
 	return (EXIT_SUCCESS);
 }
