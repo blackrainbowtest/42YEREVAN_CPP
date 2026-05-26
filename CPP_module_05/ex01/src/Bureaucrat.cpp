@@ -18,27 +18,28 @@ Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 	std::cout << GREEN << "Bureaucrat default constructor called" << RESET << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string _name) : _name(_name), _grade(150)
+Bureaucrat::Bureaucrat(std::string name) : _name(name), _grade(150)
 {
 	std::cout << GREEN << "Bureaucrat constructor with name only called" << RESET << std::endl;
 }
 
-Bureaucrat::Bureaucrat(size_t _grade) : _name("Default"), _grade(_grade)
+Bureaucrat::Bureaucrat(int grade) : _name("Default"), _grade(150)
 {
+	Bureaucrat::validateGrade(grade);
+	this->_grade = grade;
 	std::cout << GREEN << "Bureaucrat constructor with grade only called" << RESET << std::endl;
-	this->setGrade(_grade);
 }
 
-Bureaucrat::Bureaucrat(std::string _name, size_t _grade) : _name(_name), _grade(_grade)
+Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(150)
 {
+	Bureaucrat::validateGrade(grade);
+	this->_grade = grade;
 	std::cout << GREEN << "Bureaucrat constructor with name and grade called" << RESET << std::endl;
-	this->setGrade(_grade);
 }
 
 Bureaucrat::Bureaucrat(Bureaucrat const & src) : _name(src._name), _grade(src._grade)
 {
 	std::cout << GREEN << "Bureaucrat copy constructor called" << RESET << std::endl;
-	this->setGrade(src._grade);
 }
 
 Bureaucrat::~Bureaucrat()
@@ -51,9 +52,7 @@ Bureaucrat & Bureaucrat::operator=(Bureaucrat const & src)
 {
 	std::cout << GREEN << "Bureaucrat assignment operator called" << RESET << std::endl;
 	if (this != &src)
-	{
-		this->setGrade(src._grade);
-	}
+		this->_grade = src._grade;
 	return *this;
 }
 
@@ -63,33 +62,29 @@ std::string Bureaucrat::getName() const
 	return this->_name;
 }
 
-size_t Bureaucrat::getGrade() const
+int Bureaucrat::getGrade() const
 {
 	return this->_grade;
 }
 
-// Setters
-void Bureaucrat::*(size_t _grade)
+void Bureaucrat::validateGrade(int grade)
 {
-	if (this->_grade < 1)
-		throw Bureaucrat::GradeTooHighException();
-	else if (this->_grade > 150)
-		throw Bureaucrat::GradeTooLowException();
-	this->_grade = _grade;
+	if (grade < 1)
+		throw GradeTooHighException();
+	if (grade > 150)
+		throw GradeTooLowException();
 }
 
 // Methods
 void Bureaucrat::incrementGrade()
 {
-	if (this->_grade <= 1)
-		throw Bureaucrat::GradeTooHighException();
+	validateGrade(this->_grade - 1);
 	this->_grade--;
 }
 
 void Bureaucrat::decrementGrade()
 {
-	if (this->_grade >= 150)
-		throw Bureaucrat::GradeTooLowException();
+	validateGrade(this->_grade + 1);
 	this->_grade++;
 }
 
