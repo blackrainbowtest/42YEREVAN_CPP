@@ -69,7 +69,7 @@ size_t Bureaucrat::getGrade() const
 }
 
 // Setters
-void Bureaucrat::setGrade(size_t _grade)
+void Bureaucrat::*(size_t _grade)
 {
 	if (this->_grade < 1)
 		throw Bureaucrat::GradeTooHighException();

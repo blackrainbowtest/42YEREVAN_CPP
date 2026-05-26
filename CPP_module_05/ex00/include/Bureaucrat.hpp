@@ -13,19 +13,22 @@
 #ifndef BUREAUCRAT_HPP
 # define BUREAUCRAT_HPP
 
-#include <iostream>
-#include <string>
+# include <iostream>
+# include <string>
+# include <exception>
 
 class Bureaucrat
 {
 	private:
 		std::string const	_name;
-		size_t				_grade;
+		int					_grade;
+		static void			_validateGrade(int grade);
+
 	public:
 		Bureaucrat();	// default constructor
-		Bureaucrat(std::string _name);	// constructor with name only
-		Bureaucrat(size_t _grade);	// constructor with grade only
-		Bureaucrat(std::string _name, size_t _grade); // constructor with name and grade
+		Bureaucrat(std::string name);	// constructor with name only
+		Bureaucrat(int grade);	// constructor with grade only
+		Bureaucrat(std::string name, int grade); // constructor with name and grade
 		Bureaucrat(Bureaucrat const & src); // copy constructor
 		~Bureaucrat(); // destructor
 
@@ -34,30 +37,27 @@ class Bureaucrat
 
 		// Getters
 		std::string getName() const;
-		size_t getGrade() const;
-
-		// Setters
-		void setGrade(size_t _grade);
+		int getGrade() const;
 
 		// Methods
-		void incrementGrade();
-		void decrementGrade();
+		void		incrementGrade();
+		void		decrementGrade();
 
 		// Exceptions
 		class GradeTooHighException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw();
+				const char* what() const throw();
 		};
 
 		class GradeTooLowException : public std::exception
 		{
 			public:
-				virtual const char* what() const throw();
+				const char* what() const throw();
 		};
 
 };
 
-std::ostream& operator<<(std::ostream& o, Bureaucrat* a);
+std::ostream& operator<<(std::ostream& o, Bureaucrat const& a);
 
 #endif
