@@ -25,14 +25,14 @@ Bureaucrat::Bureaucrat(std::string name) : _name(name), _grade(150)
 
 Bureaucrat::Bureaucrat(int grade) : _name("Default"), _grade(150)
 {
-	Bureaucrat::_validateGrade(grade);
+	Bureaucrat::validateGrade(grade);
 	this->_grade = grade;
 	std::cout << GREEN << "Bureaucrat constructor with grade only called" << RESET << std::endl;
 }
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name), _grade(150)
 {
-	Bureaucrat::_validateGrade(grade);
+	Bureaucrat::validateGrade(grade);
 	this->_grade = grade;
 	std::cout << GREEN << "Bureaucrat constructor with name and grade called" << RESET << std::endl;
 }
@@ -52,9 +52,7 @@ Bureaucrat & Bureaucrat::operator=(Bureaucrat const & src)
 {
 	std::cout << GREEN << "Bureaucrat assignment operator called" << RESET << std::endl;
 	if (this != &src)
-	{
 		this->_grade = src._grade;
-	}
 	return *this;
 }
 
@@ -69,7 +67,7 @@ int Bureaucrat::getGrade() const
 	return this->_grade;
 }
 
-void Bureaucrat::_validateGrade(int grade)
+void Bureaucrat::validateGrade(int grade)
 {
 	if (grade < 1)
 		throw GradeTooHighException();
@@ -80,13 +78,13 @@ void Bureaucrat::_validateGrade(int grade)
 // Methods
 void Bureaucrat::incrementGrade()
 {
-	_validateGrade(this->_grade - 1);
+	validateGrade(this->_grade - 1);
 	this->_grade--;
 }
 
 void Bureaucrat::decrementGrade()
 {
-	_validateGrade(this->_grade + 1);
+	validateGrade(this->_grade + 1);
 	this->_grade++;
 }
 

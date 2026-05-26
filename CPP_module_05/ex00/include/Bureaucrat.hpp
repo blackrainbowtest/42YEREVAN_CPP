@@ -22,7 +22,7 @@ class Bureaucrat
 	private:
 		std::string const	_name;
 		int					_grade;
-		static void			_validateGrade(int grade);
+		static void			validateGrade(int grade);
 
 	public:
 		Bureaucrat();	// default constructor
