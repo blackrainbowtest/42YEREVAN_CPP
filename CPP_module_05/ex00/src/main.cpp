@@ -15,7 +15,7 @@
 #include "color_palletre.hpp"
 
 #define EXIT_SUCCESS 0
-#define EXIT_FAILURE 1
+// #define EXIT_FAILURE 1
 
 static void	printDivider(void)
 {
@@ -40,7 +40,7 @@ int	main(void)
 		Bureaucrat bob("Bob", 42);
 		std::cout << GREEN << bob << RESET << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
@@ -52,7 +52,7 @@ int	main(void)
 		Bureaucrat boss("Boss", 0);
 		std::cout << boss << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
@@ -64,7 +64,7 @@ int	main(void)
 		Bureaucrat intern("Intern", 151);
 		std::cout << intern << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
@@ -79,7 +79,7 @@ int	main(void)
 		chief.incrementGrade();
 		std::cout << chief << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
@@ -93,7 +93,7 @@ int	main(void)
 		std::cout << king << std::endl;
 		king.incrementGrade();
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
@@ -108,7 +108,7 @@ int	main(void)
 		worker.decrementGrade();
 		std::cout << worker << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
@@ -122,7 +122,7 @@ int	main(void)
 		std::cout << noob << std::endl;
 		noob.decrementGrade();
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
@@ -137,7 +137,7 @@ int	main(void)
 		std::cout << original << std::endl;
 		std::cout << copy << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
@@ -159,10 +159,60 @@ int	main(void)
 		std::cout << a << std::endl;
 		std::cout << b << std::endl;
 	}
-	catch (std::exception &e)
+	catch (const std::exception &e)
 	{
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
 
+	printSection("SELF ASSIGNMENT");
+
+	try
+	{
+		Bureaucrat self("Self", 33);
+
+		std::cout << self << std::endl;
+		self = self;
+		std::cout << self << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("DEFAULT CONSTRUCTOR");
+
+	try
+	{
+		Bureaucrat def;
+		std::cout << def << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("NAME ONLY CONSTRUCTOR");
+
+	try
+	{
+		Bureaucrat named("OnlyName");
+		std::cout << named << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("GRADE ONLY CONSTRUCTOR");
+
+	try
+	{
+		Bureaucrat graded(77);
+		std::cout << graded << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
 	return (EXIT_SUCCESS);
 }
