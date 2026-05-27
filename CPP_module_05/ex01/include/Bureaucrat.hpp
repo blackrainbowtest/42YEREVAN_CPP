@@ -29,11 +29,11 @@ class Bureaucrat
 		Bureaucrat(std::string name);	// constructor with name only
 		Bureaucrat(int grade);	// constructor with grade only
 		Bureaucrat(std::string name, int grade); // constructor with name and grade
-		Bureaucrat(Bureaucrat const & src); // copy constructor
+		Bureaucrat(Bureaucrat const &src); // copy constructor
 		~Bureaucrat(); // destructor
 
 		// overload assignment operator
-		Bureaucrat & operator=(Bureaucrat const & src);
+		Bureaucrat & operator=(Bureaucrat const &src);
 
 		// Getters
 		std::string getName() const;
@@ -58,6 +58,6 @@ class Bureaucrat
 
 };
 
-std::ostream& operator<<(std::ostream& o, Bureaucrat const& a);
+std::ostream& operator<<(std::ostream& o, Bureaucrat const &a);
 
 #endif
