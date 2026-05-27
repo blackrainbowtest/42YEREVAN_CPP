@@ -15,20 +15,19 @@
 
 # include <iostream>
 # include <string>
-# include "Bureaucrat.hpp"
+
+class Bureaucrat;
 
 class Form
 {
     private:
         const std::string		_name;
         bool                    _is_signed;
-        const size_t            _sign_req_grade;
-        const size_t			_exec_req_grade;
+        const int               _sign_req_grade;
+        const int			    _exec_req_grade;
     public:
         Form(); // constructor
-        Form(const std::string name); // constructor with name only
-        Form(const size_t sign_req_grade, const size_t exec_req_grade); // constructor with grades only
-        Form(const std::string name, const size_t sign_req_grade, const size_t exec_req_grade); // constructor with name and grades
+        Form(const std::string name, const int sign_req_grade, const int exec_req_grade); // constructor with name and grades
         Form(Form const & copy); // copy constructor
         ~Form(); // descructor
 
@@ -36,26 +35,30 @@ class Form
         Form & operator=(Form const & src);
 
     // Getters
-
+        const std::string&  getName(void) const;
+        bool                getIsSigned(void) const;
+        int                 getSignGrade(void)const;
+        int                 getExecGrade(void)const;
     // Setters
 
     // Methods
+        void beSigned(const Bureaucrat &signer);
 
     // Exceptions
     class GradeTooLowException : public std::exception
     {
         public:
-            virtual const char *what() const throw();
-    }
+            const char *what() const throw();
+    };
 
-    class GradeTooHightException : public std::exception
+    class GradeTooHighException : public std::exception
     {
         public:
-            virtual const char* what() const throw();
-    }
-}
+            const char* what() const throw();
+    };
+};
 
 // ostream Overload
-std::ostream& operator<<(std::ostream& o, Form* a);
+std::ostream& operator<<(std::ostream& o, Form const & a);
 
 #endif
