@@ -17,6 +17,8 @@
 # include <string>
 # include <exception>
 
+class Form;
+
 class Bureaucrat
 {
 	private:
@@ -42,6 +44,7 @@ class Bureaucrat
 		// Methods
 		void		incrementGrade();
 		void		decrementGrade();
+		void		signForm(Form &form);
 
 		// Exceptions
 		class GradeTooHighException : public std::exception

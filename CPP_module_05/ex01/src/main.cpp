@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include <string>
+#include "Form.hpp"
+#include "Bureaucrat.hpp"
 #include "color_palletre.hpp"
 
 #define EXIT_SUCCESS 0
@@ -164,5 +166,113 @@ int	main(void)
 		std::cout << RED << e.what() << RESET << std::endl;
 	}
 
+	printSection("VALID FORM");
+
+	try
+	{
+		Form permit("Permit", 50, 20);
+
+		std::cout << permit << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("INVALID SIGN GRADE");
+
+	try
+	{
+		Form bad("Bad", 0, 20);
+
+		std::cout << bad << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("INVALID EXEC GRADE");
+
+	try
+	{
+		Form bad("Bad", 20, 151);
+
+		std::cout << bad << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("FORM SIGN SUCCESS");
+
+	try
+	{
+		Bureaucrat boss("Boss", 10);
+		Form permit("Permit", 50, 20);
+
+		std::cout << permit << std::endl;
+
+		permit.beSigned(boss);
+
+		std::cout << permit << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("FORM SIGN FAILURE");
+
+	try
+	{
+		Bureaucrat intern("Intern", 120);
+		Form permit("Permit", 50, 20);
+
+		intern.signForm(permit);
+
+		std::cout << permit << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("FORM COPY CONSTRUCTOR");
+
+	try
+	{
+		Form original("Original", 50, 20);
+		Form copy(original);
+
+		std::cout << original << std::endl;
+		std::cout << copy << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+
+	printSection("FORM ASSIGNMENT");
+
+	try
+	{
+		Form a("A", 50, 20);
+		Form b("B", 100, 80);
+
+		std::cout << a << std::endl;
+		std::cout << b << std::endl;
+
+		b = a;
+
+		std::cout << a << std::endl;
+		std::cout << b << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << RED << e.what() << RESET << std::endl;
+	}
+	
 	return (EXIT_SUCCESS);
 }

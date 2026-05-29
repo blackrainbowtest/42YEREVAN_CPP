@@ -10,6 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Form.hpp"
 #include "Bureaucrat.hpp"
 #include "color_pallete.hpp"
 
@@ -86,6 +87,11 @@ void Bureaucrat::decrementGrade()
 {
 	validateGrade(this->_grade + 1);
 	this->_grade++;
+}
+
+void	signForm(Form &form)
+{
+	form.beSigned(*this);
 }
 
 // Exceptions
