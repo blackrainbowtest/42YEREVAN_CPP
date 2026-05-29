@@ -77,9 +77,9 @@ int     Form::getExecGrade(void)const
 
 void Form::beSigned(const Bureaucrat &signer)
 {
-    if (signer.getSignGrade() > this->_sign_req_grade)
+    if (signer.getGrade() > this->_sign_req_grade)
         throw Form::GradeTooLowException();
-        this->_is_signed = true;
+    this->_is_signed = true;
 }
 
 const char *Form::GradeTooLowException::what(void) const throw()
