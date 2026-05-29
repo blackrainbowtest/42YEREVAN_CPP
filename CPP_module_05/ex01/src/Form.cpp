@@ -77,17 +77,9 @@ int     Form::getExecGrade(void)const
 
 void Form::beSigned(const Bureaucrat &signer)
 {
-    if (this->_sign_req_grade < signer.getSignGrade())
+    if (signer.getSignGrade() > this->_sign_req_grade)
         throw Form::GradeTooLowException();
-    if (this->getIsSigned())
-    {
-        std::cout << BLUE << "Form is already signed" << RESET << std::endl;
-    }
-    else
-    {
         this->_is_signed = true;
-        std::cout << GREEN << "Form was successfully signed" << RESET << std::endl;
-    }
 }
 
 const char *Form::GradeTooLowException::what(void) const throw()
@@ -102,6 +94,12 @@ const char *Form::GradeTooHighException::what(void) const throw()
 
 std::ostream & operator<<(std::ostream &os, Form const & src)
 {
-    // add out here
+    os << src.getName()
+	   << ", signed: "
+	   << (src.getIsSigned() ? "yes" : "no")
+	   << ", sign grade: "
+	   << src.getSignGrade()
+	   << ", exec grade: "
+	   << src.getExecGrade();
     return (os);
 }
