@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.cpp                                           :+:      :+:    :+:   */
+/*   AForm.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,89 +10,89 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Form.hpp"
+#include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "color_pallete.hpp"
 
-Form::Form(void): _name("default"), _is_signed(false), _sign_req_grade(150),
+AForm::AForm(void): _name("default"), _is_signed(false), _sign_req_grade(150),
                   _exec_req_grade(150)
 {
-	std::cout << "Form Default Constructor called" << std::endl;
+	std::cout << "AForm Default Constructor called" << std::endl;
 }
 
-Form::Form(const std::string name, const int sign_req_grade, const int exec_req_grade)
+AForm::AForm(const std::string name, const int sign_req_grade, const int exec_req_grade)
         : _name(name), _is_signed(false), _sign_req_grade(sign_req_grade),
         _exec_req_grade(exec_req_grade)
 {
     validateGrade(sign_req_grade);
     validateGrade(exec_req_grade);
-    std::cout << GREEN << "Form constructor with sign and execution grade called" << RESET << std::endl;
+    std::cout << GREEN << "AForm constructor with sign and execution grade called" << RESET << std::endl;
 }
 
-Form::Form(Form const & src): _name(src._name), _is_signed(src._is_signed),
+AForm::AForm(AForm const & src): _name(src._name), _is_signed(src._is_signed),
         _sign_req_grade(src._sign_req_grade), _exec_req_grade(src._exec_req_grade)
 {
-	std::cout << GREEN << "Form copy constructor called" << RESET << std::endl;
+	std::cout << GREEN << "AForm copy constructor called" << RESET << std::endl;
 }
 
-Form::~Form()
+AForm::~AForm()
 {
-	std::cout << RED << "Form destructor called" << RESET << std::endl;
+	std::cout << RED << "AForm destructor called" << RESET << std::endl;
 }
 
-void Form::validateGrade(int grade)
+void AForm::validateGrade(int grade)
 {
     if (grade < 1)
-		throw Form::GradeTooHighException();
+		throw AForm::GradeTooHighException();
 	if (grade > 150)
-		throw Form::GradeTooLowException();
+		throw AForm::GradeTooLowException();
 }
 
-Form &Form::operator=(const Form &src)
+AForm &AForm::operator=(const AForm &src)
 {
-    std::cout << GREEN << "Form assignment operator called" << RESET << std::endl;
+    std::cout << GREEN << "AForm assignment operator called" << RESET << std::endl;
 	if (this != &src)
 		this->_is_signed = src._is_signed;
 
 	return (*this);
 }
 
-const std::string&  Form::getName(void) const
+const std::string&  AForm::getName(void) const
 {
     return (this->_name);
 }
 
-bool    Form::getIsSigned(void) const
+bool    AForm::getIsSigned(void) const
 {
     return (this->_is_signed);
 }
-int     Form::getSignGrade(void)const
+int     AForm::getSignGrade(void)const
 {
     return (this->_sign_req_grade);
 }
-int     Form::getExecGrade(void)const
+int     AForm::getExecGrade(void)const
 {
     return (this->_exec_req_grade);
 }
 
-void Form::beSigned(const Bureaucrat &signer)
+void AForm::beSigned(const Bureaucrat &signer)
 {
     if (signer.getGrade() > this->_sign_req_grade)
-        throw Form::GradeTooLowException();
+        throw AForm::GradeTooLowException();
     this->_is_signed = true;
 }
 
-const char *Form::GradeTooLowException::what(void) const throw()
+const char *AForm::GradeTooLowException::what(void) const throw()
 {
     return ("Grade too low");
 }
 
-const char *Form::GradeTooHighException::what(void) const throw()
+const char *AForm::GradeTooHighException::what(void) const throw()
 {
     return ("Grade too high");
 }
 
-std::ostream & operator<<(std::ostream &os, Form const & src)
+std::ostream & operator<<(std::ostream &os, AForm const & src)
 {
     os << src.getName()
 	   << ", signed: "

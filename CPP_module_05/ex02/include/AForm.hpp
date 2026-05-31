@@ -19,9 +19,9 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
-    private:
+    protected:
         const std::string		_name;
         bool                    _is_signed;
         const int               _sign_req_grade;
@@ -45,6 +45,9 @@ class Form
 
     // Methods
         void beSigned(const Bureaucrat &signer);
+    
+    // Virtual Methods
+        virtual void execute(Bureaucrat const & executor) const = 0;
 
     // Exceptions
     class GradeTooLowException : public std::exception
