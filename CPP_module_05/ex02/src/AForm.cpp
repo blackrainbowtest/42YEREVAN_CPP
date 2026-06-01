@@ -48,6 +48,15 @@ void AForm::validateGrade(int grade)
 		throw AForm::GradeTooLowException();
 }
 
+void AForm::validateExecution(Bureaucrat const &executor) const
+{
+	if (!_is_signed)
+		throw FormNotSignedException();
+
+	if (executor.getGrade() > _exec_req_grade)
+		throw GradeTooLowException();
+}
+
 AForm &AForm::operator=(const AForm &src)
 {
     std::cout << GREEN << "AForm assignment operator called" << RESET << std::endl;

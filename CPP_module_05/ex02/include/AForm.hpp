@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Form.hpp                                           :+:      :+:    :+:   */
+/*   AForm.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FORM_HPP
-# define FORM_HPP
+#ifndef AFORM_HPP
+# define AFORM_HPP
 
 # include <iostream>
 # include <string>
@@ -27,7 +27,9 @@ class AForm
         const int               _sign_req_grade;
         const int			    _exec_req_grade;
 
+        // validators
         static void             validateGrade(int grade);
+        void                    validateExecution(Bureaucrat const &executor) const;
     public:
         AForm(); // constructor
         AForm(const std::string name, const int sign_req_grade, const int exec_req_grade); // constructor with name and grades
@@ -65,8 +67,8 @@ class AForm
 
     class FormNotSignedException : public std::exception
 	{
-	public:
-		virtual const char *what() const throw();
+        public:
+            const char *what() const throw();
 	};
 };
 
