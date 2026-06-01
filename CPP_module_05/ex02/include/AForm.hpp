@@ -26,15 +26,16 @@ class AForm
         bool                    _is_signed;
         const int               _sign_req_grade;
         const int			    _exec_req_grade;
+
         static void             validateGrade(int grade);
     public:
-        Form(); // constructor
-        Form(const std::string name, const int sign_req_grade, const int exec_req_grade); // constructor with name and grades
-        Form(Form const &copy); // copy constructor
-        ~Form(); // descructor
+        AForm(); // constructor
+        AForm(const std::string name, const int sign_req_grade, const int exec_req_grade); // constructor with name and grades
+        AForm(AForm const &copy); // copy constructor
+        virtual ~AForm(); // descructor
 
     // overload assignment operator
-        Form & operator=(Form const &src);
+        AForm & operator=(AForm const &src);
 
     // Getters
         const std::string&  getName(void) const;
@@ -61,9 +62,15 @@ class AForm
         public:
             const char* what() const throw();
     };
+
+    class FormNotSignedException : public std::exception
+	{
+	public:
+		virtual const char *what() const throw();
+	};
 };
 
 // ostream Overload
-std::ostream& operator<<(std::ostream& o, Form const &a);
+std::ostream& operator<<(std::ostream& o, AForm const &a);
 
 #endif
