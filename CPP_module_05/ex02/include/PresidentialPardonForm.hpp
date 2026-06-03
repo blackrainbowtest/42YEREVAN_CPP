@@ -41,6 +41,6 @@ class PresidentialPardonForm: public AForm
 };
 
 // ostream Overload
-std::ostream &operator<<(std::ostream &os, PresidentialPardonForm *a);
+std::ostream &operator<<(std::ostream &os, const PresidentialPardonForm &src);
 
 #endif

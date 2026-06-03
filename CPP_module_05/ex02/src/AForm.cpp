@@ -17,7 +17,7 @@
 AForm::AForm(void): _name("default"), _is_signed(false), _sign_req_grade(150),
                   _exec_req_grade(150)
 {
-	std::cout << "AForm Default Constructor called" << std::endl;
+	std::cout << GREEN << "AForm Default Constructor called" << RESET << std::endl;
 }
 
 AForm::AForm(const std::string name, const int sign_req_grade, const int exec_req_grade)
@@ -99,6 +99,11 @@ const char *AForm::GradeTooLowException::what(void) const throw()
 const char *AForm::GradeTooHighException::what(void) const throw()
 {
     return ("Grade too high");
+}
+
+const char *AForm::FormNotSignedException::what(void) const throw()
+{
+	return ("Form not signed");
 }
 
 std::ostream & operator<<(std::ostream &os, AForm const & src)
