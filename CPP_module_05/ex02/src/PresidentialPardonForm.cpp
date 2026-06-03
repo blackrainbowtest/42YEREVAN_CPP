@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "color_pallete.hpp"
+#include "color_palletre.hpp"
 #include "PresidentialPardonForm.hpp"
 #include "Bureaucrat.hpp"
 
