@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-#include "color_pallete.hpp"
+#include "color_palletre.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 {

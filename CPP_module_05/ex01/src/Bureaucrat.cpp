@@ -12,7 +12,7 @@
 
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
-#include "color_pallete.hpp"
+#include "color_palletre.hpp"
 
 Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 {
@@ -89,7 +89,7 @@ void Bureaucrat::decrementGrade()
 	this->_grade++;
 }
 
-void	signForm(Form &form)
+void	Bureaucrat::signForm(Form &form)
 {
 	form.beSigned(*this);
 }

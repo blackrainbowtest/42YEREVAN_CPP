@@ -12,7 +12,7 @@
 
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
-#include "color_pallete.hpp"
+#include "color_palletre.hpp"
 
 Form::Form(void): _name("default"), _is_signed(false), _sign_req_grade(150),
                   _exec_req_grade(150)

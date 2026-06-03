@@ -12,6 +12,7 @@
 
 #include <iostream>
 #include <string>
+#include "Bureaucrat.hpp"
 #include "color_palletre.hpp"
 
 #define EXIT_SUCCESS 0
