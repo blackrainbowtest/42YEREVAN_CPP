@@ -9,3 +9,7 @@
 /*   Updated: 2026/06/04 10:44:15 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "color_palletre.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "Bureaucrat.hpp"
