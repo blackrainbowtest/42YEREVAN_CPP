@@ -13,3 +13,4 @@
 #include "color_palletre.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "Bureaucrat.hpp"
+# include <cstdlib>
