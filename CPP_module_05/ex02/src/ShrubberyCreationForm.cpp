@@ -40,3 +40,32 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 	std::cout << RED << "ShrubberyCreationForm destructor called"
 		<< RESET << std::endl;
 }
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &src)
+{
+	if (this != &src)
+	{
+		AForm::operator=(src);
+		this->_target = src._target;
+	}
+	return (*this);
+}
+
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
+{
+	validateExecution(executor);
+
+}
+
+const std::string &ShrubberyCreationForm::getTarget(void) const
+{
+	return (this->_target);
+}
+
+std::ostream &operator<<(std::ostream &os, const ShrubberyCreationForm &src)
+{
+	os << src.getName()
+		<< " target: "
+		<< src.getTarget();
+	return (os);
+}
