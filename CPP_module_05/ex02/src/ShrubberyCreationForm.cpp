@@ -10,18 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fstream>
 #include "color_palletre.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "Bureaucrat.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(void)
-    : AForm("ShrubberyCreationForm", 72, 45), _target("default")
+    : AForm("ShrubberyCreationForm", 145, 137), _target("default")
 {
     std::cout << GREEN << "ShrubberyCreationForm Default Constructor called" << RESET << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
-    : AForm("ShrubberyCreationForm", 72, 45), _target(target)
+    : AForm("ShrubberyCreationForm", 145, 137), _target(target)
 {
     std::cout << GREEN << "ShrubberyCreationForm Constructor for "
         << YELLOW << this->getTarget() << GREEN << " called" 
@@ -55,6 +56,21 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 {
 	validateExecution(executor);
 
+	std::ofstream outfile(
+		(this->getTarget() + "_shrubbery").c_str());
+
+	if (!outfile.is_open())
+		return ;
+
+	outfile << "       _" << std::endl;
+	outfile << "      /\\\\" << std::endl;
+	outfile << "     /\\\\*\\\\" << std::endl;
+	outfile << "    /\\\\O\\\\*\\\\" << std::endl;
+	outfile << "   /*/\\\\/\\\\/\\\\" << std::endl;
+	outfile << "      ||" << std::endl;
+	outfile << "      ||" << std::endl;
+
+	outfile.close();
 }
 
 const std::string &ShrubberyCreationForm::getTarget(void) const
