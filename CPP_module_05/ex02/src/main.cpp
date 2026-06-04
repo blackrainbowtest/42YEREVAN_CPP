@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include <string>
+#include <ctime>
+#include <cstdlib>
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "PresidentialPardonForm.hpp"
@@ -36,6 +38,7 @@ static void	printSection(const std::string& title)
 
 int	main(void)
 {
+	std::srand(std::time(NULL));
 	printSection("PRESIDENTIAL PARDON SUCCESS");
 
 	try
