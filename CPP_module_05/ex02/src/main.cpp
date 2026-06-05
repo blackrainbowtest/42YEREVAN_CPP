@@ -36,26 +36,126 @@ static void	printSection(const std::string& title)
 	printDivider();
 }
 
-int	main(void)
+void testPresidentialSuccess()
 {
-	std::srand(std::time(NULL));
-	printSection("PRESIDENTIAL PARDON SUCCESS");
+	printTitle("PRESIDENTIAL PARDON SUCCESS");
 
 	try
 	{
 		Bureaucrat president("President", 1);
-		PresidentialPardonForm pardon("Arthur Dent");
+		PresidentialPardonForm form("Arthur Dent");
 
-		pardon.beSigned(president);
-
-		std::cout << pardon << std::endl;
-
-		pardon.execute(president);
+		form.beSigned(president);
+		form.execute(president);
 	}
-	catch (const std::exception &e)
+	catch (const std::exception& e)
 	{
-		std::cout << RED << e.what() << RESET << std::endl;
+		std::cerr << e.what() << std::endl;
 	}
+}
+
+void testUnsignedForm()
+{
+	printTitle("EXECUTE UNSIGNED FORM");
+
+	try
+	{
+		Bureaucrat president("President", 1);
+		PresidentialPardonForm form("Arthur Dent");
+
+		form.execute(president);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void testGradeTooLowExecute()
+{
+	printTitle("GRADE TOO LOW TO EXECUTE");
+
+	try
+	{
+		Bureaucrat intern("Intern", 150);
+		PresidentialPardonForm form("Arthur Dent");
+
+		Bureaucrat president("President", 1);
+		form.beSigned(president);
+
+		form.execute(intern);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void testGradeTooLowSign()
+{
+	printTitle("GRADE TOO LOW TO SIGN");
+
+	try
+	{
+		Bureaucrat intern("Intern", 150);
+		PresidentialPardonForm form("Arthur Dent");
+
+		form.beSigned(intern);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void testRobotomy()
+{
+	printTitle("ROBOTOMY TEST");
+
+	try
+	{
+		Bureaucrat boss("Boss", 1);
+		RobotomyRequestForm form("Marvin");
+
+		form.beSigned(boss);
+
+		for (int i = 0; i < 5; i++)
+			form.execute(boss);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void testShrubbery()
+{
+	printTitle("SHRUBBERY TEST");
+
+	try
+	{
+		Bureaucrat boss("Boss", 1);
+		ShrubberyCreationForm form("garden");
+
+		form.beSigned(boss);
+		form.execute(boss);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+int	main(void)
+{
+	std::srand(std::time(NULL));
+
+	testPresidentialSuccess();
+	testUnsignedForm();
+	testGradeTooLowExecute();
+	testGradeTooLowSign();
+	testRobotomy();
+	testShrubbery();
 	
 	return (EXIT_SUCCESS);
 }
