@@ -38,7 +38,7 @@ static void	printSection(const std::string& title)
 
 void testPresidentialSuccess()
 {
-	printTitle("PRESIDENTIAL PARDON SUCCESS");
+	printSection("PRESIDENTIAL PARDON SUCCESS");
 
 	try
 	{
@@ -56,7 +56,7 @@ void testPresidentialSuccess()
 
 void testUnsignedForm()
 {
-	printTitle("EXECUTE UNSIGNED FORM");
+	printSection("EXECUTE UNSIGNED FORM");
 
 	try
 	{
@@ -73,7 +73,7 @@ void testUnsignedForm()
 
 void testGradeTooLowExecute()
 {
-	printTitle("GRADE TOO LOW TO EXECUTE");
+	printSection("GRADE TOO LOW TO EXECUTE");
 
 	try
 	{
@@ -93,7 +93,7 @@ void testGradeTooLowExecute()
 
 void testGradeTooLowSign()
 {
-	printTitle("GRADE TOO LOW TO SIGN");
+	printSection("GRADE TOO LOW TO SIGN");
 
 	try
 	{
@@ -110,7 +110,7 @@ void testGradeTooLowSign()
 
 void testRobotomy()
 {
-	printTitle("ROBOTOMY TEST");
+	printSection("ROBOTOMY TEST");
 
 	try
 	{
@@ -130,7 +130,7 @@ void testRobotomy()
 
 void testShrubbery()
 {
-	printTitle("SHRUBBERY TEST");
+	printSection("SHRUBBERY TEST");
 
 	try
 	{
