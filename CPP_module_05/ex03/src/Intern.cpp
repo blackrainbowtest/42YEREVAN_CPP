@@ -21,7 +21,7 @@ Intern::Intern(void)
     std::cout << GREEN << "Intern Default Constructor called" << RESET << std::endl;
 }
 
-Intern(const Intern &src)
+Intern::Intern(const Intern &src)
 {
     std::cout << GREEN << "Intern copy constructor called"
 		<< RESET << std::endl;
@@ -35,8 +35,7 @@ Intern::~Intern(void)
 
 Intern &Intern::operator=(const Intern &src)
 {
-	if (this != &src)
-		return (*this);
+	(void)src;
 	return (*this);
 }
 
