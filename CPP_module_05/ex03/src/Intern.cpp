@@ -10,6 +10,48 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "PresidentialPardonForm.hpp"
-# include "RobotomyRequestForm.hpp"
-# include "ShrubberyCreationForm.hpp"
+#include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
+#include "color_palletre.hpp"
+
+Intern::Intern(void)
+{
+    std::cout << GREEN << "Intern Default Constructor called" << RESET << std::endl;
+}
+
+Intern(const Intern &src)
+{
+    std::cout << GREEN << "Intern copy constructor called"
+		<< RESET << std::endl;
+    return (*this);
+}
+
+Intern::~Intern(void)
+{
+    std::cout << GREEN << "Intern destructor called" << RESET << std::endl;
+}
+
+Intern &Intern::operator=(const Intern &src)
+{
+	if (this != &src)
+		return (*this);
+	return (*this);
+}
+
+// static
+static AForm *makePresidentialPardonForm(const std::string &target)
+{
+    return (new PresidentialPardonForm(target));
+}
+
+static AForm *makeRobotomyRequestForm(const std::string &target)
+{
+    return (new RobotomyRequestForm(target));
+}
+
+static AForm *makeShrubberyCreationForm(const std::string &target)
+{
+    return (new ShrubberyCreationForm(target));
+}
