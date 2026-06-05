@@ -54,3 +54,9 @@ static AForm *makeShrubberyCreationForm(const std::string &target)
 {
     return (new ShrubberyCreationForm(target));
 }
+
+AForm *Intern::makeForm(const std::string &form, const std::string &target)
+{
+    std::cout << RED << "Intern cant create " << form << RESET << std::endl;
+    return (NULL);
+}
