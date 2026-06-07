@@ -17,6 +17,9 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 #include "color_palletre.hpp"
 
 #define EXIT_SUCCESS 0
@@ -146,6 +149,56 @@ void testShrubbery()
 	}
 }
 
+void testInternValidForms()
+{
+	printSection("INTERN CREATES VALID FORMS");
+
+	try
+	{
+		Intern intern;
+		Bureaucrat boss("Boss", 1);
+		AForm *presidential = intern.makeForm("presidential pardon", "Arthur Dent");
+		AForm *robotomy = intern.makeForm("robotomy request", "Marvin");
+		AForm *shrubbery = intern.makeForm("shrubbery creation", "garden");
+
+		if (presidential != NULL)
+		{
+			presidential->beSigned(boss);
+			presidential->execute(boss);
+			delete presidential;
+		}
+		if (robotomy != NULL)
+		{
+			robotomy->beSigned(boss);
+			robotomy->execute(boss);
+			delete robotomy;
+		}
+		if (shrubbery != NULL)
+		{
+			shrubbery->beSigned(boss);
+			shrubbery->execute(boss);
+			delete shrubbery;
+		}
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+}
+
+void testInternInvalidForm()
+{
+	printSection("INTERN CANNOT CREATE UNKNOWN FORM");
+
+	Intern intern;
+	AForm *form = intern.makeForm("coffee request", "kitchen");
+
+	if (form == NULL)
+		std::cout << RED << "Unknown form returned NULL" << RESET << std::endl;
+	else
+		delete form;
+}
+
 int	main(void)
 {
 	std::srand(std::time(NULL));
@@ -156,6 +209,8 @@ int	main(void)
 	testGradeTooLowSign();
 	testRobotomy();
 	testShrubbery();
+	testInternValidForms();
+	testInternInvalidForm();
 	
 	return (EXIT_SUCCESS);
 }

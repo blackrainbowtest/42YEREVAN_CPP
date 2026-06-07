@@ -25,7 +25,7 @@ Intern::Intern(const Intern &src)
 {
     std::cout << GREEN << "Intern copy constructor called"
 		<< RESET << std::endl;
-    return (*this);
+    *this = src;
 }
 
 Intern::~Intern(void)
@@ -57,6 +57,27 @@ static AForm *makeShrubberyCreationForm(const std::string &target)
 
 AForm *Intern::makeForm(const std::string &form, const std::string &target)
 {
+    typedef AForm *(*FormFactory)(const std::string &target);
+
+    static const std::string names[] = {
+        "presidential pardon",
+        "robotomy request",
+        "shrubbery creation"
+    };
+    static FormFactory factories[] = {
+        makePresidentialPardonForm,
+        makeRobotomyRequestForm,
+        makeShrubberyCreationForm
+    };
+
+    for (int i = 0; i < 3; i++)
+    {
+        if (form == names[i])
+        {
+            std::cout << GREEN << "Intern creates " << form << RESET << std::endl;
+            return (factories[i](target));
+        }
+    }
     std::cout << RED << "Intern cant create " << form << RESET << std::endl;
     return (NULL);
 }

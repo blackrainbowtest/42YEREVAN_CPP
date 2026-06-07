@@ -20,8 +20,7 @@ OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
 SRC_FILES	=	main.cpp Bureaucrat.cpp AForm.cpp PresidentialPardonForm.cpp \
-				RobotomyRequestForm.cpp ShrubberyCreationForm.cpp \
-				Intern.hpp
+				RobotomyRequestForm.cpp ShrubberyCreationForm.cpp Intern.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))

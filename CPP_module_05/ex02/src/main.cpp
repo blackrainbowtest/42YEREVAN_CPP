@@ -17,6 +17,8 @@
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "ShrubberyCreationForm.hpp"
 #include "color_palletre.hpp"
 
 #define EXIT_SUCCESS 0
