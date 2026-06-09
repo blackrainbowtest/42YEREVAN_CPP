@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ScalarConversion.hpp                               :+:      :+:    :+:   */
+/*   ScalarConverter.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERSION_HPP
-# define SCALARCONVERSION_HPP
+#ifndef SCALARCONVERTER_HPP
+# define SCALARCONVERTER_HPP
 
 # include <iostream>
 # include <string>
@@ -28,7 +28,7 @@ class ScalarConverter
         enum e_type
         {
             ERROR = 0, // unknown input type
-            CHAR, // char ubput type
+            CHAR, // char input type
             INT, // integer input type
             FLOAT, // float input type
             DOUBLE, // double input type
@@ -45,4 +45,4 @@ class ScalarConverter
     };
 };
 
-#endif // !CONVERSION_HPP
+#endif // !SCALARCONVERTER_HPP
