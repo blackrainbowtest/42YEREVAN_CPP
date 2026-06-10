@@ -13,6 +13,39 @@
 #include "ScalarConverter.hpp"
 #include "color_palletre.hpp"
 
+// empty constructors
+ScalarConverter::ScalarConverter()
+{
+}
 
+ScalarConverter::ScalarConverter(const ScalarConverter &src)
+{
+	(void)src;
+}
 
+// empty destructor
+ScalarConverter::~ScalarConverter()
+{
+}
+
+ScalarConverter &ScalarConverter::operator=(
+	const ScalarConverter &src)
+{
+	(void)src;
+	return (*this);
+}
+
+// 1. isPseudoLiteral()
+
+// 2. isChar()
+
+// 3. isInt()
+
+// 4. isFloat()
+
+// 5. isDouble()
+
+// 6. detectType()
+
+// 7. convert()
 
