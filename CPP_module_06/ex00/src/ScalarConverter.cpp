@@ -36,7 +36,12 @@ ScalarConverter &ScalarConverter::operator=(
 }
 
 // 1. isPseudoLiteral()
-
+static bool isPseudoLiteral(const std::string &literal)
+{
+    if (literal == "nan")
+        return (true);
+    return (false)
+}
 // 2. isChar()
 
 // 3. isInt()
