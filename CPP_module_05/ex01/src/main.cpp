@@ -258,8 +258,12 @@ int	main(void)
 
 	try
 	{
+		Bureaucrat boss("Boss", 1);
+		
 		Form a("A", 50, 20);
 		Form b("B", 100, 80);
+
+		a.beSigned(boss);
 
 		std::cout << a << std::endl;
 		std::cout << b << std::endl;
