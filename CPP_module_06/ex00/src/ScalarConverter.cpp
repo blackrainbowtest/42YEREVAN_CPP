@@ -36,21 +36,91 @@ ScalarConverter &ScalarConverter::operator=(
 }
 
 // 1. isPseudoLiteral()
-static bool isPseudoLiteral(const std::string &literal)
+
+bool ScalarConverter::isPseudoLiteral(const std::string &literal)
 {
-    if (literal == "nan")
-        return (true);
-    return (false)
+	if (literal == "nan"
+		|| literal == "nanf"
+		|| literal == "+inf"
+		|| literal == "-inf"
+		|| literal == "+inff"
+		|| literal == "-inff")
+	{
+		return (true);
+	}
+
+	return (false);
 }
+
 // 2. isChar()
+// "a"       -> true
+// "1"       -> false
+// " "       -> true
+// "ab"      -> false
+// ""        -> false
+// "\n"      -> false
+
+bool ScalarConverter::isChar(const std::string &literal)
+{
+	if (literal.length() == 1 && std::isprint(literal[0]) && !std::isdigit(literal[0]))
+		return (true);
+
+	return (false);
+}
 
 // 3. isInt()
+// "42"      -> true
+// "-42"     -> true
+// "+42"     -> true
+// "++42"    -> false
+// "--42"    -> false
+// "0"       -> true
+// "+"       -> false
+// "-"       -> false
+// "42f"     -> false
+// "42.0"    -> false
+// "abc"     -> false
+// ""        -> false
 
+bool ScalarConverter::isInt(const std::string &literal)
+{
+	size_t i = 0;
+	if (literal.empty())
+		return (false);
+
+	if (literal[i] == '-' || literal[i] == '+')
+		i++;
+
+	if (i == literal.length())
+		return (false);
+
+	while (i < literal.length())
+	{
+		if (!std::isdigit(literal[i]))
+			return (false);
+		i++;
+	}
+
+	return (true);
+}
 // 4. isFloat()
+bool ScalarConverter::isFloat(const std::string &literal)
+{
 
+}
 // 5. isDouble()
+bool ScalarConverter::isDouble(const std::string &literal)
+{
+
+}
 
 // 6. detectType()
+e_type ScalarConverter::detectType(const std::string &literal)
+{
 
+}
 // 7. convert()
+void ScalarConverter::convert(const std::string &literal)
+{
 
+}
