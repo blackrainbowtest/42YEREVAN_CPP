@@ -53,6 +53,19 @@ class ScalarConverter
     public:
         // Methods
         static void convert(const std::string &literal);
+        
+        // Test Methods
+        // enum e_type
+        // {
+        //     ERROR = 0, // unknown input type
+        //     CHAR,      // char input type
+        //     INT,       // integer input type
+        //     FLOAT,     // float input type
+        //     DOUBLE,    // double input type
+        //     NAN_INF    // NaN or infinity types
+        // };
+        // static e_type detectType(const std::string &literal);
+        
         //Exceptions
         class ErrorException : public std::exception
         {
