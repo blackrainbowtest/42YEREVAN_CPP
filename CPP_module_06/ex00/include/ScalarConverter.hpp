@@ -50,6 +50,12 @@ class ScalarConverter
         static bool isFloat(const std::string &literal);
         static bool isDouble(const std::string &literal);
         static bool isPseudoLiteral(const std::string &literal);
+
+        static void convertFromChar(char value);
+        static void convertFromInt(int value);
+        static void convertFromFloat(float value);
+        static void convertFromDouble(double value);
+        static void convertPseudoLiteral(const std::string &literal);
     public:
         // Methods
         static void convert(const std::string &literal);

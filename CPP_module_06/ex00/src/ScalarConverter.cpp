@@ -286,5 +286,25 @@ ScalarConverter::e_type ScalarConverter::detectType(const std::string &literal)
 // 7. convert()
 void ScalarConverter::convert(const std::string &literal)
 {
-	(void)literal;
+	switch (detectType(literal))
+	{
+		case CHAR:
+			convertFromChar(literal[0]);
+			break;
+		case INT:
+			convertFromInt(std::atoi(literal.c_str()));
+			break;
+		case FLOAT:
+			convertFromFloat(std::atof(literal.c_str()));
+			break;
+		
+		case DOUBLE:
+			convertFromDouble(std::atof(literal.c_str()));
+			break;
+		case NAN_INF:
+			convertPseudoLiteral(literal);
+			break;
+		default:
+			throw ErrorException();
+	}
 }
