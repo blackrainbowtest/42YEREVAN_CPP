@@ -297,7 +297,6 @@ void ScalarConverter::convert(const std::string &literal)
 		case FLOAT:
 			convertFromFloat(std::atof(literal.c_str()));
 			break;
-		
 		case DOUBLE:
 			convertFromDouble(std::atof(literal.c_str()));
 			break;
@@ -319,7 +318,10 @@ void ScalarConverter::convertFromChar(char value)
 	f = static_cast<float>(value);
 	d = static_cast<double>(value);
 
-	
+	std::cout << "char: '" << value << "'" << std::endl;
+	std::cout << "int: " << i << std::endl;
+	std::cout << "float: " << f << ".0f" << std::endl;
+	std::cout << "double: " << d << ".0" << std::endl;
 }
 
 void ScalarConverter::convertFromInt(int value)
@@ -341,3 +343,4 @@ void ScalarConverter::convertPseudoLiteral(const std::string &literal)
 {
 
 }
+
