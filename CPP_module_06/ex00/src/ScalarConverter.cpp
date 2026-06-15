@@ -326,21 +326,25 @@ void ScalarConverter::convertFromChar(char value)
 
 void ScalarConverter::convertFromInt(int value)
 {
-
+	(void)value;
 }
 
 void ScalarConverter::convertFromFloat(float value)
 {
-
+	(void)value;
 }
 
 void ScalarConverter::convertFromDouble(double value)
 {
-
+	(void)value;
 }
 
 void ScalarConverter::convertPseudoLiteral(const std::string &literal)
 {
-
+	(void)literal;
 }
 
+const char	*ScalarConverter::ErrorException::what() const throw()
+{
+	return ("Error");
+}

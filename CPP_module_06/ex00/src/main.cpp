@@ -32,26 +32,6 @@
 // 	printDivider();
 // }
 
-static const char *typeToString(ScalarConverter::e_type type)
-{
-	switch (type)
-	{
-		case ScalarConverter::ERROR:
-			return ("ERROR");
-		case ScalarConverter::CHAR:
-			return ("CHAR");
-		case ScalarConverter::INT:
-			return ("INT");
-		case ScalarConverter::FLOAT:
-			return ("FLOAT");
-		case ScalarConverter::DOUBLE:
-			return ("DOUBLE");
-		case ScalarConverter::NAN_INF:
-			return ("NAN_INF");
-	}
-	return ("UNKNOWN");
-}
-
 int	main(int argc, char **argv)
 {
 	if (argc != 2)
@@ -62,11 +42,6 @@ int	main(int argc, char **argv)
 	std::string input = argv[1];
 
 
-	std::cout
-	<< input
-	<< " -> "
-	<< typeToString(
-		ScalarConverter::detectType(input))
-	<< std::endl;
+	ScalarConverter::convert(input);
 	return (EXIT_SUCCESS);
 }
