@@ -41,7 +41,14 @@ int	main(int argc, char **argv)
 	}
 	std::string input = argv[1];
 
-
-	ScalarConverter::convert(input);
+	try
+	{
+		ScalarConverter::convert(input);
+	}
+	catch (const std::exception &error)
+	{
+		std::cerr << error.what() << std::endl;
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
