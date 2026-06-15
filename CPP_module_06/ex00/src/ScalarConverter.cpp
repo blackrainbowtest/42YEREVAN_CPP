@@ -308,3 +308,36 @@ void ScalarConverter::convert(const std::string &literal)
 			throw ErrorException();
 	}
 }
+
+void ScalarConverter::convertFromChar(char value)
+{
+	int		i;
+	float	f;
+	double	d;
+
+	i = static_cast<int>(value);
+	f = static_cast<float>(value);
+	d = static_cast<double>(value);
+
+	
+}
+
+void ScalarConverter::convertFromInt(int value)
+{
+
+}
+
+void ScalarConverter::convertFromFloat(float value)
+{
+
+}
+
+void ScalarConverter::convertFromDouble(double value)
+{
+
+}
+
+void ScalarConverter::convertPseudoLiteral(const std::string &literal)
+{
+
+}
