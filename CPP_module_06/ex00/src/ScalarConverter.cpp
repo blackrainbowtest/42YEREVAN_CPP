@@ -292,8 +292,22 @@ void ScalarConverter::convert(const std::string &literal)
 			convertFromChar(literal[0]);
 			break;
 		case INT:
-			convertFromInt(std::atoi(literal.c_str()));
+		{
+			long	value;
+			
+			value = std::strtol(literal.c_str(), NULL, 10);
+			if (value < std::numeric_limits<int>::min()
+				|| value > std::numeric_limits<int>::max())
+			{
+				std::cout << "char: impossible" << std::endl;
+				std::cout << "int: impossible" << std::endl;
+				std::cout << "float: " << static_cast<float>(value) << "f" << std::endl;
+				std::cout << "double: " << static_cast<double>(value) << std::endl;
+				return ;
+			}
+			convertFromInt(static_cast<int>(value));
 			break;
+		}
 		case FLOAT:
 			convertFromFloat(std::atof(literal.c_str()));
 			break;
@@ -326,7 +340,23 @@ void ScalarConverter::convertFromChar(char value)
 
 void ScalarConverter::convertFromInt(int value)
 {
-	(void)value;
+	char	c;
+	float	f;
+	double	d;
+
+	c = static_cast<char>(value);
+	f = static_cast<float>(value);
+	d = static_cast<double>(value);
+
+	if (value < 0 || value > 127)
+		std::cout << "char: impossible" << std::endl;
+	else if (!std::isprint(c))
+		std::cout << "char: Non displayable" << std::endl;
+	else
+		std::cout << "char: '" << c << "'" << std::endl;
+	std::cout << "int: " << value << std::endl;
+	std::cout << "float: " << f << ".0f" << std::endl;
+	std::cout << "double: " << d << ".0" << std::endl;
 }
 
 void ScalarConverter::convertFromFloat(float value)
