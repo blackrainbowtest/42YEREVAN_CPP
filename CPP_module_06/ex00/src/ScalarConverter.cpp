@@ -361,7 +361,23 @@ void ScalarConverter::convertFromInt(int value)
 
 void ScalarConverter::convertFromFloat(float value)
 {
-	(void)value;
+	char	c;
+	int		i;
+	double	d;
+
+	c = static_cast<char>(value);
+	i = static_cast<int>(value);
+	d = static_cast<double>(value);
+
+	if (value < 0 || value > 127)
+		std::cout << "char: impossible" << std::endl;
+	else if (!std::isprint(c))
+		std::cout << "char: Non displayable" << std::endl;
+	else
+		std::cout << "char: '" << c << "'" << std::endl;
+	std::cout << "int: " << i << std::endl;
+	std::cout << "float: " << value << std::endl;
+	std::cout << "double: " << d << ".0" << std::endl;
 }
 
 void ScalarConverter::convertFromDouble(double value)
