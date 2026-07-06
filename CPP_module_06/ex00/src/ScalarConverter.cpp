@@ -348,7 +348,7 @@ void ScalarConverter::convertFromInt(int value)
 	f = static_cast<float>(value);
 	d = static_cast<double>(value);
 
-	if (value < 0 || value > 127)
+	if (value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max())
 		std::cout << "char: impossible" << std::endl;
 	else if (!std::isprint(c))
 		std::cout << "char: Non displayable" << std::endl;
@@ -365,16 +365,21 @@ void ScalarConverter::convertFromFloat(float value)
 	int		i;
 	double	d;
 
-	c = static_cast<char>(value);
 	i = static_cast<int>(value);
 	d = static_cast<double>(value);
 
-	if (value < 0 || value > 127)
+	// CHAR 
+	if (value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max())
 		std::cout << "char: impossible" << std::endl;
-	else if (!std::isprint(c))
-		std::cout << "char: Non displayable" << std::endl;
 	else
-		std::cout << "char: '" << c << "'" << std::endl;
+	{
+		c = static_cast<char>(value);
+		if (!std::isprint(static_cast<unsigned char>(c)))
+			std::cout << "char: Non displayable" << std::endl;
+		else
+			std::cout << "char: '" << c << "'" << std::endl;
+	}
+
 	std::cout << "int: " << i << std::endl;
 	std::cout << "float: " << value << std::endl;
 	std::cout << "double: " << d << ".0" << std::endl;
