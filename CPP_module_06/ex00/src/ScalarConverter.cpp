@@ -12,6 +12,38 @@
 
 #include "ScalarConverter.hpp"
 #include "color_palletre.hpp"
+#include <cmath>
+#include <sstream>
+
+static bool	isNan(double value)
+{
+	return (value != value);
+}
+
+static bool	isInf(double value)
+{
+	return (value == std::numeric_limits<double>::infinity()
+		|| value == -std::numeric_limits<double>::infinity());
+}
+
+static std::string	formatDecimal(double value, bool isFloat)
+{
+	std::ostringstream	oss;
+	std::string			result;
+	double				intpart;
+
+	oss << value;
+	result = oss.str();
+	if (!isNan(value) && !isInf(value)
+		&& std::modf(value, &intpart) == 0.0
+		&& result.find('.') == std::string::npos
+		&& result.find('e') == std::string::npos
+		&& result.find('E') == std::string::npos)
+		result += ".0";
+	if (isFloat)
+		result += "f";
+	return (result);
+}
 
 /*
 ** VALID FLOATS
@@ -365,12 +397,13 @@ void ScalarConverter::convertFromFloat(float value)
 	int		i;
 	double	d;
 
-	i = static_cast<int>(value);
 	d = static_cast<double>(value);
 
-	// CHAR 
-	if (value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max())
+	// CHAR
+	if (isNan(d) || isInf(d) || d < 0 || d > 127)
+	{
 		std::cout << "char: impossible" << std::endl;
+	}
 	else
 	{
 		c = static_cast<char>(value);
@@ -380,9 +413,24 @@ void ScalarConverter::convertFromFloat(float value)
 			std::cout << "char: '" << c << "'" << std::endl;
 	}
 
-	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << value << std::endl;
-	std::cout << "double: " << d << ".0" << std::endl;
+	// INT
+	if (isNan(d) || isInf(d)
+		|| d < static_cast<double>(std::numeric_limits<int>::min())
+		|| d > static_cast<double>(std::numeric_limits<int>::max()))
+	{
+		std::cout << "int: impossible" << std::endl;
+	}
+	else
+	{
+		i = static_cast<int>(value);
+		std::cout << "int: " << i << std::endl;
+	}
+
+	// FLOAT
+	std::cout << "float: " << formatDecimal(d, true) << std::endl;
+
+	// DOUBLE
+	std::cout << "double: " << formatDecimal(d, false) << std::endl;
 }
 
 void ScalarConverter::convertFromDouble(double value)
@@ -392,7 +440,23 @@ void ScalarConverter::convertFromDouble(double value)
 
 void ScalarConverter::convertPseudoLiteral(const std::string &literal)
 {
-	(void)literal;
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	if (literal == "nan" || literal == "nanf")
+	{
+		std::cout << "float: nanf" << std::endl;
+		std::cout << "double: nan" << std::endl;
+	}
+	else if (literal == "+inf" || literal == "+inff")
+	{
+		std::cout << "float: +inff" << std::endl;
+		std::cout << "double: +inf" << std::endl;
+	}
+	else
+	{
+		std::cout << "float: -inff" << std::endl;
+		std::cout << "double: -inf" << std::endl;
+	}
 }
 
 const char	*ScalarConverter::ErrorException::what() const throw()
