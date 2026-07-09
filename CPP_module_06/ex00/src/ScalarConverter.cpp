@@ -366,8 +366,8 @@ void ScalarConverter::convertFromChar(char value)
 
 	std::cout << "char: '" << value << "'" << std::endl;
 	std::cout << "int: " << i << std::endl;
-	std::cout << "float: " << f << ".0f" << std::endl;
-	std::cout << "double: " << d << ".0" << std::endl;
+	std::cout << "float: " << formatDecimal(f, true) << std::endl;
+	std::cout << "double: " << formatDecimal(d, false) << std::endl;
 }
 
 void ScalarConverter::convertFromInt(int value)
@@ -380,15 +380,15 @@ void ScalarConverter::convertFromInt(int value)
 	f = static_cast<float>(value);
 	d = static_cast<double>(value);
 
-	if (value < std::numeric_limits<char>::min() || value > std::numeric_limits<char>::max())
+	if (value < 0 || value > 127)
 		std::cout << "char: impossible" << std::endl;
-	else if (!std::isprint(c))
+	else if (!std::isprint(static_cast<unsigned char>(c)))
 		std::cout << "char: Non displayable" << std::endl;
 	else
 		std::cout << "char: '" << c << "'" << std::endl;
 	std::cout << "int: " << value << std::endl;
-	std::cout << "float: " << f << ".0f" << std::endl;
-	std::cout << "double: " << d << ".0" << std::endl;
+	std::cout << "float: " << formatDecimal(f, true) << std::endl;
+	std::cout << "double: " << formatDecimal(d, false) << std::endl;
 }
 
 void ScalarConverter::convertFromFloat(float value)
