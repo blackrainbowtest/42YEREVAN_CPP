@@ -376,16 +376,18 @@ void ScalarConverter::convertFromInt(int value)
 	float	f;
 	double	d;
 
-	c = static_cast<char>(value);
-	f = static_cast<float>(value);
-	d = static_cast<double>(value);
-
 	if (value < 0 || value > 127)
 		std::cout << "char: impossible" << std::endl;
-	else if (!std::isprint(static_cast<unsigned char>(c)))
-		std::cout << "char: Non displayable" << std::endl;
 	else
-		std::cout << "char: '" << c << "'" << std::endl;
+	{
+		c = static_cast<char>(value);
+		if (!std::isprint(static_cast<unsigned char>(c)))
+			std::cout << "char: Non displayable" << std::endl;
+		else
+			std::cout << "char: '" << c << "'" << std::endl;
+	}
+	f = static_cast<float>(value);
+	d = static_cast<double>(value);
 	std::cout << "int: " << value << std::endl;
 	std::cout << "float: " << formatDecimal(f, true) << std::endl;
 	std::cout << "double: " << formatDecimal(d, false) << std::endl;
