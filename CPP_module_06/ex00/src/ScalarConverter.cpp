@@ -432,7 +432,9 @@ void ScalarConverter::convertFromFloat(float value)
 	std::cout << "float: " << formatDecimal(d, true) << std::endl;
 
 	// DOUBLE
-	std::cout << "double: " << formatDecimal(d, false) << std::endl;
+	std::cout << "double: "
+		<< formatDecimal(value, false)
+		<< std::endl;
 }
 
 void ScalarConverter::convertFromDouble(double value)
@@ -468,9 +470,26 @@ void ScalarConverter::convertFromDouble(double value)
 	}
 
 	// float
-
+	if (!isNan(value) && !isInf(value)
+		&& (value < -static_cast<double>(
+				std::numeric_limits<float>::max())
+			|| value > static_cast<double>(
+				std::numeric_limits<float>::max())))
+	{
+		std::cout << "float: impossible" << std::endl;
+	}
+	else
+	{
+		f = static_cast<float>(value);
+		std::cout << "float: "
+			<< formatDecimal(static_cast<double>(f), true)
+			<< std::endl;
+	}
+	
 	// double
-	(void)value;
+	std::cout << "double: "
+		<< formatDecimal(value, false)
+		<< std::endl;
 }
 
 void ScalarConverter::convertPseudoLiteral(const std::string &literal)
