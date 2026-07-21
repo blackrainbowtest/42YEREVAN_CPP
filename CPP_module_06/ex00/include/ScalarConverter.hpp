@@ -13,14 +13,14 @@
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
+# include <cstdlib>   // strtol, atof
+# include <limits>    // numeric_limits
+# include <sstream>   // ostringstream
+# include <cmath>     // modf
+# include <cctype>    // isprint, isdigit
 # include <iostream>
 # include <string>
-# include <exception>
-# include <limits>
-# include <climits>
-# include <cstdlib>
-# include <cstring>
-# include <cctype>
+# include <exception>  // std::exception
 
 class ScalarConverter
 {
