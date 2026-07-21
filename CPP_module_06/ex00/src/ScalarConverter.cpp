@@ -437,6 +437,39 @@ void ScalarConverter::convertFromFloat(float value)
 
 void ScalarConverter::convertFromDouble(double value)
 {
+	char	c;
+	int		i;
+	float	f;
+
+	// char
+	if (isNan(value) || isInf(value) || value < 0 || value > 127)
+	{
+		std::cout << "char: impossible" << std::endl;
+	}
+	else
+	{
+		c = static_cast<char>(value);
+		if (@std::isprint(static_cast<unsigned char>(c)))
+			std::cout << "char: Non displayable" << std::endl;
+		else
+			std::cout << "char: '" << c << "'" << std::endl;
+	}
+	// int
+	if (isNan(value) || isInf(value)
+		|| value < static_cast<double>(std::numeric_limits<int>::min())
+		|| value > static_cast<double>(std::numeric_limits<int>::max()))
+	{
+		std::cout << "int: impossible" << std::endl;
+	}
+	else
+	{
+		i = static_cast<int>(value);
+		std::cout << "int: " << i << std::endl;
+	}
+
+	// float
+
+	// double
 	(void)value;
 }
 
