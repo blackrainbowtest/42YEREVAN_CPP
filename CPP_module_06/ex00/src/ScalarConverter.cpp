@@ -451,8 +451,8 @@ void ScalarConverter::convertFromDouble(double value)
 	else
 	{
 		c = static_cast<char>(value);
-		if (@std::isprint(static_cast<unsigned char>(c)))
-			std::cout << "char: Non displayable" << std::endl;
+		if (!std::isprint(static_cast<unsigned char>(c)))
+			std::cout << "char: Non displayable";
 		else
 			std::cout << "char: '" << c << "'" << std::endl;
 	}
@@ -485,7 +485,7 @@ void ScalarConverter::convertFromDouble(double value)
 			<< formatDecimal(static_cast<double>(f), true)
 			<< std::endl;
 	}
-	
+
 	// double
 	std::cout << "double: "
 		<< formatDecimal(value, false)
