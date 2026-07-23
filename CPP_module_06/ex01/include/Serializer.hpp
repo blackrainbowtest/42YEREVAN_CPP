@@ -16,6 +16,8 @@
 # include <stdint.h>
 # include "Data.hpp"
 
+struct Data;
+
 class Serializer
 {
 	private:
@@ -27,6 +29,8 @@ class Serializer
 	public:
 		static uintptr_t	serialize(Data *ptr);
 		static Data			*deserialize(uintptr_t raw);
+
+        std::ostream	&operator<<(std::ostream &o, Data *a);
 };
 
 #endif //SERIALIZER_HPP
