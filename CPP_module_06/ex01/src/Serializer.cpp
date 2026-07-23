@@ -24,9 +24,12 @@ Data	*Serializer::deserialize(uintptr_t raw)
 
 std::ostream	&operator<<(std::ostream &o, Data *a)
 {
-	o <<
-	"\tName: " << a->name <<
-	"\n\tage: " << a->age <<
-	std::endl;
+	if (a == NULL)
+	{
+		o << "Data: NULL";
+		return (o);
+	}
+	o << "\tName: " << a->name
+		<< "\n\tAge: " << a->age;
 	return (o);
 }
