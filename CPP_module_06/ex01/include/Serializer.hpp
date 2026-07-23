@@ -10,74 +10,23 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SCALARCONVERTER_HPP
-# define SCALARCONVERTER_HPP
+#ifndef SERIALIZER_HPP
+# define SERIALIZER_HPP
 
-# include <cstdlib>   // strtol, atof
-# include <limits>    // numeric_limits
-# include <sstream>   // ostringstream
-# include <cmath>     // modf
-# include <cctype>    // isprint, isdigit
-# include <iostream>
-# include <string>
-# include <exception>  // std::exception
+# include <stdint.h>
+# include "Data.hpp"
 
-class ScalarConverter
+class Serializer
 {
-    private:
-        enum e_type
-        {
-            ERROR = 0, // unknown input type
-            CHAR,      // char input type
-            INT,       // integer input type
-            FLOAT,     // float input type
-            DOUBLE,    // double input type
-            NAN_INF    // NaN or infinity types
-        };
+	private:
+		Serializer();
+		Serializer(const Serializer &src);
+		Serializer &operator=(const Serializer &src);
+		~Serializer();
 
-        // Constructors
-        ScalarConverter();
-        ScalarConverter(const ScalarConverter &src);
-        // Destructors
-        ~ScalarConverter();
-        // Overloaded Operators
-        ScalarConverter &operator=(const ScalarConverter &src);
-        // Methods
-		static e_type detectType(const std::string &literal);
-
-        static bool isChar(const std::string &literal);
-        static bool isInt(const std::string &literal);
-        static bool isFloat(const std::string &literal);
-        static bool isDouble(const std::string &literal);
-        static bool isPseudoLiteral(const std::string &literal);
-
-        static void convertFromChar(char value);
-        static void convertFromInt(int value);
-        static void convertFromFloat(float value);
-        static void convertFromDouble(double value);
-        static void convertPseudoLiteral(const std::string &literal);
-    public:
-        // Methods
-        static void convert(const std::string &literal);
-        
-        // Test Methods
-        // enum e_type
-        // {
-        //     ERROR = 0, // unknown input type
-        //     CHAR,      // char input type
-        //     INT,       // integer input type
-        //     FLOAT,     // float input type
-        //     DOUBLE,    // double input type
-        //     NAN_INF    // NaN or infinity types
-        // };
-        // static e_type detectType(const std::string &literal);
-        
-        //Exceptions
-        class ErrorException : public std::exception
-        {
-            public:
-                virtual const char *what() const throw();
-        };
+	public:
+		static uintptr_t	serialize(Data *ptr);
+		static Data			*deserialize(uintptr_t raw);
 };
 
-#endif // !SCALARCONVERTER_HPP
+#endif //SERIALIZER_HPP
