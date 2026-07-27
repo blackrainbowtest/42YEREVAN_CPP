@@ -11,6 +11,31 @@
 /* ************************************************************************** */
 
 #include "Serializer.hpp"
+#include <iostream>
+
+Serializer::Serializer()
+{
+	std::cout << "Serializer Default Constructor called" << std::endl;
+}
+
+Serializer::Serializer(const Serializer &src)
+{
+	std::cout << "Serializer Copy Constructor called" << std::endl;
+	*this = src;
+}
+
+Serializer::~Serializer()
+{
+	std::cout << "Serializer Deconstructor called" << std::endl;
+}
+
+Serializer &Serializer::operator=(const Serializer &src)
+{
+	std::cout << "Serializer Assignation operator called" << std::endl;
+	if (this == &src)
+		return *this;
+	return *this;
+}
 
 uintptr_t	Serializer::serialize(Data *ptr)
 {
@@ -22,14 +47,9 @@ Data	*Serializer::deserialize(uintptr_t raw)
 	return (reinterpret_cast<Data *>(raw));
 }
 
-std::ostream	&operator<<(std::ostream &o, Data *a)
+std::ostream	&operator<<(std::ostream &o, const Data &data)
 {
-	if (a == NULL)
-	{
-		o << "Data: NULL";
-		return (o);
-	}
-	o << "\tName: " << a->name
-		<< "\n\tAge: " << a->age;
+	o << "\tName: " << data.name
+		<< "\n\tAge: " << data.age;
 	return (o);
 }

@@ -15,10 +15,11 @@
 
 # include <string>
 
-struct Data
+typedef struct Data
 {
 	std::string	name;
 	int			age;
-};
+	Data		*next;
+}				Data;
 
 #endif
