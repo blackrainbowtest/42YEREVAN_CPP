@@ -14,41 +14,35 @@
 #include <string>
 #include "color_palletre.hpp"
 #include "Serializer.hpp"
+#include <iostream>
 
 #define EXIT_SUCCESS 0
 // #define EXIT_FAILURE 1
 
-// static void	printDivider(void)
-// {
-// 	std::cout << std::endl;
-// 	std::cout << "-------------------------------------------------------" << std::endl;
-// 	std::cout << std::endl;
-// }
-
-// static void	printSection(const std::string& title)
-// {
-// 	printDivider();
-// 	std::cout << BLUE << title << RESET << std::endl;
-// 	printDivider();
-// }
-
-int	main(int argc, char **argv)
+int	main(void)
 {
-	if (argc != 2)
-	{
-		std::cerr << "Usage: " << argv[0] << " <literal>" << std::endl;
-		return (EXIT_FAILURE);
-	}
-	std::string input = argv[1];
+	Data		data;
+	Data		*res;
+	uintptr_t	raw;
 
-	try
-	{
-		ScalarConverter::convert(input);
-	}
-	catch (const std::exception &error)
-	{
-		std::cerr << error.what() << std::endl;
-		return (EXIT_FAILURE);
-	}
+	data.name = "mr. Split";
+	data.age = 30;
+	data.next = NULL;
+
+	raw = Serializer::serialize(&data);
+	result = Serializer::deserialize(raw);
+
+	std::cout << "Original address:     " << &data << std::endl;
+	std::cout << "Deserialized address: " << result << std::endl;
+	std::cout << "Raw value:            " << raw << std::endl;
+	std::cout << "Data:" << std::endl;
+	std::cout << *result << std::endl;
+
+	if (result == &data)
+		std::cout << "Serialization successful" << std::endl;
+	else
+		std::cout << "Serialization failed" << std::endl;
+	return (0);
+	
 	return (EXIT_SUCCESS);
 }
