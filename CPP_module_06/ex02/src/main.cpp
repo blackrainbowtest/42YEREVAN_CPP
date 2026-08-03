@@ -10,19 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
-#include <string>
-#include "color_palletre.hpp"
 #include "Serializer.hpp"
 #include <iostream>
-
-#define EXIT_SUCCESS 0
-// #define EXIT_FAILURE 1
+// #include "color_palletre.hpp"
 
 int	main(void)
 {
 	Data		data;
-	Data		*res;
+	Data		*result;
 	uintptr_t	raw;
 
 	data.name = "mr. Split";
@@ -43,6 +38,4 @@ int	main(void)
 	else
 		std::cout << "Serialization failed" << std::endl;
 	return (0);
-	
-	return (EXIT_SUCCESS);
 }
