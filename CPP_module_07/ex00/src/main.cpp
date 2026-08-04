@@ -12,6 +12,7 @@
 
 #include "whatever.hpp"
 #include <iostream>
+#include <string>
 
 template < typename T >
 
