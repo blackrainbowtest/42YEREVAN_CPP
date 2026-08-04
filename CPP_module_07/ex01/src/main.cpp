@@ -10,44 +10,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "whatever.hpp"
+#include "iter.hpp"
 #include <iostream>
-#include <string>
+#include <cctype>
 
-template < typename T >
-
-void	print(T &a, T &b)
+template <typename T>
+void	printElement(const T &element)
 {
-    std::cout << "The max of a: " << a << " and b: " << b
-        << " is: " << max(a, b) << std::endl;
-    std::cout << "The min of a: " << a << " and b: " << b
-        << " is: " << min(a, b) << std::endl;
-    std::cout << "Before swapping a: " << a
-        << ", b: " << b << std::endl;
-    swap(a, b);
-    std::cout << "After swapping a: " << a
-        << ", b: " << b << std::endl;
+	std::cout << element << std::endl;
+}
+
+template <typename T>
+void	incrementElement(T &element)
+{
+	element++;
+}
+
+void	ft_toupper(char &c)
+{
+	c = static_cast<char>(std::toupper(static_cast<unsigned char>(c)));
 }
 
 int main()
 {
-    {
-        int a = 5;
-        int b = 6;
+	int		numbers[] = {1, 2, 3, 4, 5};
+	char	text[] = "hello";
+	std::string	words[] = {"one", "two", "three"};
 
-        print(a, b);
-    }
-    {
-        float a = 5.4f;
-        float b = 3.7f;
-
-        print(a, b);
-    }
-    {
-        std::string a = "string a";
-        std::string b = "string b";
-
-        print(a, b);
-    }
-    return (0);
+	return (0);
 }

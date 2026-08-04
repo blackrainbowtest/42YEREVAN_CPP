@@ -13,12 +13,12 @@
 #ifndef ITER_HPP
 # define ITER_HPP
 
-# include <string>
+# include <cstddef>
 
 template <typename T>
 void	iter(T *array, size_t length, void (*function)(T &))
 {
-	size_t	i;
+	std::size_t	i;
 
 	i = 0;
 	while (i < length)
@@ -31,7 +31,7 @@ void	iter(T *array, size_t length, void (*function)(T &))
 template <typename T>
 void	iter(const T *array, size_t length, void (*function)(const T &))
 {
-	size_t	i;
+	std::size_t	i;
 
 	i = 0;
 	while (i < length)
