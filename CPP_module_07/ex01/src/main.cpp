@@ -37,5 +37,19 @@ int main()
 	char	text[] = "hello";
 	std::string	words[] = {"one", "two", "three"};
 
+		std::cout << "Numbers:" << std::endl;
+	iter(numbers, 5, printElement<int>);
+
+	iter(numbers, 5, incrementElement<int>);
+
+	std::cout << "Incremented numbers:" << std::endl;
+	iter(numbers, 5, printElement<int>);
+
+	iter(text, sizeof(text) / sizeof(text[0]) - 1, ft_toupper);
+
+	std::cout << "Uppercase text: " << text << std::endl;
+
+	std::cout << "Words:" << std::endl;
+	iter(words, 3, printElement<std::string>);
 	return (0);
 }
