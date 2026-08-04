@@ -1,36 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Whatever.hpp                                       :+:      :+:    :+:   */
+/*   iter.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/23 09:50:45 by aramarak          #+#    #+#             */
-/*   Updated: 2026/07/23 10:57:10 by aramarak         ###   ########.fr       */
+/*   Created: 2026/08/04 09:58:21 by aramarak          #+#    #+#             */
+/*   Updated: 2026/08/04 10:59:45 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WHATEVER_HPP
-# define WHATEVER_HPP
+#ifndef ITER_HPP
+# define ITER_HPP
 
-template < typename T > // can define like template < class T > // too
-const T &max(const T &x, const T &y)
+# include <string>
+
+template <typename T>
+void	iter(T *array, size_t length, void (*function)(T &))
 {
-    return (x > y ? x : y);
+	size_t	i;
+
+	i = 0;
+	while (i < length)
+	{
+		function(array[i]);
+		i++;
+	}
 }
 
-template < typename T >
-const T &min(const T &x, const T &y)
+template <typename T>
+void	iter(const T *array, size_t length, void (*function)(const T &))
 {
-    return (x < y ? x : y);
+	size_t	i;
+
+	i = 0;
+	while (i < length)
+	{
+		function(array[i]);
+		i++;
+	}
 }
 
-template < typename T >
-void    swap(T &x, T &y)
-{
-    T temp = x;
-    x = y;
-    y = temp;
-}
-
-#endif // WHATEVER
+#endif // ITER

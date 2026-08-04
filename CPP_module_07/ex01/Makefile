@@ -19,7 +19,7 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-SRC_FILES	=	main.cpp
+SRC_FILES	=	main.cpp ScalarConverter.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
