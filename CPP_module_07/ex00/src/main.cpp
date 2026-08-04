@@ -13,36 +13,35 @@
 #include "whatever.hpp"
 #include <iostream>
 
-template < typename I >
+template < typename T >
 
-void    print(I &a, I &b)
+void	print(T &a, T &b)
 {
-        std::cout << "The max of " << "a: " << a << " and b: " << b
-            << " is: " << max(a, b) << std::endl;
-        std::cout << "The min of " << "a: " << a << " and b: " << b
-            << " is: " << min(a, b) << std::endl;
-        std::cout << "Before swaping a: " << a << ", b: " << b << std::endl;
-        swap(a, b);
-        std::cout << "After swaping a: " << a << ", b: " << b << std::endl;
+    std::cout << "The max of a: " << a << " and b: " << b
+        << " is: " << max(a, b) << std::endl;
+    std::cout << "The min of a: " << a << " and b: " << b
+        << " is: " << min(a, b) << std::endl;
+    std::cout << "Before swapping a: " << a
+        << ", b: " << b << std::endl;
+    swap(a, b);
+    std::cout << "After swapping a: " << a
+        << ", b: " << b << std::endl;
 }
 
 int main()
 {
-    // int
     {
         int a = 5;
         int b = 6;
 
         print(a, b);
     }
-    // float
     {
         float a = 5.4f;
         float b = 3.7f;
 
         print(a, b);
     }
-    // string
     {
         std::string a = "string a";
         std::string b = "string b";

@@ -19,16 +19,16 @@ const T &max(const T &x, const T &y)
     return (x > y ? x : y);
 }
 
-template < typename Y >
-const Y &min(const Y &x, const Y &y)
+template < typename T >
+const T &min(const T &x, const T &y)
 {
     return (x < y ? x : y);
 }
 
-template < typename U >
-void    swap(U &x, U &y)
+template < typename T >
+void    swap(T &x, T &y)
 {
-    U temp = x;
+    T temp = x;
     x = y;
     y = temp;
 }
