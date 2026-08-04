@@ -22,7 +22,7 @@ const T &max(const T &x, const T &y)
 template < typename Y >
 const Y &min(const Y &x, const Y &y)
 {
-    return (x <= y ? x : y);
+    return (x < y ? x : y);
 }
 
 template < typename U >
