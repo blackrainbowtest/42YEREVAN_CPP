@@ -1,0 +1,37 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Array.hpp                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/08/04 09:58:21 by aramarak          #+#    #+#             */
+/*   Updated: 2026/08/04 10:59:45 by aramarak         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef ARRAY_HPP
+# define ARRAY_HPP
+
+# include <exception>
+
+template< typename T>
+class Array
+{
+    /** */
+    private:
+    T               *_array;
+    unsigned int    _size;
+    /** */
+    public:
+    Array() _size(0);
+    /** Exception */
+};
+
+template< typename T>
+const char *Array<T>::InvalidIndexException::what() const throw()
+{
+    return ("Error: out-of-bounds invalid index.");
+}
+
+#endif // ARRAY
