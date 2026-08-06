@@ -24,9 +24,9 @@ class Array
     unsigned int    _size;
     /** */
     public:
-        Array() _size(0)
+        Array(): _array(NULL), _size(0)
         {
-
+            this->_array = new T[this->size];
         }
 
         Array(unsigned int size): _size(size)
@@ -34,7 +34,7 @@ class Array
 
         }
 
-        Array(const Array &src): _size(src._size())
+        Array(const Array &src): _size(src._size)
         {
 
         }
