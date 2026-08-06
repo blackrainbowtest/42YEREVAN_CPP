@@ -58,7 +58,7 @@ class Array
             public:
                 virtual const char *what() const throw();
         }
-
+    /** Getter - Setter */
         unsigned int size() const
         {
             return (this->_size);
