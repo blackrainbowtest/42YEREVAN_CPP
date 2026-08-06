@@ -55,12 +55,13 @@ class Array
     /** Exception */
         class	InvalidIndexException : public std::exception
         {
-
+            public:
+                virtual const char *what() const throw();
         }
 
         unsigned int size() const
         {
-            
+            return (this->_size);
         }
 };
 
