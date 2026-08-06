@@ -24,8 +24,44 @@ class Array
     unsigned int    _size;
     /** */
     public:
-    Array() _size(0);
+        Array() _size(0)
+        {
+
+        }
+
+        Array(unsigned int size): _size(size)
+        {
+
+        }
+
+        Array(const Array &src): _size(src._size())
+        {
+
+        }
+        ~Array()
+        {
+
+        }
+
+        Array &operator=(const Array &src)
+        {
+
+        }
+
+        T &operator[]( unsigned int index )
+        {
+
+        }
     /** Exception */
+        class	InvalidIndexException : public std::exception
+        {
+
+        }
+
+        unsigned int size() const
+        {
+            
+        }
 };
 
 template< typename T>
