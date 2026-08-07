@@ -58,7 +58,12 @@ class Array
 
         T &operator[]( unsigned int index )
         {
-
+            if (index >= this->_size || this->_array == NULL)
+            {
+                std::cout << "you try to get " << index << " index.";
+                throw Array<T>::InvalidIndexException();
+            }
+            return (this->_array[index]);
         }
     /** Exception */
         class	InvalidIndexException : public std::exception
