@@ -48,12 +48,22 @@ class Array
 
         ~Array()
         {
-            delete[] _array;
+            delete[] this->_array;
         }
 
         Array &operator=(const Array &src)
         {
+            if (this == &src)
+                return (*this);
 
+            delete[] this->_array;
+            this->_size = src.size();
+            this->_array = new T[ this->_size]();
+            for (unsigned int i = 0; i < this->size(); i++)
+            {
+                this->_array[i] == src._array[i];
+            }
+            return (*this);
         }
 
         T &operator[]( unsigned int index )
