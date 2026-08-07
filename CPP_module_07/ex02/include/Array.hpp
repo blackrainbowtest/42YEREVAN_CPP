@@ -38,7 +38,7 @@ class Array
 
             if (this->_size == 0)
                 return ;
-            this->_array = new T[this->_size];
+            this->_array = new T[this->_size]();
             while (i < this->_size)
             {
                 this->_array[i] = src._array[i];
