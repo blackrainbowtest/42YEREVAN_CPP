@@ -26,21 +26,29 @@ class Array
     public:
         Array(): _array(NULL), _size(0)
         {
-            this->_array = new T[this->size];
         }
 
-        Array(unsigned int size): _size(size)
+        Array(unsigned int size): _array(new T[size]()), _size(size)
         {
-
         }
 
-        Array(const Array &src): _size(src._size)
+        Array(const Array &src): _array(NULL), _size(src._size)
         {
+            unsigned int    i = 0;
 
+            if (this->_size == 0)
+                return ;
+            this->_array = new T[this->_size];
+            while (i < this->_size)
+            {
+                this->_array[i] = src._array[i];
+                ++i;
+            }
         }
+
         ~Array()
         {
-
+            delete[] _array;
         }
 
         Array &operator=(const Array &src)
@@ -57,7 +65,7 @@ class Array
         {
             public:
                 virtual const char *what() const throw();
-        }
+        };
     /** Getter - Setter */
         unsigned int size() const
         {
