@@ -61,7 +61,7 @@ class Array
             this->_array = new T[ this->_size]();
             for (unsigned int i = 0; i < this->size(); i++)
             {
-                this->_array[i] == src._array[i];
+                this->_array[i] = src._array[i];
             }
             return (*this);
         }
@@ -88,7 +88,7 @@ class Array
         }
 };
 
-template< typename T>
+template <typename T>
 const char *Array<T>::InvalidIndexException::what() const throw()
 {
     return ("Error: out-of-bounds invalid index.");
