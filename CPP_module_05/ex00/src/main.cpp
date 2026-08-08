@@ -6,7 +6,7 @@
 /*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/05/24 15:25:11 by aramarak          #+#    #+#             */
-/*   Updated: 2026/05/25 09:28:41 by aramarak         ###   ########.fr       */
+/*   Updated: 2026/08/08 11:49:51 by aramarak         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,9 +170,10 @@ int	main(void)
 	try
 	{
 		Bureaucrat self("Self", 33);
+		Bureaucrat &same = self;
 
 		std::cout << self << std::endl;
-		self = self;
+		self = same;
 		std::cout << self << std::endl;
 	}
 	catch (const std::exception &e)
