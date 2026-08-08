@@ -67,8 +67,8 @@ void ShrubberyCreationForm::execute(Bureaucrat const &executor) const
 	outfile << "     /\\\\*\\\\" << std::endl;
 	outfile << "    /\\\\O\\\\*\\\\" << std::endl;
 	outfile << "   /*/\\\\/\\\\/\\\\" << std::endl;
-	outfile << "      ||" << std::endl;
-	outfile << "      ||" << std::endl;
+	outfile << "       ||" << std::endl;
+	outfile << "       ||" << std::endl;
 
 	outfile.close();
 }
