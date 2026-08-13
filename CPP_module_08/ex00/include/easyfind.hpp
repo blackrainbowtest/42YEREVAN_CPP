@@ -27,24 +27,4 @@ class NotFoundException: public std::exception
         }
 }
 
-template < typename T> // can define like template < class T > // too
-const T &max(const T &x, const T &y)
-{
-    return (x > y ? x : y);
-}
-
-template < typename T>
-const T &min(const T &x, const T &y)
-{
-    return (x < y ? x : y);
-}
-
-template < typename T>
-void    swap(T &x, T &y)
-{
-    T temp = x;
-    x = y;
-    y = temp;
-}
-
 #endif // EASYFIND
