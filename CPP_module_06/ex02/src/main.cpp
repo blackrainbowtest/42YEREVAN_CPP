@@ -10,32 +10,60 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Serializer.hpp"
-#include <iostream>
+#include "Base.hpp"
+#include "A.hpp"
+#include "B.hpp"
+#include "C.hpp"
+
+#include <cstdlib>
+#include <cstdio>
+
 // #include "color_palletre.hpp"
 
-int	main(void)
+static Base *generate(void)
 {
-	Data		data;
-	Data		*result;
-	uintptr_t	raw;
+	switch (rand() % 3)
+	{
+	case 0:
+		return (new A());
+		break;
+	case 1:
+		return (new B());
+		break;
+	case 2:
+		return (new C());
+		break;
+	default:
+		perror("Something went wrong with the random generator");
+		return (NULL);
+	}
+}
 
-	data.name = "mr. Split";
-	data.age = 30;
-	data.next = NULL;
+static int i = 0;
+static std::string classes[] = {"A", "B", "C"};
 
-	raw = Serializer::serialize(&data);
-	result = Serializer::deserialize(raw);
+static void identify(Base &Test)
+{
+	//TODO: Use dynamic_cast to identify the type of the object
+}
 
-	std::cout << "Original address:     " << &data << std::endl;
-	std::cout << "Deserialized address: " << result << std::endl;
-	std::cout << "Raw value:            " << raw << std::endl;
-	std::cout << "Data:" << std::endl;
-	std::cout << *result << std::endl;
 
-	if (result == &data)
-		std::cout << "Serialization successful" << std::endl;
-	else
-		std::cout << "Serialization failed" << std::endl;
+int main()
+{
+	srand(time(NULL));
+	for (int j = 0; j < 5; j++)
+	{
+		Base *Test = generate();
+		if (Test == NULL)
+			return (1);
+		else
+		{
+			identify(Test);
+			identify(*Test);
+			delete (Test);
+
+			std::cout << std::endl;
+		}
+	}
 	return (0);
 }

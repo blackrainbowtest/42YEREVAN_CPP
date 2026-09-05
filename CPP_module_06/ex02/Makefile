@@ -19,7 +19,7 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-SRC_FILES	=	main.cpp Serializer.cpp
+SRC_FILES	=	A.cpp B.cpp Base.cpp C.cpp main.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
