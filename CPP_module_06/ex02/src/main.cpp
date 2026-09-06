@@ -44,6 +44,8 @@ static std::string classes[] = {"A", "B", "C"};
 
 static void identify(Base &Test)
 {
+	
+	
 	//TODO: Use dynamic_cast to identify the type of the object
 }
 
