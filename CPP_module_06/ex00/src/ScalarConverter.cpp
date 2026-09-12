@@ -452,7 +452,7 @@ void ScalarConverter::convertFromDouble(double value)
 	{
 		c = static_cast<char>(value);
 		if (!std::isprint(static_cast<unsigned char>(c)))
-			std::cout << "char: Non displayable";
+			std::cout << "char: Non displayable" << std::endl;
 		else
 			std::cout << "char: '" << c << "'" << std::endl;
 	}
