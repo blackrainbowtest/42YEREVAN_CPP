@@ -12,7 +12,6 @@
 
 #include <iostream>
 #include <string>
-#include "color_palletre.hpp"
 #include "Serializer.hpp"
 #include <iostream>
 
@@ -22,7 +21,7 @@
 int	main(void)
 {
 	Data		data;
-	Data		*res;
+	Data		*result;
 	uintptr_t	raw;
 
 	data.name = "mr. Split";
@@ -42,7 +41,5 @@ int	main(void)
 		std::cout << "Serialization successful" << std::endl;
 	else
 		std::cout << "Serialization failed" << std::endl;
-	return (0);
-	
 	return (EXIT_SUCCESS);
 }
