@@ -18,8 +18,6 @@
 #include <cstdlib>
 #include <cstdio>
 
-// #include "color_palletre.hpp"
-
 static Base *generate(void)
 {
 	switch (rand() % 3)
@@ -37,6 +35,24 @@ static Base *generate(void)
 		perror("Something went wrong with the random generator");
 		return (NULL);
 	}
+}
+
+static void identify(Base *Test)
+{
+	if (dynamic_cast<A *>(Test))
+	{
+		std::cout << "identified type is A" << std::endl;
+	}
+	else if (dynamic_cast<B *>(Test))
+	{
+		std::cout << "identified type is B" << std::endl;
+	}
+	else if (dynamic_cast<C *>(test))
+	{
+		std::cout << "identified type is C" << std::endl;
+	}
+	else
+		std::cout << "unknown type" << std::endl;
 }
 
 static int i = 0;
