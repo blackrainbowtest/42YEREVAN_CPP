@@ -57,11 +57,16 @@ class Array
                 return (*this);
 
             delete[] this->_array;
+
             this->_size = src.size();
-            this->_array = new T[ this->_size]();
-            for (unsigned int i = 0; i < this->size(); i++)
+	        this->_array = NULL;
+
+            if (this->_size != 0)
             {
-                this->_array[i] = src._array[i];
+                this->_array = new T[this->_size]();
+
+                for (unsigned int i = 0; i < this->_size; i++)
+                    this->_array[i] = src._array[i];
             }
             return (*this);
         }
