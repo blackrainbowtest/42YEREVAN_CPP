@@ -1,23 +1,30 @@
-#include "whatever.hpp"
 #include <iostream>
 #include <string>
+#include <iomanip>
+
+#include "whatever.hpp"
+#include "color_palletre.hpp"
+
+#define EXIT_SUCCESS 0
 
 template < typename T >
 
 void	print(T &a, T &b)
 {
-    std::cout << "The max of a: " << a << " and b: " << b
-        << " is: " << ::max(a, b) << std::endl;
-    std::cout << "The min of a: " << a << " and b: " << b
-        << " is: " << ::min(a, b) << std::endl;
-    std::cout << "Before swapping a: " << a
-        << ", b: " << b << std::endl;
+    std::cout << CYAN << "The max of a: " << GREEN << a << CYAN << " and b: " << GREEN <<  b
+        << CYAN << " is: " << GREEN << ::max(a, b) << RESET << std::endl;
+    std::cout << CYAN << "The min of a: " << GREEN << a << CYAN << " and b: " << GREEN << b
+        << CYAN << " is: " << GREEN << ::min(a, b) << RESET << std::endl;
+
+    std::cout << CYAN << "Before swapping: a: " << GREEN << a
+        << CYAN << ", b: " << GREEN << b << RESET << std::endl;
     ::swap(a, b);
-    std::cout << "After swapping a: " << a
-        << ", b: " << b << std::endl;
+    std::cout << CYAN << "After swapping: a: " << GREEN << a
+        << CYAN << ", b: " << GREEN << b << RESET << std::endl;
+    std::cout << std::setw(60) << std::setfill('-') << "" << std::endl;
 }
 
-int main()
+int main(void)
 {
     {
         int a = 5;
@@ -37,5 +44,5 @@ int main()
 
         print(a, b);
     }
-    return (0);
+    return (EXIT_SUCCESS);
 }

@@ -26,7 +26,9 @@ class Array
 
             if (this->_size == 0)
                 return ;
+
             this->_array = new T[this->_size]();
+
             while (i < this->_size)
             {
                 this->_array[i] = src._array[i];
@@ -68,12 +70,14 @@ class Array
             }
             return (this->_array[index]);
         }
+
     /** Exception */
         class	InvalidIndexException : public std::exception
         {
             public:
                 virtual const char *what() const throw();
         };
+
     /** Getter - Setter */
         unsigned int size() const
         {
