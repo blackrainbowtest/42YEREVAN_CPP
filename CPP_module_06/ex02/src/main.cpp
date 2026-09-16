@@ -1,11 +1,15 @@
+#include <cstdlib>
+#include <cstdio>
+
 #include "Base.hpp"
 #include "A.hpp"
 #include "B.hpp"
 #include "C.hpp"
 
-#include <cstdlib>
-#include <cstdio>
 #include "color_palletre.hpp"
+
+#define EXIT_SUCCESS 0
+#define EXIT_FAILURE 1
 
 static Base *generate(void)
 {
@@ -77,11 +81,12 @@ static void identify(Base &Test)
 int main()
 {
 	srand(time(NULL));
+
 	for (int j = 0; j < 5; j++)
 	{
 		Base *Test = generate();
 		if (Test == NULL)
-			return (1);
+			return (EXIT_FAILURE);
 		else
 		{
 			identify(Test);
@@ -91,5 +96,6 @@ int main()
 			std::cout << std::endl;
 		}
 	}
-	return (0);
+
+	return (EXIT_SUCCESS);
 }
