@@ -7,12 +7,12 @@ template < typename T >
 void	print(T &a, T &b)
 {
     std::cout << "The max of a: " << a << " and b: " << b
-        << " is: " << max(a, b) << std::endl;
+        << " is: " << ::max(a, b) << std::endl;
     std::cout << "The min of a: " << a << " and b: " << b
-        << " is: " << min(a, b) << std::endl;
+        << " is: " << ::min(a, b) << std::endl;
     std::cout << "Before swapping a: " << a
         << ", b: " << b << std::endl;
-    swap(a, b);
+    ::swap(a, b);
     std::cout << "After swapping a: " << a
         << ", b: " << b << std::endl;
 }

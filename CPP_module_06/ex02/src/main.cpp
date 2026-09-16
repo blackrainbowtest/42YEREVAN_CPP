@@ -5,8 +5,7 @@
 
 #include <cstdlib>
 #include <cstdio>
-
-// #include "color_palletre.hpp"
+#include "color_palletre.hpp"
 
 static Base *generate(void)
 {
@@ -27,14 +26,51 @@ static Base *generate(void)
 	}
 }
 
-static int i = 0;
-static std::string classes[] = {"A", "B", "C"};
+static void identify(Base *Test)
+{
+	if (dynamic_cast<A *>(Test))
+	{
+		std::cout << CYAN << "pointer" << RESET << " identified type is A" << std::endl;
+	}
+	else if (dynamic_cast<B *>(Test))
+	{
+		std::cout << CYAN << "pointer" << RESET << " identified type is B" << std::endl;
+	}
+	else if (dynamic_cast<C *>(Test))
+	{
+		std::cout << CYAN << "pointer" << RESET << " identified type is C" << std::endl;
+	}
+	else
+		std::cout << "unknown type" << std::endl;
+}
 
 static void identify(Base &Test)
 {
-	
-	
-	//TODO: Use dynamic_cast to identify the type of the object
+	try
+	{
+		(void)dynamic_cast<A &>(Test);
+		std::cout << MAGENTA << "reference" << RESET << " identified type is A" << std::endl;
+		return ;
+	}
+	catch(...)
+	{}
+	try
+	{
+		(void)dynamic_cast<B &>(Test);
+		std::cout << MAGENTA << "reference" << RESET << " identified type is B" << std::endl;
+		return ;
+	}
+	catch(...)
+	{}
+	try
+	{
+		(void)dynamic_cast<C &>(Test);
+		std::cout << MAGENTA << "reference" << RESET << " identified type is C" << std::endl;
+		return ;
+	}
+	catch(...)
+	{}
+	std::cout << "unknown type" << std::endl;
 }
 
 
