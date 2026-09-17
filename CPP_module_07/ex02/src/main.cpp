@@ -49,6 +49,21 @@ void ft_wr_array()
 
 }
 
+void ft_deep_copy_array()
+{
+	Array<int> a(3);
+
+	a[0] = 10;
+
+	Array<int> b(a);
+	b[0] = 41;
+
+	std::cout << GREEN << "DEEP COPY ARRAY" << std::setw(15) << std::setfill('-') << RESET << std::endl;
+	std::cout << CYAN << "a[0]" << RESET << " = " << RESET << a[0] << std::endl;
+	std::cout << CYAN << "b[0]" << RESET << " = " << RESET << b[0] << std::endl;
+
+}
+
 int main()
 {
 	srand(time(NULL));
@@ -58,6 +73,8 @@ int main()
 	ft_sized_array();
 	std::cout << std::endl;
 	ft_wr_array();
+	std::cout << std::endl;
+	ft_deep_copy_array();
 
 
 	Array<int> numbers(MAX_SIZE);
