@@ -46,7 +46,6 @@ void ft_wr_array()
 	std::cout << GREEN << "WR ARRAY" << std::setw(15) << std::setfill('-') << RESET << std::endl;
 	std::cout << CYAN << "a[0]" << RESET << " = " << RESET << a[0] << std::endl;
 	std::cout << CYAN << "a[1]" << RESET << " = " << RESET << a[1] << std::endl;
-
 }
 
 void ft_deep_copy_array()
@@ -61,7 +60,6 @@ void ft_deep_copy_array()
 	std::cout << GREEN << "DEEP COPY ARRAY" << std::setw(15) << std::setfill('-') << RESET << std::endl;
 	std::cout << CYAN << "a[0]" << RESET << " = " << RESET << a[0] << std::endl;
 	std::cout << CYAN << "b[0]" << RESET << " = " << RESET << b[0] << std::endl;
-
 }
 
 int main()
