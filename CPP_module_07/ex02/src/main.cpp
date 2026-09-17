@@ -23,8 +23,7 @@
 void ft_empty_array()
 {
 	Array<int> a;
-	std::cout << GREEN << std::setw(15) << std::setfill('-') 
-			<< "EMPTY ARRAY" << std::setw(15) 
+	std::cout << GREEN << "EMPTY ARRAY" << std::setw(15) 
 			<< std::setfill('-') << RESET << std::endl;
 	std::cout << "a.size() = " << a.size() << std::endl;
 }
@@ -32,10 +31,22 @@ void ft_empty_array()
 void ft_sized_array()
 {
 	Array<int> a(5);
-	std::cout << GREEN << std::setw(15) << std::setfill('-') 
-			<< "5 ELEMENT ARRAY" << std::setw(15) 
+	std::cout << GREEN << "5 ELEMENT ARRAY" << std::setw(15) 
 			<< std::setfill('-') << RESET << std::endl;
 	std::cout << "a.size() = " << a.size() << std::endl;
+}
+
+void ft_wr_array()
+{
+	Array<int> a(5);
+
+	a[0] = 42;
+	a[1] = 21;
+
+	std::cout << GREEN << "WR ARRAY" << std::setw(15) << std::setfill('-') << RESET << std::endl;
+	std::cout << CYAN << "a[0]" << RESET << " = " << RESET << a[0] << std::endl;
+	std::cout << CYAN << "a[1]" << RESET << " = " << RESET << a[1] << std::endl;
+
 }
 
 int main()
@@ -45,6 +56,8 @@ int main()
 	ft_empty_array();
 	std::cout << std::endl;
 	ft_sized_array();
+	std::cout << std::endl;
+	ft_wr_array();
 
 
 	Array<int> numbers(MAX_SIZE);
