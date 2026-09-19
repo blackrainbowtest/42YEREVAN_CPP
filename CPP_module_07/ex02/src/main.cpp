@@ -1,95 +1,56 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: aramarak <aramarak@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/12 18:56:49 by aramarak          #+#    #+#             */
-/*   Updated: 2026/09/12 18:57:08 by aramarak         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <iostream>
 #include <cstdlib>
-#include <iomanip>
+#include <ctime>
 
 #include "Array.hpp"
-#include "color_palletre.hpp"
 
-#define EXIT_SUCCESS 0
-#define MAX_SIZE 120
-
-void ft_empty_array()
+#define MAX_VAL 750
+int main(int, char**)
 {
-	Array<int> a;
-	std::cout << GREEN << "EMPTY ARRAY" << std::setw(15) 
-			<< std::setfill('-') << RESET << std::endl;
-	std::cout << "a.size() = " << a.size() << std::endl;
-}
+    Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+    //SCOPE
+    {
+        Array<int> tmp = numbers;
+        Array<int> test(tmp);
+    }
 
-void ft_sized_array()
-{
-	Array<int> a(5);
-	std::cout << GREEN << "5 ELEMENT ARRAY" << std::setw(15) 
-			<< std::setfill('-') << RESET << std::endl;
-	std::cout << "a.size() = " << a.size() << std::endl;
-}
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != numbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return 1;
+        }
+    }
+    try
+    {
+        numbers[-2] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    try
+    {
+        numbers[MAX_VAL] = 0;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
 
-void ft_wr_array()
-{
-	Array<int> a(5);
-
-	a[0] = 42;
-	a[1] = 21;
-
-	std::cout << GREEN << "WR ARRAY" << std::setw(15) << std::setfill('-') << RESET << std::endl;
-	std::cout << CYAN << "a[0]" << RESET << " = " << RESET << a[0] << std::endl;
-	std::cout << CYAN << "a[1]" << RESET << " = " << RESET << a[1] << std::endl;
-}
-
-void ft_deep_copy_array()
-{
-	Array<int> a(3);
-
-	a[0] = 10;
-
-	Array<int> b(a);
-	b[0] = 41;
-
-	std::cout << GREEN << "DEEP COPY ARRAY" << std::setw(15) << std::setfill('-') << RESET << std::endl;
-	std::cout << CYAN << "a[0]" << RESET << " = " << RESET << a[0] << std::endl;
-	std::cout << CYAN << "b[0]" << RESET << " = " << RESET << b[0] << std::endl;
-}
-
-int main()
-{
-	srand(time(NULL));
-
-	ft_empty_array();
-	std::cout << std::endl;
-	ft_sized_array();
-	std::cout << std::endl;
-	ft_wr_array();
-	std::cout << std::endl;
-	ft_deep_copy_array();
-
-
-	Array<int> numbers(MAX_SIZE);
-
-	int *tmp = new int[MAX_SIZE];
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		int value = rand() % 100; 
-		numbers[i] = value;
-		tmp[i] = value;
-	}
-
-	{
-
-	}
-
-	delete [] tmp;
-
-	return (EXIT_SUCCESS);
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        numbers[i] = rand();
+    }
+    delete [] mirror;//
+    return 0;
 }
