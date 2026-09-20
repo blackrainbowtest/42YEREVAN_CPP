@@ -1,41 +1,40 @@
-#include "whatever.hpp"
-#include <iostream>
-#include <string>
-
-template < typename T >
-
-void	print(T &a, T &b)
-{
-    std::cout << "The max of a: " << a << " and b: " << b
-        << " is: " << max(a, b) << std::endl;
-    std::cout << "The min of a: " << a << " and b: " << b
-        << " is: " << min(a, b) << std::endl;
-    std::cout << "Before swapping a: " << a
-        << ", b: " << b << std::endl;
-    swap(a, b);
-    std::cout << "After swapping a: " << a
-        << ", b: " << b << std::endl;
-}
+#include "easyfind.hpp"
+#include <list>
 
 int main()
 {
-    {
-        int a = 5;
-        int b = 6;
+	std::list<int> test;
+	test.push_back(668);
+	test.push_back(669);
+	test.push_back(670);
 
-        print(a, b);
-    }
-    {
-        float a = 5.4f;
-        float b = 3.7f;
+	std::list<int>::const_iterator	it = test.end();
 
-        print(a, b);
-    }
-    {
-        std::string a = "string a";
-        std::string b = "string b";
+	try
+	{
+		it = ::easyfind(test, 668);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 
-        print(a, b);
-    }
-    return (0);
+	if (it != test.end())
+		std::cout << *it << " found" << std::endl;
+
+	it = test.end();
+
+	try
+	{
+		it = ::easyfind(test, 111);
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	if (it != test.end())
+		std::cout << *it << " found" << std::endl;
+
+	return (0);
 }
