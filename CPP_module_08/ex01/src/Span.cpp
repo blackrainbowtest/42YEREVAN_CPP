@@ -33,6 +33,22 @@ Span	&Span::operator=(const Span &src)
 }
 
 // Public Methods
+void	Span::addNumber(int number)
+{
+	if (this->_storage.size() >= this->_size)
+		throw Span::ArrayFullException();
+
+	this->_storage.push_back(number);
+}
+
+void	Span::addNumber(std::vector<int>::iterator begin,
+					std::vector<int>::iterator end)
+{
+	if (this->_storage.size() + std::distance(begin, end) > this->_size)
+		throw Span::ArrayFullException();
+
+	this->_storage.insert(this->_storage.end(), begin, end);
+}
 
 // Getter
 unsigned int	Span::getSize() const
