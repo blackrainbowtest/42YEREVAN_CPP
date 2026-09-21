@@ -33,6 +33,7 @@ Span	&Span::operator=(const Span &src)
 }
 
 // Public Methods
+
 void	Span::addNumber(int number)
 {
 	if (this->_storage.size() >= this->_size)
@@ -41,6 +42,11 @@ void	Span::addNumber(int number)
 	this->_storage.push_back(number);
 }
 
+/*
+ * Adds all numbers from the iterator range [begin, end).
+ * std::distance() returns the number of elements in the range.
+ * If the entire range does not fit into Span, an exception is thrown.
+ */
 void	Span::addNumber(std::vector<int>::iterator begin,
 					std::vector<int>::iterator end)
 {
