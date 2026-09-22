@@ -64,7 +64,19 @@ void	Span::addNumber(std::vector<int>::iterator begin,
  */
 unsigned int	Span::shortestSpan() const
 {
-	// ...
+	if (this->_storage.size() < 2)
+		throw Span::ComparisonInvalidException();
+	
+	std::vector<int>	sorted(this->_storage);
+	std::sort(sorted.begin(), sorted.end());
+	unsigned int	shortest = static_cast<unsigned int>(sorted[1] - sorted[0]);
+	for (size_t i = 0; i < sorted.size() - 1; ++i)
+	{
+		unsigned int	diff = static_cast<unsigned int>(sorted[i + 1] - sorted[i]);
+		if (diff < shortest)
+			shortest = diff;
+	}
+	return (shortest);
 }
 
 /*
