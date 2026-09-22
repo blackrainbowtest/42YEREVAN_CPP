@@ -85,7 +85,12 @@ unsigned int	Span::shortestSpan() const
  */
 unsigned int	Span::longestSpan() const
 {
-	// ...
+	if (this->_storage.size() < 2)
+		throw Span::ComparisonInvalidException();
+	
+	int	min = *std::min_element(this->_storage.begin(), this->_storage.end());
+	int	max = *std::max_element(this->_storage.begin(), this->_storage.end());
+	return (static_cast<unsigned int>(max - min));
 }
 
 // Getter
