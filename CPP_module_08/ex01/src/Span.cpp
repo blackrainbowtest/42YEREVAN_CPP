@@ -50,10 +50,30 @@ void	Span::addNumber(int number)
 void	Span::addNumber(std::vector<int>::iterator begin,
 					std::vector<int>::iterator end)
 {
-	if (this->_storage.size() + std::distance(begin, end) > this->_size)
-		throw Span::ArrayFullException();
+	unsigned int	range;
 
+	range = static_cast<unsigned int>(std::distance(begin, end));
+	if (this->_storage.size() + range > this->_size)
+		throw Span::ArrayFullException();
 	this->_storage.insert(this->_storage.end(), begin, end);
+}
+
+/*
+ * Finds the smallest difference between any two stored numbers.
+ * At least two numbers are required.
+ */
+unsigned int	Span::shortestSpan() const
+{
+	// ...
+}
+
+/*
+ * Finds the largest difference between any two stored numbers.
+ * At least two numbers are required.
+ */
+unsigned int	Span::longestSpan() const
+{
+	// ...
 }
 
 // Getter
