@@ -1,4 +1,4 @@
-NAME      = easyfind
+NAME      = span
 
 CXX       = c++
 CXXFLAGS  = -Wall -Wextra -Werror -std=c++98
