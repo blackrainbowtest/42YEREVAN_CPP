@@ -9,9 +9,9 @@ template <typename T>
 class MutantStack : public std::stack<T>
 {
 	public:
-		typedef std::stack<T>						stack_type;
-		typedef typename stack_type::container_type	container_type;
-		typedef typename container_type::iterator		iterator;
+		typedef std::stack<T>					stack;
+		typedef typename stack::container_type	container;
+		typedef typename container::iterator	iterator;
 
 		MutantStack(void) : stack()
 		{
@@ -28,10 +28,10 @@ class MutantStack : public std::stack<T>
 			std::cout << "MutantStack destructor called" << std::endl;
 		}
 
-		stack &operator=(const stack &src)
+		MutantStack &operator=(const MutantStack &src)
 		{
-			if (*this != src)
-				*this = src;
+			if (this != &src)
+				stack::operator=(src);
 			return (*this);
 		}
 
