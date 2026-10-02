@@ -1,44 +1,13 @@
-#include "easyfind.hpp"
-#include <list>
+#include "BitcoinExchange.hpp"
 
-int main()
+int main(int argc, char **argv)
 {
-	std::list<int> test;
-	test.push_back(668);
-	test.push_back(669);
-	test.push_back(670);
-
-	std::cout << GREEN << "Pushed three numbers: 668, 669, 670" << RESET << std::endl;
-
-	std::list<int>::const_iterator	it = test.end();
-
-	try
-	{
-		std::cout << BLUE << "Try find 668:\t" << RESET;
-		it = ::easyfind(test, 668);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	if (it != test.end())
-		std::cout << *it << " found" << std::endl;
-
-	it = test.end();
-
-	try
-	{
-		std::cout << RED << "Try find 111:\t" << RESET;
-		it = ::easyfind(test, 111);
-	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << std::endl;
-	}
-
-	if (it != test.end())
-		std::cout << *it << " found" << std::endl;
-
-	return (0);
+    if (argc == 2)
+    {
+        BitcoinExchange db;
+        db.readDb();
+        db.readParse(argv[1]);
+    }
+    else
+        std::cout << "Error: could not open file." << std::endl;
 }

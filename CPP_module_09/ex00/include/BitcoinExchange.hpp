@@ -17,5 +17,8 @@
 #define RESET		"\033[0m"
 
 
+class BitcoinExchange
+{
 
+};
 #endif // BITCOIN_EXCHANGE_HPP
