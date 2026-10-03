@@ -16,9 +16,31 @@
 
 #define RESET		"\033[0m"
 
+# include <iostream>
+# include <fstream>
+# include <map>
+# include <cstdlib>
+# include <string>
+# include <ctime>
+# include <cstring>
 
 class BitcoinExchange
 {
+	pricvate:
+		std::map<std::string, float> _db;
+	public:
+		BitcoinExchange();
+		BitcoinExchange(const BitcoinExchange &other);
+		BitcoinExchange &operator=(const BitcoinExchange &other);
+		~BitcoinExchange();
 
+		void readDb();
+		void parsePush(const std::string &line);
+		void readParse(const char *file);
+
+		bool checkDate(const std::string &date);
+		float checkValue(const std::string &value);
+		void findValue(const std::string &date, const std::string &value);
 };
+
 #endif // BITCOIN_EXCHANGE_HPP
