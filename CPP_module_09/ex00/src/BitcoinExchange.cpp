@@ -49,17 +49,62 @@ void BitcoinExchange::readDb()
     }
 }
 
-bool BitcoinExchange::checkDate(std::string date)
+bool BitcoinExchange::checkDate(const std::string &date)
+{
+	int year, month, day;
+	struct tm t_date;
+	time_t cal;
+
+	/** 
+		tm_sec   = 0
+		tm_min   = 0
+		tm_hour  = 0
+		tm_mday  = 0
+		tm_mon   = 0
+		tm_year  = 0
+	*/
+	memset(&t_date, 0, sizeof(struct tm));
+
+	if (date.length() != 10)
+        return (false);
+	if (date[4] != '-' || date[7] != '-')
+		return (false);
+	for (size_t i = 0; i < date.length(); i++)
+	{
+		if (i == 4 || i == 7)
+			continue;
+		if (!isdigit(date[i]))
+			return (false);
+	}
+
+	year = atoi(date.substr(0, 4).c_str());
+	month = atoi(date.substr(5, 2).c_str());
+	day = atoi(date.substr(8, 2).c_str());
+
+	if (month < 1 || month > 12)
+		return (false);
+	if (day < 1 || day > 31)
+		return (false);
+	
+	t_date.tm_year = year - 1900;
+	t_date.tm_mon = month - 1;
+	t_date.tm_mday = day;
+	cal = mktime(&t_date);
+
+	if (cal == -1)
+		return (false);
+	if (t_date.tm_year != year - 1900 || t_date.tm_mon != month - 1 || t_date.tm_mday != day)
+		return (false);
+
+	return (true);
+}
+
+float BitcoinExchange::checkValue(const std::string &value)
 {
 
 }
 
-float BitcoinExchange::checkValue(std::string value)
-{
-
-}
-
-void BitcoinExchange::findValue(std::string date, std::string value)
+void BitcoinExchange::findValue(const std::string &date, const std::string &value)
 {
 
 }

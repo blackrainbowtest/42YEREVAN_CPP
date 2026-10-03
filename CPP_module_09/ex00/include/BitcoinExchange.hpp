@@ -22,7 +22,7 @@
 # include <cstdlib>
 # include <string>
 # include <ctime>
-# include <cstring>
+# include <cstring> // memset
 
 class BitcoinExchange
 {
