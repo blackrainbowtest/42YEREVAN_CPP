@@ -99,9 +99,28 @@ bool BitcoinExchange::checkDate(const std::string &date)
 	return (true);
 }
 
+/**
+* @brief Checks if the value is a valid float and returns it.
+* @param value The string representation of the value to check.
+* @return The valid float value.
+*         The value must be a valid float and greater than 0 and less than 1000.
+*/
 float BitcoinExchange::checkValue(const std::string &value)
 {
+	char *end;
+	float val = strtof(value.c_str(), &end); // Convert string to float
 
+	if (*end != '\0' || val < 0 || val > 1000)
+	{
+		std::cerr << "Error: invalid value => " << value << std::endl;
+		return (-1);
+	}
+	if (value[0] == '.')
+	{
+		std::cerr << "Error: invalid value => " << value << std::endl;
+		return (-2);
+	}
+	return (val);
 }
 
 void BitcoinExchange::findValue(const std::string &date, const std::string &value)
