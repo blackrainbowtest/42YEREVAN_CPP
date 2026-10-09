@@ -64,7 +64,6 @@ bool BitcoinExchange::checkDate(const std::string &date)
 		tm_year  = 0
 	*/
 	memset(&t_date, 0, sizeof(struct tm));
-	t_date.tm_isdst = -1;
 
 	if (date.length() != 10)
         return (false);
@@ -74,7 +73,7 @@ bool BitcoinExchange::checkDate(const std::string &date)
 	{
 		if (i == 4 || i == 7)
 			continue;
-		if (!isdigit(static_cast<unsigned char>(date[i])))
+		if (!isdigit(date[i]))
 			return (false);
 	}
 
@@ -108,20 +107,30 @@ bool BitcoinExchange::checkDate(const std::string &date)
 */
 float BitcoinExchange::checkValue(const std::string &value)
 {
-	char *end;
-	float val = strtof(value.c_str(), &end); // Convert string to float
+    char *end;
 
-	if (*end != '\0' || val < 0 || val > 1000)
-	{
-		std::cerr << "Error: invalid value => " << value << std::endl;
-		return (-1);
-	}
-	if (value[0] == '.')
-	{
-		std::cerr << "Error: invalid value => " << value << std::endl;
-		return (-2);
-	}
-	return (val);
+    // catch empty string
+    if (value.empty())
+        return (-1.0f);
+
+    float val = strtof(value.c_str(), &end);
+
+    // catch invalid float values (e.g., "abc", "12.34abc")
+    if (end == value.c_str() || *end != '\0')
+        return (-1.0f);
+
+    // catch NaN (Not a Number) values
+    if (val != val)
+        return (-1.0f);
+
+    // catch infinity values
+    if (val < 0)
+        return (-2.0f);
+
+    if (val > 1000)
+        return (-3.0f);
+
+    return (val);
 }
 
 void BitcoinExchange::findValue(const std::string &date, const std::string &value)
