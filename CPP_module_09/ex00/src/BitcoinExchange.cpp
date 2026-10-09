@@ -64,6 +64,7 @@ bool BitcoinExchange::checkDate(const std::string &date)
 		tm_year  = 0
 	*/
 	memset(&t_date, 0, sizeof(struct tm));
+	t_date.tm_isdst = -1; // Not set by mktime; tells mktime to determine whether daylight saving time is in effect
 
 	if (date.length() != 10)
         return (false);
