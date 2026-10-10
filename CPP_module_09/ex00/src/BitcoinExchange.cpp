@@ -179,12 +179,12 @@ void BitcoinExchange::findValue(const std::string &date, const std::string &valu
 	}
 	if (amount == -2.0f)
 	{
-		std::cout << "Error: Value must be a positive number." << std::endl;
+		std::cout << "Error: not a positive number." << std::endl;
 		return;
 	}
 	if (amount == -3.0f)
 	{
-		std::cout << "Error: Value is too large." << std::endl;
+		std::cout << "Error: too large a number." << std::endl;
 		return;
 	}
 
@@ -216,13 +216,71 @@ void BitcoinExchange::findValue(const std::string &date, const std::string &valu
 
 	// 5. Calculate the result
 	//    result = amount * exchange_rate
+	float result = amount * exchange_rate;
 
 
 	// 6. Print the result
 	//    date => amount = result
+	std::cout << date << " => " << amount << " = " << result << std::endl;
 }
 
 void BitcoinExchange::readParse(const char *file)
 {
+	// 1. Declare the necessary variables
+	std::ifstream inputFile(file);
+	std::string line;
+	std::string date;
+	std::string value;
+	std::string::size_type pos;
 
+	// 2. Check if the file was opened successfully
+	if (!inputFile.is_open())
+	{
+		std::cerr << "Error: could not open file." << std::endl;
+		return;
+	}
+
+	// 3. Read and validate the header
+	if (!std::getline(inputFile, line) || line != "date | value")
+	{
+		std::cerr << "Error: invalid file header." << std::endl;
+		return;
+	}
+
+	// 4. Read the remaining lines
+	while (std::getline(inputFile, line))
+	{
+		// 5. Find the separator '|'
+		pos = line.find('|');
+		if (line.find('|', pos + 1) != std::string::npos)
+		{
+			std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
+		if (pos == std::string::npos)
+		{
+			std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
+
+		// 6. Extract date and value
+		date = line.substr(0, pos);
+		value = line.substr(pos + 1);
+
+		// 7. Handle spaces around date and value
+		date.erase(0, date.find_first_not_of(' '));
+		date.erase(date.find_last_not_of(' ') + 1);
+		value.erase(0, value.find_first_not_of(' '));
+		value.erase(value.find_last_not_of(' ') + 1);
+
+		// 8. Validate the line structure
+		if (date.empty() || value.empty())
+		{
+			std::cerr << "Error: bad input => " << line << std::endl;
+			continue;
+		}
+
+		// 9. Call findValue(date, value)
+		findValue(date, value);
+	}
 }
