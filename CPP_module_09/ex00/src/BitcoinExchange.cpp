@@ -114,12 +114,17 @@ bool BitcoinExchange::checkDate(const std::string &date)
 float BitcoinExchange::checkValue(const std::string &value)
 {
     char *end;
+	errno = 0; // Reset errno before calling strtof
 
     // catch empty string
     if (value.empty())
         return (-1.0f);
 
     float val = strtof(value.c_str(), &end);
+
+	// catch out of range values
+	if (errno == ERANGE)
+        return (-1.0f);
 
     // catch invalid float values (e.g., "abc", "12.34abc")
     if (end == value.c_str() || *end != '\0')
@@ -163,7 +168,7 @@ void BitcoinExchange::findValue(const std::string &date, const std::string &valu
 	//    If the date is invalid, print an error message and return
 	if (!checkDate(date))
 	{
-		std::cout << "Error: Invalid date format." << std::endl;
+		std::cout << "Error: bad input => " << date << std::endl;
 		return;
 	}
 

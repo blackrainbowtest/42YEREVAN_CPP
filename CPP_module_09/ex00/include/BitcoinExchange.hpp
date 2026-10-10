@@ -22,6 +22,7 @@
 # include <cstdlib>
 # include <string>
 # include <ctime>
+# include <cerrno>
 # include <cctype>
 # include <cstring> // memset
 
