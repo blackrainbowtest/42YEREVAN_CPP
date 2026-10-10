@@ -93,17 +93,19 @@ void RPN::evaluate(const std::string &expression)
 			a = _stack.top();
 			_stack.pop();
 
-			// 5.4. Calculate the result using calcOperation(a, b, op)
-			
-
-			// 5.5. Push the result back onto the stack
+			// 5.4. Calculate the result and push it onto the stack
 			_stack.push(calcOperation(a, b, expression[i]));
 		}
 
 		// 6. Throw an exception if the character is invalid
+		if (!isOperand(expression[i]) && !isOperator(expression[i]))
+			throw std::runtime_error("Error: invalid character in expression");
 	}
 
 	// 7. Verify that exactly one element remains in the stack
+	if (_stack.size() != 1)
+		throw std::runtime_error("Error: invalid expression");
 
 	// 8. Print the final result
+	std::cout << _stack.top() << std::endl;
 }
