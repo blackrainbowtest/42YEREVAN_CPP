@@ -7,7 +7,7 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-SRC_FILES	=	BitcoinExchange.cpp main.cpp
+SRC_FILES	=	RPN.cpp main.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
