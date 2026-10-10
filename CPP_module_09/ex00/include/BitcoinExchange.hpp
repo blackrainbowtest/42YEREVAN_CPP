@@ -22,11 +22,12 @@
 # include <cstdlib>
 # include <string>
 # include <ctime>
+# include <cctype>
 # include <cstring> // memset
 
 class BitcoinExchange
 {
-	pricvate:
+	private:
 		std::map<std::string, float> _db;
 	public:
 		BitcoinExchange();

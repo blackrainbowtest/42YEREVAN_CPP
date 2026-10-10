@@ -2,15 +2,16 @@
 
 BitcoinExchange::BitcoinExchange(){}
 BitcoinExchange::~BitcoinExchange(){}
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& copy)
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& other)
 {
-   this->database = copy.database;
+   this->_db = other._db;
 }
 
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& in)
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& other)
 {
-    this->database = in.database;
-    return (*this);    
+	if (this != &other)
+		this->_db = other._db;
+	return (*this);
 }
 
 /**
@@ -19,7 +20,7 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& in)
 * example of the database file format:
 * 2021-01-01,29374.15
 */
-void BitcoinExchange::parsePush(std::string data)
+void BitcoinExchange::parsePush(const std::string &data)
 {
     std::string date;
     float value;
@@ -27,7 +28,7 @@ void BitcoinExchange::parsePush(std::string data)
     date = data.substr(0, data.find(","));
     value = atof(data.substr(data.find(",")+1, data.length()).c_str());
 
-    this->database[date] = value;
+    this->_db[date] = value;
 }
 
 /**
@@ -41,7 +42,11 @@ void BitcoinExchange::readDb()
     std::ifstream db("data.csv");
     std::string data;
 
-
+	if (!db.is_open())
+	{
+		std::cerr << "Error: could not open data.csv." << std::endl;
+		return ;
+	}
     while(std::getline(db, data))
     {
         if (data != "date,exchange_rate")
@@ -124,7 +129,7 @@ float BitcoinExchange::checkValue(const std::string &value)
     if (val != val)
         return (-1.0f);
 
-    // catch infinity values
+    // catch negative values
     if (val < 0)
         return (-2.0f);
 
@@ -134,9 +139,87 @@ float BitcoinExchange::checkValue(const std::string &value)
     return (val);
 }
 
+/**
+*	@brief Finds the value of Bitcoin for a given date and amount.
+*	@param date The date for which to find the Bitcoin value.
+*	@param value The amount of Bitcoin to convert.
+*	@note The function checks if the date and value are valid, finds the closest date
+*		in the database, and calculates the equivalent value in USD.
+*
+*	call checkDate(date) and validate the date.
+*	call checkValue(value) and validate the amount.
+*	find the closest date in the database.
+*	multiply the exchange rate by the amount of Bitcoin.
+*	print the result or an error message.
+*/
+
 void BitcoinExchange::findValue(const std::string &date, const std::string &value)
 {
+	// 1. Declare the necessary variables
+	float amount;
+	float exchange_rate;
 
+	// 2. Validate the date using checkDate()
+	//    If the date is invalid, print an error message and return
+	if (!checkDate(date))
+	{
+		std::cout << "Error: Invalid date format." << std::endl;
+		return;
+	}
+
+	// 3. Validate the value using checkValue()
+	//    If -1 -> invalid value
+	//    If -2 → not a positive number
+	//    If -3 → too large a number
+	amount = checkValue(value);
+	if (amount == -1.0f)
+	{
+		std::cout << "Error: Invalid value format." << std::endl;
+		return;
+	}
+	if (amount == -2.0f)
+	{
+		std::cout << "Error: Value must be a positive number." << std::endl;
+		return;
+	}
+	if (amount == -3.0f)
+	{
+		std::cout << "Error: Value is too large." << std::endl;
+		return;
+	}
+
+	// 4. Find the Bitcoin exchange rate in the database
+	//    Use lower_bound()
+	//    If the exact date exists, use its exchange rate
+	//    If the exact date does not exist, use the closest earlier date
+	//    If the date is earlier than the first entry, handle the error
+	if (_db.empty())
+	{
+		std::cout << "Error: Database is empty." << std::endl;
+		return;
+	}
+	std::map<std::string, float>::const_iterator it = _db.lower_bound(date);
+	if (it != _db.end() && it->first == date)
+	{
+		exchange_rate = it->second;
+	}
+	else if (it != _db.begin())
+	{
+		--it;
+		exchange_rate = it->second;
+	}
+	else
+	{
+		std::cout << "Error: Date is earlier than the first entry in the database." << std::endl;
+		return;
+	}
+
+	// 5. Calculate the result
+	//    result = amount * exchange_rate
+
+
+	// 6. Print the result
+	//    date => amount = result
 }
 
 void BitcoinExchange::readParse(const char *file)
