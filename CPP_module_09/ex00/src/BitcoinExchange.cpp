@@ -257,12 +257,14 @@ void BitcoinExchange::readParse(const char *file)
 	{
 		// 5. Find the separator '|'
 		pos = line.find('|');
-		if (line.find('|', pos + 1) != std::string::npos)
+
+		if (pos == std::string::npos)
 		{
 			std::cerr << "Error: bad input => " << line << std::endl;
 			continue;
 		}
-		if (pos == std::string::npos)
+
+		if (line.find('|', pos + 1) != std::string::npos)
 		{
 			std::cerr << "Error: bad input => " << line << std::endl;
 			continue;
