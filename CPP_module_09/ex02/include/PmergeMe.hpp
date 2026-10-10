@@ -16,13 +16,43 @@
 
 #define RESET		"\033[0m"
 
-# include <iostream>
-# include <stack>
-# include <cstring>
-# include <sstream>
-# include <cstdlib>
+# include <vector>
+# include <deque>
 
+class PmergeMe
+{
+	private:
+		std::vector<int> _vector;
+		std::deque<int> _deque;
 
+        // Parsing and validation
+        bool isValidNumber(const std::string &str) const;
+        void parseArguments(int argc, char **argv);
+
+        // Ford-Johnson algorithm
+        void sortVector();
+        void sortDeque();
+
+        // Binary insertion
+        void binaryInsertVector(int value);
+        void binaryInsertDeque(int value);
+
+        // Jacobsthal sequence
+        std::vector<size_t> generateJacobsthal(size_t size);
+
+        // Output
+        void printBefore() const;
+        void printAfter() const;
+
+	public:
+	    PmergeMe();
+        PmergeMe(const PmergeMe &other);
+        PmergeMe &operator=(const PmergeMe &other);
+        ~PmergeMe();
+
+        void run(int argc, char **argv);
+
+};
 
 
 #endif // PMERGEME_HPP
