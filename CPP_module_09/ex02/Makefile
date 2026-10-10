@@ -1,4 +1,4 @@
-NAME      = RPN
+NAME      = PmergeMe
 
 CXX       = c++
 CXXFLAGS  = -Wall -Wextra -Werror -std=c++98
@@ -7,7 +7,7 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-SRC_FILES	=	RPN.cpp main.cpp
+SRC_FILES	=	PmergeMe.cpp main.cpp
 OBJ_FILES	=	$(SRC_FILES:.cpp=.o)
 
 SRC			=	$(addprefix $(SRC_DIR), $(SRC_FILES))
