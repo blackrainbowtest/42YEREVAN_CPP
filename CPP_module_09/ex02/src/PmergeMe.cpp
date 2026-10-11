@@ -1,5 +1,10 @@
-
 #include "PmergeMe.hpp"
+
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+#include <climits>
+#include <ctime>
 
 // Orthodox Canonical Form
 
@@ -26,9 +31,22 @@ PmergeMe::~PmergeMe() {}
 
 bool PmergeMe::isValidNumber(const std::string &str) const
 {
-    // TODO: Validate positive integer
-    (void)str;
-    return (false);
+    if (str.empty())
+        return (false);
+
+    for (size_t i = 0; i < str.length(); ++i)
+    {
+        if (!std::isdigit(str[i]))
+            return (false);
+    }
+
+    char *endptr;
+    errno = 0;
+    long value = std::strtol(str.c_str(), &endptr, 10);
+
+    if (errno == ERANGE || *endptr != '\0' || value < 0 || value > INT_MAX)
+        return (false);
+    return (true);
 }
 
 void PmergeMe::parseArguments(int argc, char **argv)

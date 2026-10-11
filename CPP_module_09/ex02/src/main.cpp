@@ -1,5 +1,8 @@
 #include "PmergeMe.hpp"
 
+#include <iostream>
+#include <exception>
+
 int main(int argc, char **argv)
 {
     if (argc < 2)
