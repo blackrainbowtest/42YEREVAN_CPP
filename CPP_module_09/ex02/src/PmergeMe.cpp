@@ -51,9 +51,21 @@ bool PmergeMe::isValidNumber(const std::string &str) const
 
 void PmergeMe::parseArguments(int argc, char **argv)
 {
-    // TODO: Validate and fill both containers
-    (void)argc;
-    (void)argv;
+    _vector.clear();
+    _deque.clear();
+
+    for (int i = 1; i < argc; ++i)
+    {
+        std::string str = argv[i];
+
+        if (!isValidNumber(str))
+            throw std::runtime_error("Invalid number");
+
+        int num = std::atoi(str.c_str());
+
+        _vector.push_back(num);
+        _deque.push_back(num);
+    }
 }
 
 // Ford-Johnson
@@ -96,11 +108,27 @@ std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
 void PmergeMe::printBefore() const
 {
     // TODO: Print original sequence
+
+    std::cout << "Before:";
+
+    for (size_t i = 0; i < _vector.size(); ++i)
+    {
+        std::cout << " " << _vector[i];
+    }
+    std::cout << std::endl;
 }
 
 void PmergeMe::printAfter() const
 {
     // TODO: Print sorted sequence
+
+    std::cout << "After:";
+
+    for (size_t i = 0; i < _vector.size(); ++i)
+    {
+        std::cout << " " << _vector[i];
+    }
+    std::cout << std::endl;
 }
 
 // Main execution
