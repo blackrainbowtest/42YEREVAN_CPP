@@ -1,5 +1,33 @@
 #include "PmergeMe.hpp"
 
+/*
+    CPP Module 09 - ex02: PmergeMe
+
+    Obiasnenie proekta:
+    - programma prinimaet positive integers iz command-line arguments;
+    - odna i ta zhe posledovatelnost hranitsia v std::vector i std::deque;
+    - obe posledovatelnosti dolzhny sortirovatsia algoritmom Ford-Johnson;
+    - nuzhno vyvesti Before, After i vremia obrabotki dlia kazhdogo container.
+
+    Chto uzhe sdelano:
+    - Orthodox Canonical Form;
+    - proverka positive int v isValidNumber();
+    - parsing argumentov v parseArguments();
+    - vyvod Before/After;
+    - pervyi shag sortVector(): formirovanie par (smaller, bigger);
+    - sohranenie odd element pri nechetnom kolichestve chisel;
+    - prostaya binary insertion v _vector.
+
+    Chto poka ostavleno kommentariiami:
+    - recursive Ford-Johnson sorting;
+    - preserve pair/group relationships during recursion;
+    - build main chain and pending elements;
+    - Jacobsthal insertion order;
+    - bounded binary insertion;
+    - std::deque version;
+    - run() with timing.
+*/
+
 // Orthodox Canonical Form
 
 PmergeMe::PmergeMe() {}
@@ -63,26 +91,9 @@ void PmergeMe::parseArguments(int argc, char **argv)
 }
 
 // Ford-Johnson
-// Done:
-// - Input validation and parsing fill both containers.
-// - Vector pair formation stores each pair as (smaller, bigger).
-// - Odd element is remembered separately.
-// - Basic binary insertion into _vector exists.
-//
-// Remaining vector steps:
-// - Sort pairs by their bigger element (pair.second).
-// - Build main chain from pair.second values.
-// - Build pending list from pair.first values.
-// - Insert the first pending element at the beginning of the main chain.
-// - Generate Jacobsthal insertion order for the remaining pending elements.
-// - Insert pending elements with bounded binary insertion.
-// - Insert the odd element, if there is one.
-// - Store the final main chain back into _vector.
-//
-// Remaining project steps:
-// - Repeat the algorithm for std::deque.
-// - Implement run() with timing for both containers.
-// - Compile with C++98 and test 3000+ values, including duplicates.
+// This is the beginning of merge-insertion sort.
+// Current implemented step: split numbers into pairs.
+// Each pair is stored as (smaller, bigger), so the relationship is preserved.
 
 void PmergeMe::sortVector()
 {
@@ -108,13 +119,15 @@ void PmergeMe::sortVector()
         hasOdd = true;
     }
 
-    // TODO: sortPairsVector(pairs);
-    // TODO: create mainChain from pairs[i].second values.
-    // TODO: create pendingElements from pairs[i].first values.
-    // TODO: move mainChain into _vector before inserting.
-    // TODO: insert pendingElements in Jacobsthal order.
-    // TODO: insert odd if hasOdd is true.
-    // TODO: assign the final sorted chain to _vector.
+    // Next steps:
+    // 1. Sort pairs by second, meaning by the bigger element.
+    // 2. Create mainChain from pairs[i].second.
+    // 3. Create pendingElements from pairs[i].first.
+    // 4. Move mainChain into _vector.
+    // 5. Insert pendingElements in Jacobsthal order.
+    // 6. Use bounded binary search for each insertion.
+    // 7. If hasOdd == true, insert odd.
+    // 8. After all insertions, _vector must be sorted.
     (void)pairs;
     (void)odd;
     (void)hasOdd;
@@ -122,23 +135,35 @@ void PmergeMe::sortVector()
 
 void PmergeMe::sortPairsVector(std::vector<std::pair<int, int> > &pairs)
 {
-    // TODO: Sort pairs by pairs[i].second in ascending order.
-    // This keeps each smaller value attached to its original bigger partner.
+    // Sort pairs by pairs[i].second in ascending order.
+    // Important: sort whole pairs, not only second values.
+    // Otherwise the smaller value loses its bigger partner.
+    //
+    // Example:
+    // Before: (3, 8) (2, 7) (1, 5)
+    // After:  (1, 5) (2, 7) (3, 8)
+    //
+    // Insertion sort is a simple C++98-friendly first implementation.
     (void)pairs;
 }
 
 void PmergeMe::sortDeque()
 {
-    // TODO: Implement the same Ford-Johnson steps as sortVector(),
-    // but using std::deque and deque iterators/insert operations.
+    // Same logic as sortVector(), but for std::deque.
+    // Steps:
+    // 1. Form deque pairs.
+    // 2. Sort pairs by bigger element.
+    // 3. Build main chain and pending elements.
+    // 4. Insert pending elements in Jacobsthal order.
+    // 5. Insert odd element if it exists.
 }
 
 // Binary insertion
 
 void PmergeMe::binaryInsertVector(int value)
 {
-    // TODO later: add an overload/helper that can limit the right boundary.
-    // Ford-Johnson should only search up to the paired bigger element.
+    // Current version: normal binary insertion into the whole _vector.
+    // Later Ford-Johnson needs an overload/helper with a right search boundary.
     size_t left = 0;
     size_t right = _vector.size();
 
@@ -157,8 +182,9 @@ void PmergeMe::binaryInsertVector(int value)
 
 void PmergeMe::binaryInsertDeque(int value)
 {
-    // TODO: Same binary insertion idea as vector, but for _deque.
-    // TODO later: support bounded insertion for Ford-Johnson.
+    // Binary insertion for _deque will go here.
+    // Start with the same idea as binaryInsertVector().
+    // Later add bounded insertion for Ford-Johnson.
     (void)value;
 }
 
@@ -166,8 +192,9 @@ void PmergeMe::binaryInsertDeque(int value)
 
 std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
 {
-    // TODO: Return pending-element indexes in Jacobsthal insertion order.
-    // Example goal: cover every index from 0 to size - 1 exactly once.
+    // Return pendingElements indexes in Jacobsthal insertion order.
+    // Goal: every index from 0 to size - 1 appears exactly once.
+    // Jacobsthal numbers: 1, 3, 5, 11, 21...
     (void)size;
     return (std::vector<size_t>());
 }
@@ -200,13 +227,16 @@ void PmergeMe::printAfter() const
 
 void PmergeMe::run(int argc, char **argv)
 {
-    // TODO: parseArguments(argc, argv);
-    // TODO: printBefore();
-    // TODO: copy initial containers if needed before timing.
-    // TODO: measure sortVector() time in microseconds.
-    // TODO: measure sortDeque() time in microseconds.
-    // TODO: printAfter();
-    // TODO: print vector and deque timings in the subject format.
+    // Final order:
+    // 1. parseArguments(argc, argv);
+    // 2. printBefore();
+    // 3. Measure sortVector() time in microseconds.
+    // 4. Measure sortDeque() time in microseconds.
+    // 5. printAfter();
+    // 6. Print vector/deque timings in the subject format.
+    //
+    // parseArguments() already fills both containers with the same numbers,
+    // so vector and deque can be sorted independently.
     (void)argc;
     (void)argv;
 }
