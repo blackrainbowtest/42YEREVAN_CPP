@@ -5,6 +5,10 @@
 #include <stdexcept>
 #include <climits>
 #include <ctime>
+#include <cstdlib>
+#include <cerrno>
+#include <cctype>
+#include <utility>
 
 // Orthodox Canonical Form
 
@@ -36,7 +40,7 @@ bool PmergeMe::isValidNumber(const std::string &str) const
 
     for (size_t i = 0; i < str.length(); ++i)
     {
-        if (!std::isdigit(str[i]))
+        if (!std::isdigit(static_cast<unsigned char>(str[i])))
             return (false);
     }
 
@@ -44,7 +48,7 @@ bool PmergeMe::isValidNumber(const std::string &str) const
     errno = 0;
     long value = std::strtol(str.c_str(), &endptr, 10);
 
-    if (errno == ERANGE || *endptr != '\0' || value < 0 || value > INT_MAX)
+    if (errno == ERANGE || *endptr != '\0' || value <= 0 || value > INT_MAX)
         return (false);
     return (true);
 }
@@ -72,7 +76,18 @@ void PmergeMe::parseArguments(int argc, char **argv)
 
 void PmergeMe::sortVector()
 {
-    // TODO: Ford-Johnson using vector
+    if (_vector.size() <= 1)
+        return;
+
+    std::vector<std::pair<int, int> > pairs;
+
+    for (size_t i = 0; i + 1 < _vector.size(); i += 2)
+    {
+        if (_vector[i] < _vector[i + 1])
+            pairs.push_back(std::make_pair(_vector[i], _vector[i + 1]));
+        else
+            pairs.push_back(std::make_pair(_vector[i + 1], _vector[i]));
+    }
 }
 
 void PmergeMe::sortDeque()
@@ -84,8 +99,20 @@ void PmergeMe::sortDeque()
 
 void PmergeMe::binaryInsertVector(int value)
 {
-    // TODO: Binary insertion
-    (void)value;
+    size_t left = 0;
+    size_t right = _vector.size();
+
+    while (left < right)
+    {
+        size_t mid = left + (right - left) / 2;
+
+        if (_vector[mid] < value)
+            left = mid + 1;
+        else
+            right = mid;
+    }
+
+    _vector.insert(_vector.begin() + left, value);
 }
 
 void PmergeMe::binaryInsertDeque(int value)
