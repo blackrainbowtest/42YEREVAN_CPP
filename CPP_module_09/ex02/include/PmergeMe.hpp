@@ -29,6 +29,7 @@
 #include <cerrno>
 #include <cctype>
 #include <utility>
+#include <iomanip>
 
 class PmergeMe
 {

@@ -1,32 +1,141 @@
 #include "PmergeMe.hpp"
 
-/*
-    CPP Module 09 - ex02: PmergeMe
+namespace
+{
+    template <typename Container>
+    void binaryInsert(Container &container, int value)
+    {
+        typename Container::iterator left = container.begin();
+        typename Container::iterator right = container.end();
 
-    Obiasnenie proekta:
-    - programma prinimaet positive integers iz command-line arguments;
-    - odna i ta zhe posledovatelnost hranitsia v std::vector i std::deque;
-    - obe posledovatelnosti dolzhny sortirovatsia algoritmom Ford-Johnson;
-    - nuzhno vyvesti Before, After i vremia obrabotki dlia kazhdogo container.
+        while (left < right)
+        {
+            typename Container::iterator mid = left + (right - left) / 2;
 
-    Chto uzhe sdelano:
-    - Orthodox Canonical Form;
-    - proverka positive int v isValidNumber();
-    - parsing argumentov v parseArguments();
-    - vyvod Before/After;
-    - pervyi shag sortVector(): formirovanie par (smaller, bigger);
-    - sohranenie odd element pri nechetnom kolichestve chisel;
-    - prostaya binary insertion v _vector.
+            if (*mid < value)
+                left = mid + 1;
+            else
+                right = mid;
+        }
+        container.insert(left, value);
+    }
 
-    Chto poka ostavleno kommentariiami:
-    - recursive Ford-Johnson sorting;
-    - preserve pair/group relationships during recursion;
-    - build main chain and pending elements;
-    - Jacobsthal insertion order;
-    - bounded binary insertion;
-    - std::deque version;
-    - run() with timing.
-*/
+    std::vector<size_t> makeJacobsthalOrder(size_t size)
+    {
+        std::vector<size_t> order;
+
+        if (size == 0)
+            return (order);
+
+        order.push_back(0);
+
+        size_t prev = 1;
+        size_t current = 3;
+        size_t last = 1;
+
+        while (last < size)
+        {
+            size_t high = current;
+
+            if (high > size)
+                high = size;
+            for (size_t i = high; i > last; --i)
+                order.push_back(i - 1);
+
+            size_t next = current + 2 * prev;
+            prev = current;
+            current = next;
+            last = high;
+        }
+        return (order);
+    }
+
+    std::vector<int> fordJohnsonVector(const std::vector<int> &input)
+    {
+        if (input.size() <= 1)
+            return (input);
+
+        std::vector<std::pair<int, int> > pairs;
+        std::vector<int> pending;
+        std::vector<int> mainChain;
+        bool hasOdd = false;
+        int odd = 0;
+
+        for (size_t i = 0; i + 1 < input.size(); i += 2)
+        {
+            if (input[i] < input[i + 1])
+                pairs.push_back(std::make_pair(input[i], input[i + 1]));
+            else
+                pairs.push_back(std::make_pair(input[i + 1], input[i]));
+        }
+
+        if (input.size() % 2 != 0)
+        {
+            odd = input.back();
+            hasOdd = true;
+        }
+
+        for (size_t i = 0; i < pairs.size(); ++i)
+        {
+            pending.push_back(pairs[i].first);
+            mainChain.push_back(pairs[i].second);
+        }
+
+        mainChain = fordJohnsonVector(mainChain);
+
+        std::vector<size_t> order = makeJacobsthalOrder(pending.size());
+        for (size_t i = 0; i < order.size(); ++i)
+            binaryInsert(mainChain, pending[order[i]]);
+
+        if (hasOdd)
+            binaryInsert(mainChain, odd);
+
+        return (mainChain);
+    }
+
+    std::deque<int> fordJohnsonDeque(const std::deque<int> &input)
+    {
+        if (input.size() <= 1)
+            return (input);
+
+        std::deque<std::pair<int, int> > pairs;
+        std::deque<int> pending;
+        std::deque<int> mainChain;
+        bool hasOdd = false;
+        int odd = 0;
+
+        for (size_t i = 0; i + 1 < input.size(); i += 2)
+        {
+            if (input[i] < input[i + 1])
+                pairs.push_back(std::make_pair(input[i], input[i + 1]));
+            else
+                pairs.push_back(std::make_pair(input[i + 1], input[i]));
+        }
+
+        if (input.size() % 2 != 0)
+        {
+            odd = input.back();
+            hasOdd = true;
+        }
+
+        for (size_t i = 0; i < pairs.size(); ++i)
+        {
+            pending.push_back(pairs[i].first);
+            mainChain.push_back(pairs[i].second);
+        }
+
+        mainChain = fordJohnsonDeque(mainChain);
+
+        std::vector<size_t> order = makeJacobsthalOrder(pending.size());
+        for (size_t i = 0; i < order.size(); ++i)
+            binaryInsert(mainChain, pending[order[i]]);
+
+        if (hasOdd)
+            binaryInsert(mainChain, odd);
+
+        return (mainChain);
+    }
+}
 
 // Orthodox Canonical Form
 
@@ -91,112 +200,50 @@ void PmergeMe::parseArguments(int argc, char **argv)
 }
 
 // Ford-Johnson
-// This is the beginning of merge-insertion sort.
-// Current implemented step: split numbers into pairs.
-// Each pair is stored as (smaller, bigger), so the relationship is preserved.
 
 void PmergeMe::sortVector()
 {
-    if (_vector.size() <= 1)
-        return;
-
-    std::vector<std::pair<int, int> > pairs;
-
-    int odd = 0;
-    bool hasOdd = false;
-
-    for (size_t i = 0; i + 1 < _vector.size(); i += 2)
-    {
-        if (_vector[i] < _vector[i + 1])
-            pairs.push_back(std::make_pair(_vector[i], _vector[i + 1]));
-        else
-            pairs.push_back(std::make_pair(_vector[i + 1], _vector[i]));
-    }
-
-    if (_vector.size() % 2 != 0)
-    {
-        odd = _vector.back();
-        hasOdd = true;
-    }
-
-    // Next steps:
-    // 1. Sort pairs by second, meaning by the bigger element.
-    // 2. Create mainChain from pairs[i].second.
-    // 3. Create pendingElements from pairs[i].first.
-    // 4. Move mainChain into _vector.
-    // 5. Insert pendingElements in Jacobsthal order.
-    // 6. Use bounded binary search for each insertion.
-    // 7. If hasOdd == true, insert odd.
-    // 8. After all insertions, _vector must be sorted.
-    (void)pairs;
-    (void)odd;
-    (void)hasOdd;
+    _vector = fordJohnsonVector(_vector);
 }
 
 void PmergeMe::sortPairsVector(std::vector<std::pair<int, int> > &pairs)
 {
-    // Sort pairs by pairs[i].second in ascending order.
-    // Important: sort whole pairs, not only second values.
-    // Otherwise the smaller value loses its bigger partner.
-    //
-    // Example:
-    // Before: (3, 8) (2, 7) (1, 5)
-    // After:  (1, 5) (2, 7) (3, 8)
-    //
-    // Insertion sort is a simple C++98-friendly first implementation.
-    (void)pairs;
+    for (size_t i = 1; i < pairs.size(); ++i)
+    {
+        std::pair<int, int> key = pairs[i];
+        size_t j = i;
+
+        while (j > 0 && pairs[j - 1].second > key.second)
+        {
+            pairs[j] = pairs[j - 1];
+            --j;
+        }
+        pairs[j] = key;
+    }
 }
 
 void PmergeMe::sortDeque()
 {
-    // Same logic as sortVector(), but for std::deque.
-    // Steps:
-    // 1. Form deque pairs.
-    // 2. Sort pairs by bigger element.
-    // 3. Build main chain and pending elements.
-    // 4. Insert pending elements in Jacobsthal order.
-    // 5. Insert odd element if it exists.
+    _deque = fordJohnsonDeque(_deque);
 }
 
 // Binary insertion
 
 void PmergeMe::binaryInsertVector(int value)
 {
-    // Current version: normal binary insertion into the whole _vector.
-    // Later Ford-Johnson needs an overload/helper with a right search boundary.
-    size_t left = 0;
-    size_t right = _vector.size();
-
-    while (left < right)
-    {
-        size_t mid = left + (right - left) / 2;
-
-        if (_vector[mid] < value)
-            left = mid + 1;
-        else
-            right = mid;
-    }
-
-    _vector.insert(_vector.begin() + left, value);
+    binaryInsert(_vector, value);
 }
 
 void PmergeMe::binaryInsertDeque(int value)
 {
-    // Binary insertion for _deque will go here.
-    // Start with the same idea as binaryInsertVector().
-    // Later add bounded insertion for Ford-Johnson.
-    (void)value;
+    binaryInsert(_deque, value);
 }
 
 // Jacobsthal sequence
 
 std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
 {
-    // Return pendingElements indexes in Jacobsthal insertion order.
-    // Goal: every index from 0 to size - 1 appears exactly once.
-    // Jacobsthal numbers: 1, 3, 5, 11, 21...
-    (void)size;
-    return (std::vector<size_t>());
+    return (makeJacobsthalOrder(size));
 }
 
 // Output
@@ -206,9 +253,7 @@ void PmergeMe::printBefore() const
     std::cout << "Before:";
 
     for (size_t i = 0; i < _vector.size(); ++i)
-    {
         std::cout << " " << _vector[i];
-    }
     std::cout << std::endl;
 }
 
@@ -217,9 +262,7 @@ void PmergeMe::printAfter() const
     std::cout << "After:";
 
     for (size_t i = 0; i < _vector.size(); ++i)
-    {
         std::cout << " " << _vector[i];
-    }
     std::cout << std::endl;
 }
 
@@ -227,16 +270,27 @@ void PmergeMe::printAfter() const
 
 void PmergeMe::run(int argc, char **argv)
 {
-    // Final order:
-    // 1. parseArguments(argc, argv);
-    // 2. printBefore();
-    // 3. Measure sortVector() time in microseconds.
-    // 4. Measure sortDeque() time in microseconds.
-    // 5. printAfter();
-    // 6. Print vector/deque timings in the subject format.
-    //
-    // parseArguments() already fills both containers with the same numbers,
-    // so vector and deque can be sorted independently.
-    (void)argc;
-    (void)argv;
+    parseArguments(argc, argv);
+    printBefore();
+
+    clock_t vectorStart = std::clock();
+    sortVector();
+    clock_t vectorEnd = std::clock();
+
+    clock_t dequeStart = std::clock();
+    sortDeque();
+    clock_t dequeEnd = std::clock();
+
+    double vectorTime = static_cast<double>(vectorEnd - vectorStart)
+        * 1000000.0 / CLOCKS_PER_SEC;
+    double dequeTime = static_cast<double>(dequeEnd - dequeStart)
+        * 1000000.0 / CLOCKS_PER_SEC;
+
+    printAfter();
+    std::cout << "Time to process a range of " << _vector.size()
+              << " elements with std::vector: " << std::fixed
+              << std::setprecision(5) << vectorTime << " us" << std::endl;
+    std::cout << "Time to process a range of " << _deque.size()
+              << " elements with std::deque:  " << std::fixed
+              << std::setprecision(5) << dequeTime << " us" << std::endl;
 }
