@@ -20,6 +20,15 @@
 # include <deque>
 # include <string>
 # include <cstddef>
+#include <iostream>
+#include <sstream>
+#include <stdexcept>
+#include <climits>
+#include <ctime>
+#include <cstdlib>
+#include <cerrno>
+#include <cctype>
+#include <utility>
 
 class PmergeMe
 {
@@ -34,6 +43,7 @@ class PmergeMe
         // Ford-Johnson algorithm
         void sortVector();
         void sortDeque();
+        void sortPairsVector(std::vector<std::pair<int, int> > &pairs);
 
         // Binary insertion
         void binaryInsertVector(int value);
