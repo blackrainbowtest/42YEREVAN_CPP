@@ -3,10 +3,13 @@
 namespace
 {
     template <typename Container>
-    void binaryInsert(Container &container, int value)
+    // done 
+    void binaryInsert(Container &container, int value, size_t limit)
     {
         typename Container::iterator left = container.begin();
-        typename Container::iterator right = container.end();
+
+        // typename Container::iterator right = container.end();
+        typename Container::iterator right = container.begin() + limit;
 
         while (left < right)
         {
@@ -24,10 +27,10 @@ namespace
     {
         std::vector<size_t> order;
 
-        if (size == 0)
+        if (size <= 1)
             return (order);
 
-        order.push_back(0);
+        // order.push_back(0); // b1 уже находится в mainChain
 
         size_t prev = 1;
         size_t current = 3;
