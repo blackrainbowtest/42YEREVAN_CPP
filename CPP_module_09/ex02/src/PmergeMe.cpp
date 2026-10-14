@@ -23,6 +23,7 @@ namespace
         container.insert(left, value);
     }
 
+    // done
     std::vector<size_t> makeJacobsthalOrder(size_t size)
     {
         std::vector<size_t> order;
