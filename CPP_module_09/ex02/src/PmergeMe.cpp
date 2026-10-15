@@ -2,6 +2,22 @@
 
 namespace
 {
+    struct FJItem
+    {
+        int value;
+        size_t id;
+
+        FJItem(int v, size_t i) : value(v), id(i) {}
+    };
+
+    struct FJPair
+    {
+        FJItem small;
+        FJItem large;
+
+        FJPair(const FJItem &a, const FJItem &b) : small(a), large(b) {}
+    };
+
     template <typename Container>
     // done 
     void binaryInsert(Container &container, int value, size_t limit)
@@ -54,46 +70,94 @@ namespace
         return (order);
     }
 
-    std::vector<int> fordJohnsonVector(const std::vector<int> &input)
+    std::vector<FJItem> fordJohnsonRecursive(const std::vector<FJItem> &input)
     {
         if (input.size() <= 1)
             return (input);
 
-        std::vector<std::pair<int, int> > pairs;
-        std::vector<int> pending;
-        std::vector<int> mainChain;
-        bool hasOdd = false;
-        int odd = 0;
+        std::vector<FJPair> pairs;
+        std::vector<FJItem> pending;
+        std::vector<FJItem> mainChain;
+        std::vector<FJItem> large;
+        bool hasOdd = (input.size() % 2 != 0);
 
+        // 1. Создание пар
         for (size_t i = 0; i + 1 < input.size(); i += 2)
         {
-            if (input[i] < input[i + 1])
-                pairs.push_back(std::make_pair(input[i], input[i + 1]));
+            if (input[i].value <= input[i + 1].value)
+                pairs.push_back(FJPair(input[i], input[i + 1]));
             else
-                pairs.push_back(std::make_pair(input[i + 1], input[i]));
+                pairs.push_back(FJPair(input[i + 1], input[i]));
         }
 
-        if (input.size() % 2 != 0)
-        {
-            odd = input.back();
-            hasOdd = true;
-        }
-
+        // 2. Сбор больших элементов
         for (size_t i = 0; i < pairs.size(); ++i)
+            large.push_back(pairs[i].large);
+
+        // 3. Рекурсивная сортировка больших элементов
+        large = fordJohnsonRecursive(large);
+
+        // 4. Восстановление соответствующих меньших элементов
+        for (size_t i = 0; i < large.size(); ++i)
         {
-            pending.push_back(pairs[i].first);
-            mainChain.push_back(pairs[i].second);
+            mainChain.push_back(large[i]);
+
+            for (size_t j = 0; j < pairs.size(); ++j)
+            {
+                if (pairs[j].large.id == large[i].id)
+                {
+                    pending.push_back(pairs[j].small);
+                    break;
+                }
+            }
         }
 
-        mainChain = fordJohnsonVector(mainChain);
-
-        std::vector<size_t> order = makeJacobsthalOrder(pending.size());
-        for (size_t i = 0; i < order.size(); ++i)
-            binaryInsert(mainChain, pending[order[i]]);
-
+        // 5. Непарный элемент участвует в порядке Якобсталя
         if (hasOdd)
-            binaryInsert(mainChain, odd);
+            pending.push_back(input.back());
 
+        // 6. b1 помещается перед a1
+        mainChain.insert(mainChain.begin(), pending[0]);
+
+        // 7. Вставка остальных элементов по Якобсталю
+        std::vector<size_t> order =
+            makeJacobsthalOrder(pending.size());
+
+        for (size_t i = 0; i < order.size(); ++i)
+        {
+            size_t index = order[i];
+            size_t limit = mainChain.size();
+
+            // Поиск соответствующего a_i
+            if (index < large.size())
+            {
+                for (size_t j = 0; j < mainChain.size(); ++j)
+                {
+                    if (mainChain[j].id == large[index].id)
+                    {
+                        limit = j;
+                        break;
+                    }
+                }
+            }
+
+            // Ограниченный бинарный поиск
+            std::vector<FJItem>::iterator left = mainChain.begin();
+            std::vector<FJItem>::iterator right =
+                mainChain.begin() + limit;
+
+            while (left < right)
+            {
+                std::vector<FJItem>::iterator mid =
+                    left + (right - left) / 2;
+
+                if (mid->value < pending[index].value)
+                    left = mid + 1;
+                else
+                    right = mid;
+            }
+            mainChain.insert(left, pending[index]);
+        }
         return (mainChain);
     }
 
