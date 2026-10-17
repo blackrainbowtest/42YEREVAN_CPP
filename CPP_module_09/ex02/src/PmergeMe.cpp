@@ -18,36 +18,12 @@ namespace
         FJPair(const FJItem &a, const FJItem &b) : small(a), large(b) {}
     };
 
-    template <typename Container>
-    // done 
-    void binaryInsert(Container &container, int value, size_t limit)
-    {
-        typename Container::iterator left = container.begin();
-
-        // typename Container::iterator right = container.end();
-        typename Container::iterator right = container.begin() + limit;
-
-        while (left < right)
-        {
-            typename Container::iterator mid = left + (right - left) / 2;
-
-            if (*mid < value)
-                left = mid + 1;
-            else
-                right = mid;
-        }
-        container.insert(left, value);
-    }
-
-    // done
     std::vector<size_t> makeJacobsthalOrder(size_t size)
     {
         std::vector<size_t> order;
 
         if (size <= 1)
             return (order);
-
-        // order.push_back(0); // b1 уже находится в mainChain
 
         size_t prev = 1;
         size_t current = 3;
@@ -62,10 +38,18 @@ namespace
             for (size_t i = high; i > last; --i)
                 order.push_back(i - 1);
 
+            last = high;
+            if (last == size)
+                break;
+            // Saturate before the Jacobsthal recurrence can overflow.
+            if (prev > (static_cast<size_t>(-1) - current) / 2)
+            {
+                current = size;
+                continue;
+            }
             size_t next = current + 2 * prev;
             prev = current;
             current = next;
-            last = high;
         }
         return (order);
     }
@@ -81,7 +65,7 @@ namespace
         std::vector<FJItem> large;
         bool hasOdd = (input.size() % 2 != 0);
 
-        // 1. Создание пар
+        // Create pairs with one value comparison per pair.
         for (size_t i = 0; i + 1 < input.size(); i += 2)
         {
             if (input[i].value <= input[i + 1].value)
@@ -90,14 +74,14 @@ namespace
                 pairs.push_back(FJPair(input[i + 1], input[i]));
         }
 
-        // 2. Сбор больших элементов
+        // Collect the larger elements.
         for (size_t i = 0; i < pairs.size(); ++i)
             large.push_back(pairs[i].large);
 
-        // 3. Рекурсивная сортировка больших элементов
+        // Recursively sort larger elements.
         large = fordJohnsonRecursive(large);
 
-        // 4. Восстановление соответствующих меньших элементов
+        // Restore pair associations using unique IDs.
         for (size_t i = 0; i < large.size(); ++i)
         {
             mainChain.push_back(large[i]);
@@ -112,14 +96,14 @@ namespace
             }
         }
 
-        // 5. Непарный элемент участвует в порядке Якобсталя
+        // Include the unpaired element in the Jacobsthal schedule.
         if (hasOdd)
             pending.push_back(input.back());
 
-        // 6. b1 помещается перед a1
+        // Place b1 before a1 without another value comparison.
         mainChain.insert(mainChain.begin(), pending[0]);
 
-        // 7. Вставка остальных элементов по Якобсталю
+        // Insert remaining elements in Jacobsthal order.
         std::vector<size_t> order =
             makeJacobsthalOrder(pending.size());
 
@@ -128,7 +112,7 @@ namespace
             size_t index = order[i];
             size_t limit = mainChain.size();
 
-            // Поиск соответствующего a_i
+            // Locate the matching a_i by identity, not by value.
             if (index < large.size())
             {
                 for (size_t j = 0; j < mainChain.size(); ++j)
@@ -141,7 +125,7 @@ namespace
                 }
             }
 
-            // Ограниченный бинарный поиск
+            // Search only the prefix before the matching partner.
             std::vector<FJItem>::iterator left = mainChain.begin();
             std::vector<FJItem>::iterator right =
                 mainChain.begin() + limit;
@@ -161,48 +145,97 @@ namespace
         return (mainChain);
     }
 
-    std::deque<int> fordJohnsonDeque(const std::deque<int> &input)
+    std::deque<FJItem> fordJohnsonDeque(const std::deque<FJItem> &input)
     {
         if (input.size() <= 1)
             return (input);
 
-        std::deque<std::pair<int, int> > pairs;
-        std::deque<int> pending;
-        std::deque<int> mainChain;
-        bool hasOdd = false;
-        int odd = 0;
+        std::deque<FJPair> pairs;
+        std::deque<FJItem> pending;
+        std::deque<FJItem> mainChain;
+        std::deque<FJItem> large;
+        bool hasOdd = (input.size() % 2 != 0);
 
+        // Create pairs with one value comparison per pair.
         for (size_t i = 0; i + 1 < input.size(); i += 2)
         {
-            if (input[i] < input[i + 1])
-                pairs.push_back(std::make_pair(input[i], input[i + 1]));
+            if (input[i].value <= input[i + 1].value)
+                pairs.push_back(FJPair(input[i], input[i + 1]));
             else
-                pairs.push_back(std::make_pair(input[i + 1], input[i]));
+                pairs.push_back(FJPair(input[i + 1], input[i]));
         }
 
-        if (input.size() % 2 != 0)
-        {
-            odd = input.back();
-            hasOdd = true;
-        }
-
+        // Collect the larger elements.
         for (size_t i = 0; i < pairs.size(); ++i)
+            large.push_back(pairs[i].large);
+
+        // Recursively sort larger elements.
+        large = fordJohnsonDeque(large);
+
+        // Restore pair associations using unique IDs.
+        for (size_t i = 0; i < large.size(); ++i)
         {
-            pending.push_back(pairs[i].first);
-            mainChain.push_back(pairs[i].second);
+            mainChain.push_back(large[i]);
+
+            for (size_t j = 0; j < pairs.size(); ++j)
+            {
+                if (pairs[j].large.id == large[i].id)
+                {
+                    pending.push_back(pairs[j].small);
+                    break;
+                }
+            }
         }
 
-        mainChain = fordJohnsonDeque(mainChain);
-
-        std::vector<size_t> order = makeJacobsthalOrder(pending.size());
-        for (size_t i = 0; i < order.size(); ++i)
-            binaryInsert(mainChain, pending[order[i]]);
-
+        // Include the unpaired element in the Jacobsthal schedule.
         if (hasOdd)
-            binaryInsert(mainChain, odd);
+            pending.push_back(input.back());
 
+        // Place b1 before a1 without another value comparison.
+        mainChain.insert(mainChain.begin(), pending[0]);
+
+        // Insert remaining elements in Jacobsthal order.
+        std::vector<size_t> order =
+            makeJacobsthalOrder(pending.size());
+
+        for (size_t i = 0; i < order.size(); ++i)
+        {
+            size_t index = order[i];
+            size_t limit = mainChain.size();
+
+            // Locate the matching a_i by identity, not by value.
+            if (index < large.size())
+            {
+                for (size_t j = 0; j < mainChain.size(); ++j)
+                {
+                    if (mainChain[j].id == large[index].id)
+                    {
+                        limit = j;
+                        break;
+                    }
+                }
+            }
+
+            // Search only the prefix before the matching partner.
+            std::deque<FJItem>::iterator left = mainChain.begin();
+            std::deque<FJItem>::iterator right =
+                mainChain.begin() + limit;
+
+            while (left < right)
+            {
+                std::deque<FJItem>::iterator mid =
+                    left + (right - left) / 2;
+
+                if (mid->value < pending[index].value)
+                    left = mid + 1;
+                else
+                    right = mid;
+            }
+            mainChain.insert(left, pending[index]);
+        }
         return (mainChain);
     }
+
 }
 
 // Orthodox Canonical Form
@@ -251,7 +284,6 @@ bool PmergeMe::isValidNumber(const std::string &str) const
 void PmergeMe::parseArguments(int argc, char **argv)
 {
     _vector.clear();
-    _deque.clear();
 
     for (int i = 1; i < argc; ++i)
     {
@@ -263,7 +295,18 @@ void PmergeMe::parseArguments(int argc, char **argv)
         int num = std::atoi(str.c_str());
 
         _vector.push_back(num);
-        _deque.push_back(num);
+    }
+}
+
+void PmergeMe::parseDequeArguments(int argc, char **argv)
+{
+    _deque.clear();
+    for (int i = 1; i < argc; ++i)
+    {
+        std::string str = argv[i];
+        if (!isValidNumber(str))
+            throw std::runtime_error("Invalid number");
+        _deque.push_back(std::atoi(str.c_str()));
     }
 }
 
@@ -271,47 +314,32 @@ void PmergeMe::parseArguments(int argc, char **argv)
 
 void PmergeMe::sortVector()
 {
-    _vector = fordJohnsonVector(_vector);
-}
+    std::vector<FJItem> items;
 
-void PmergeMe::sortPairsVector(std::vector<std::pair<int, int> > &pairs)
-{
-    for (size_t i = 1; i < pairs.size(); ++i)
+    for (size_t i = 0; i < _vector.size(); ++i)
     {
-        std::pair<int, int> key = pairs[i];
-        size_t j = i;
+        items.push_back(FJItem(_vector[i], i));
+    }
 
-        while (j > 0 && pairs[j - 1].second > key.second)
-        {
-            pairs[j] = pairs[j - 1];
-            --j;
-        }
-        pairs[j] = key;
+    items = fordJohnsonRecursive(items);
+
+    for (size_t i = 0; i < items.size(); ++i)
+    {
+        _vector[i] = items[i].value;
     }
 }
 
 void PmergeMe::sortDeque()
 {
-    _deque = fordJohnsonDeque(_deque);
-}
+    std::deque<FJItem> items;
 
-// Binary insertion
+    for (size_t i = 0; i < _deque.size(); ++i)
+        items.push_back(FJItem(_deque[i], i));
 
-void PmergeMe::binaryInsertVector(int value)
-{
-    binaryInsert(_vector, value);
-}
+    items = fordJohnsonDeque(items);
 
-void PmergeMe::binaryInsertDeque(int value)
-{
-    binaryInsert(_deque, value);
-}
-
-// Jacobsthal sequence
-
-std::vector<size_t> PmergeMe::generateJacobsthal(size_t size)
-{
-    return (makeJacobsthalOrder(size));
+    for (size_t i = 0; i < items.size(); ++i)
+        _deque[i] = items[i].value;
 }
 
 // Output
@@ -338,7 +366,13 @@ void PmergeMe::printAfter() const
 
 void PmergeMe::run(int argc, char **argv)
 {
+    if (argc < 2)
+        throw std::runtime_error("Missing arguments");
+
+    // Exclude console output while including each container's data management.
+    clock_t parseStart = std::clock();
     parseArguments(argc, argv);
+    clock_t parseEnd = std::clock();
     printBefore();
 
     clock_t vectorStart = std::clock();
@@ -346,10 +380,12 @@ void PmergeMe::run(int argc, char **argv)
     clock_t vectorEnd = std::clock();
 
     clock_t dequeStart = std::clock();
+    parseDequeArguments(argc, argv);
     sortDeque();
     clock_t dequeEnd = std::clock();
 
-    double vectorTime = static_cast<double>(vectorEnd - vectorStart)
+    double vectorTime = (static_cast<double>(parseEnd - parseStart)
+        + static_cast<double>(vectorEnd - vectorStart))
         * 1000000.0 / CLOCKS_PER_SEC;
     double dequeTime = static_cast<double>(dequeEnd - dequeStart)
         * 1000000.0 / CLOCKS_PER_SEC;

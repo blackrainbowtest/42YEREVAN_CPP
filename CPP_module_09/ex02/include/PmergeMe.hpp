@@ -40,18 +40,11 @@ class PmergeMe
         // Parsing and validation
         bool isValidNumber(const std::string &str) const;
         void parseArguments(int argc, char **argv);
+        void parseDequeArguments(int argc, char **argv);
 
         // Ford-Johnson algorithm
         void sortVector();
         void sortDeque();
-        void sortPairsVector(std::vector<std::pair<int, int> > &pairs);
-
-        // Binary insertion
-        void binaryInsertVector(int value);
-        void binaryInsertDeque(int value);
-
-        // Jacobsthal sequence
-        std::vector<size_t> generateJacobsthal(size_t size);
 
         // Output
         void printBefore() const;

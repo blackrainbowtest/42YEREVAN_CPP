@@ -21,7 +21,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
-$(OBJ_DIR)%.o:$(SRC_DIR)%.cpp
+$(OBJ_DIR)%.o:$(SRC_DIR)%.cpp $(INC_DIR)PmergeMe.hpp
 	mkdir -p $(OBJ_DIR)
 	$(CXX) $(CXXFLAGS) -I $(INC_DIR) -o $@ -c $<
 
@@ -32,6 +32,8 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 
-re: fclean all
+re:
+	$(MAKE) fclean
+	$(MAKE) all
 
 .PHONY: all clean fclean re
